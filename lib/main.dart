@@ -4,6 +4,7 @@ import 'package:glo_project/pages/home_page.dart';
 import 'package:glo_project/pages/login_register/forget_password.dart';
 import 'package:glo_project/pages/login_register/login_page.dart';
 import 'package:glo_project/pages/login_register/varify_page.dart';
+import 'package:glo_project/pages/ticket_info/national_ticket_info.dart';
 import 'package:glo_project/upgrade_page/upgrade_page.dart';
 import 'package:glo_project/pages/welcome/anim_welcome.dart';
 import 'package:glo_project/pages/welcome/buy_tickets.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xff2E3192),
       ),
     // home: CarouselDemo(),
-      initialRoute: WelcomePage.routeName,
+      initialRoute: NationalTicketPage.routeName,
       routes: {
         WelcomePage.routeName:(context)=>WelcomePage(),
         WelcomeAnim.routeName:(context)=>WelcomeAnim(),
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         UpgradePage.routeName:(context)=>UpgradePage(),
         HomePage.routeName:(context)=>HomePage(),
         DealershipPage.routeName:(context)=>DealershipPage(),
+        NationalTicketPage.routeName:(context)=>NationalTicketPage(),
 
 
       },

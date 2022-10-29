@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 var lightBgColor = Color(0xffffffff);
 var lightBgPrimaryColor = Color(0xffFFD504);
 var lightBgSecondaryColor = Color(0xff2B3990);
+var lightBgThirdColor = Color(0xffF3F3F3);
 
 var darkBgColor = Color(0xffffffff);
 var darkBgPrimaryColor = Color(0xFF303030);

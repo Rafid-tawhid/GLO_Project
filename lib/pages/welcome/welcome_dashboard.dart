@@ -1,6 +1,7 @@
 import 'package:animated_widgets/widgets/opacity_animated.dart';
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ezanimation/ezanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glo_project/pages/home_page.dart';
@@ -18,7 +19,7 @@ class WelcomeDashboard extends StatefulWidget {
 class _WelcomeDashboardState extends State<WelcomeDashboard> {
   bool animation = false;
   int pageNo = 0;
-
+  EzAnimation ezAnimation=EzAnimation(200.0, 50.0, Duration(milliseconds: 1500));
   @override
   void initState() {
     Future.delayed(Duration(microseconds: 500), () {
@@ -354,6 +355,94 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                               ),
                             ),
                           ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            if (pageNo == 4)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Stack(
+                        children: [
+                          TranslationAnimatedWidget.tween(
+                            enabled: animation,
+                            duration: Duration(milliseconds: 500),
+                            translationDisabled: Offset(-200, 0),
+                            translationEnabled: Offset(0, 0),
+                            child: OpacityAnimatedWidget.tween(
+                              enabled: animation,
+                              opacityDisabled: 0,
+                              duration: Duration(milliseconds: 200),
+                              opacityEnabled: 1,
+                              child: Image.asset('images/money_circle.png'),
+                            ),
+                          ),
+                          Positioned(
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                            child: TranslationAnimatedWidget.tween(
+                              enabled: animation,
+                              duration: Duration(milliseconds: 500),
+                              translationDisabled: Offset(0, -200),
+                              translationEnabled: Offset(0, 0),
+                              child: OpacityAnimatedWidget.tween(
+                                enabled: animation,
+                                opacityDisabled: 0,
+                                duration: Duration(milliseconds: 200),
+                                opacityEnabled: 1,
+                                child: Image.asset('images/bank.png'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TranslationAnimatedWidget.tween(
+                            enabled: animation,
+                            duration: Duration(milliseconds: 500),
+                            translationDisabled: Offset(-500, 0),
+                            translationEnabled: Offset(0, 0),
+                            child: OpacityAnimatedWidget.tween(
+                              enabled: animation,
+                              opacityDisabled: 0,
+                              duration: Duration(milliseconds: 200),
+                              opacityEnabled: 1,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'WORLD WIDE',
+                                    style:
+                                    TextStyle(fontSize: 22, color: Colors.red),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'MONEY WITHDRAWAL',
+                                    style:
+                                    TextStyle(fontSize: 22, color: Color(0xff061596)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
+
                         ],
                       ),
                     ],
