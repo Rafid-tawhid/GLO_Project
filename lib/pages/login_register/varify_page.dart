@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glo_project/pages/home_page.dart';
 
 import '../../utils/constants.dart';
 
@@ -88,7 +89,9 @@ class _VerificationPageState extends State<VerificationPage> {
           child: ElevatedButton.icon(
             icon: Icon(Icons.home),
             style: ElevatedButton.styleFrom(backgroundColor: Color(0xff032D46)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, HomePage.routeName);
+            },
             label: Text(
               'Home',
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),

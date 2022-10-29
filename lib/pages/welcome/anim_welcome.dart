@@ -28,7 +28,7 @@ class _WelcomeAnimState extends State<WelcomeAnim> {
           ezAnimation.reverse();
         }
     );
-    Future.delayed(Duration(seconds: 3),(){
+    Future.delayed(Duration(seconds: 4),(){
       Navigator.pushNamed(context, WelcomeDashboard.routeName);
     });
     super.initState();
@@ -42,7 +42,7 @@ class _WelcomeAnimState extends State<WelcomeAnim> {
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
-                  'images/welcome_bg.JPG',
+                  'images/welcome_bg2.PNG',
                 ),
                 fit: BoxFit.cover)),
         child: Column(

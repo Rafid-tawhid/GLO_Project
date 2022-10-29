@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:glo_project/pages/dealership_page.dart';
+import 'package:glo_project/pages/home_page.dart';
 import 'package:glo_project/pages/login_register/forget_password.dart';
 import 'package:glo_project/pages/login_register/login_page.dart';
 import 'package:glo_project/pages/login_register/varify_page.dart';
-import 'package:glo_project/pages/upgrade_page.dart';
+import 'package:glo_project/upgrade_page/upgrade_page.dart';
 import 'package:glo_project/pages/welcome/anim_welcome.dart';
 import 'package:glo_project/pages/welcome/buy_tickets.dart';
 import 'package:glo_project/pages/welcome/test.dart';
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xff2E3192),
       ),
     // home: CarouselDemo(),
-      initialRoute: UpgradePage.routeName,
+      initialRoute: WelcomePage.routeName,
       routes: {
         WelcomePage.routeName:(context)=>WelcomePage(),
         WelcomeAnim.routeName:(context)=>WelcomeAnim(),
@@ -44,6 +46,8 @@ class MyApp extends StatelessWidget {
         LoginWelcome.routeName:(context)=>LoginWelcome(),
         VerificationPage.routeName:(context)=>VerificationPage(),
         UpgradePage.routeName:(context)=>UpgradePage(),
+        HomePage.routeName:(context)=>HomePage(),
+        DealershipPage.routeName:(context)=>DealershipPage(),
 
 
       },

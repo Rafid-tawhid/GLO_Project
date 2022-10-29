@@ -19,7 +19,7 @@ class _WelcomePageState extends State<WelcomePage> {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/welcome_bg.JPG',),
+                image: AssetImage('images/welcome_bg.png',),
                 fit: BoxFit.cover
             )
         ),

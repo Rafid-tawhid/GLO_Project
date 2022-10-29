@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'forget_password.dart';
+
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
 
@@ -11,11 +13,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool checkValue = false;
   bool showFields = true;
+  bool showPassword = false;
   Color loginBgColor = Color(0xff032D46);
   Color loginTxtColor = Colors.white;
   Color registerBgColor = Colors.white;
   Color registerTxtColor = Color(0xff032D46);
   String btnTxt='Login';
+  final _formKey=GlobalKey<FormState>();
+  final _formKey2=GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +151,18 @@ class _LoginPageState extends State<LoginPage> {
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Color(0xFF032D46)),
-                              onPressed: () {},
+                              onPressed: () {
+                                if(showFields==true){
+                                  if(_formKey.currentState!.validate()){
+                                    print('ALL OKK');
+                                  }
+                                } else if(showFields==false) {
+                                  if(_formKey2.currentState!.validate()){
+                                    print('ALL OKK 2');
+                                  }
+                                }
+
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
                                 child: Text(btnTxt),
@@ -163,6 +179,7 @@ class _LoginPageState extends State<LoginPage> {
 
             ],
           ),
+
           Container(
             alignment: Alignment.center,
             width: MediaQuery.of(context).size.width,
@@ -187,91 +204,153 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        TextField(
-          decoration: InputDecoration(
-              labelText: '  Enter Referral Code',
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              )),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        TextField(
-          decoration: InputDecoration(
-              labelText: '  Enter Name',
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              prefixIcon:
+        Form(
+          key: _formKey2,
+            child: Column(
+          children: [
+            TextFormField(
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Referral Code';
+                }
+                else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  labelText: '  Enter Referral Code',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Your Name';
+                }
+                else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  labelText: '  Enter Name',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon:
                   SizedBox(child: SvgPicture.asset('svg/pass_icon.svg')),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              )),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        TextField(
-          decoration: InputDecoration(
-              labelText: '  example@gmail.com',
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              )),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        TextField(
-          decoration: InputDecoration(
-              labelText: '  01xxxxxxxxxx',
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              prefixIcon:
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Your Email';
+                }
+                else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  labelText: '  example@gmail.com',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Phone Number';
+                }
+                else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  labelText: '  01xxxxxxxxxx',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon:
                   SizedBox(child: SvgPicture.asset('svg/pass_icon.svg')),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              )),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        TextField(
-          decoration: InputDecoration(
-              labelText: '  Enter Pin',
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              )),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        TextField(
-          decoration: InputDecoration(
-              labelText: '  Confirm Password',
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              prefixIcon:
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Phone Number';
+                }
+                else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  labelText: '  Enter Pin',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              obscureText: showPassword,
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Password';
+                }
+                else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  labelText: '  Confirm Password',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon:
                   SizedBox(child: SvgPicture.asset('svg/pass_icon.svg')),
-              suffixIcon: Icon(
-                Icons.remove_red_eye_outlined,
-                color: Color(0xff032D46),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              )),
-        ),
-        SizedBox(
-          height: 10,
-        ),
+                  suffixIcon: InkWell(
+                    onTap: (){
+                      setState(() {
+                        showPassword=!showPassword;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye_outlined,
+                      color: Color(0xff032D46),
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ))
       ],
     );
   }
@@ -279,58 +358,93 @@ class _LoginPageState extends State<LoginPage> {
   Column showLoginInfo() {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
       children: [
-        TextField(
-          decoration: InputDecoration(
-              labelText: '  Enter Phone or Email',
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              )),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        TextField(
-          decoration: InputDecoration(
-              labelText: '  Enter Password',
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              prefixIcon:
-                  SizedBox(child: SvgPicture.asset('svg/pass_icon.svg')),
-              suffixIcon: Icon(
-                Icons.remove_red_eye_outlined,
-                color: Color(0xff032D46),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
-              )),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Form(
+          key: _formKey,
+            child:Column(
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Checkbox(
-                    value: checkValue,
-                    onChanged: (value) {
+            TextFormField(
+              decoration: InputDecoration(
+                  labelText: '  Enter Phone or Email',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )),
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Phone or Email';
+                }
+                else {
+                  return null;
+                }
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              obscureText: showPassword,
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Password';
+                }
+                else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  labelText: '  Enter Password',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon:
+                  SizedBox(child: SvgPicture.asset('svg/pass_icon.svg')),
+                  suffixIcon: InkWell(
+                    onTap: (){
                       setState(() {
-                        checkValue = !checkValue;
+                        showPassword=!showPassword;
                       });
-                    }),
-                Text('Remember Me')
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye_outlined,
+                      color: Color(0xff032D46),
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Checkbox(
+                        value: checkValue,
+                        onChanged: (value) {
+                          setState(() {
+                            checkValue = !checkValue;
+                          });
+                        }),
+                    Text('Remember Me')
+                  ],
+                ),
+                InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, ForgetPassword.routeName);
+                  },
+                    child: Text('Forgot Password?'))
               ],
             ),
-            Text('Forgot Password?')
           ],
-        ),
+        ))
       ],
     );
   }

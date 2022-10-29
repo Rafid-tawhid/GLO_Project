@@ -3,6 +3,7 @@ import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glo_project/pages/home_page.dart';
 import 'package:glo_project/pages/welcome/winprize_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -16,12 +17,13 @@ class WelcomeDashboard extends StatefulWidget {
 
 class _WelcomeDashboardState extends State<WelcomeDashboard> {
   bool animation = false;
+  int pageNo = 0;
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(microseconds: 500), () {
       setState(() {
-        animation = !animation;
+        animation = true;
       });
     });
     super.initState();
@@ -39,9 +41,8 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-
             Padding(
-              padding: const EdgeInsets.only(top: 40.0,left: 8,right: 8),
+              padding: const EdgeInsets.only(top: 40.0, left: 8, right: 8),
               child: Container(
                 height: MediaQuery.of(context).size.height / 11,
                 child: Row(
@@ -60,79 +61,86 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                child:Column(
+            if (pageNo == 0)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                    child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TranslationAnimatedWidget.tween(
-                            enabled: animation,
-                            duration: Duration(milliseconds: 1000),
-                            translationDisabled: Offset(-300, -100),
-                            translationEnabled: Offset(0, 0),
-                            child: OpacityAnimatedWidget.tween(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40.0, right: 40),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TranslationAnimatedWidget.tween(
                               enabled: animation,
                               duration: Duration(milliseconds: 1000),
-                              opacityDisabled: 0,
-                              opacityEnabled: 1,
-                              child: Image.asset('images/a1.png'),
+                              translationDisabled: Offset(-300, -100),
+                              translationEnabled: Offset(0, 0),
+                              child: OpacityAnimatedWidget.tween(
+                                enabled: animation,
+                                duration: Duration(milliseconds: 1000),
+                                opacityDisabled: 0,
+                                opacityEnabled: 1,
+                                child: SvgPicture.asset('svg/d2.svg'),
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: TranslationAnimatedWidget.tween(
-                            enabled: animation,
-                            duration: Duration(milliseconds: 1000),
-                            translationDisabled: Offset(300, -100),
-                            translationEnabled: Offset(0, 0),
-                            child: OpacityAnimatedWidget.tween(
+                          Expanded(
+                            child: TranslationAnimatedWidget.tween(
                               enabled: animation,
                               duration: Duration(milliseconds: 1000),
-                              opacityDisabled: 0,
-                              opacityEnabled: 1,
-                              child: Image.asset('images/a1.png'),
+                              translationDisabled: Offset(300, -100),
+                              translationEnabled: Offset(0, 0),
+                              child: OpacityAnimatedWidget.tween(
+                                enabled: animation,
+                                duration: Duration(milliseconds: 1000),
+                                opacityDisabled: 0,
+                                opacityEnabled: 1,
+                                child: SvgPicture.asset('svg/d1.svg'),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TranslationAnimatedWidget.tween(
-                            enabled: animation,
-                            duration: Duration(milliseconds: 1000),
-                            translationDisabled: Offset(-300, 0),
-                            translationEnabled: Offset(0, 0),
-                            child: OpacityAnimatedWidget.tween(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40.0, right: 40),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TranslationAnimatedWidget.tween(
                               enabled: animation,
-                              opacityDisabled: 0,
                               duration: Duration(milliseconds: 1000),
-                              opacityEnabled: 1,
-                              child: Image.asset('images/a1.png'),
+                              translationDisabled: Offset(-300, 0),
+                              translationEnabled: Offset(0, 0),
+                              child: OpacityAnimatedWidget.tween(
+                                enabled: animation,
+                                opacityDisabled: 0,
+                                duration: Duration(milliseconds: 1000),
+                                opacityEnabled: 1,
+                                child: SvgPicture.asset('svg/d3.svg'),
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: TranslationAnimatedWidget.tween(
-                            enabled: animation,
-                            duration: Duration(milliseconds: 1000),
-                            translationDisabled: Offset(300, 0),
-                            translationEnabled: Offset(0, 0),
-                            child: OpacityAnimatedWidget.tween(
+                          Expanded(
+                            child: TranslationAnimatedWidget.tween(
                               enabled: animation,
-                              opacityDisabled: 0,
                               duration: Duration(milliseconds: 1000),
-                              opacityEnabled: 1,
-                              child: Image.asset('images/a1.png'),
+                              translationDisabled: Offset(300, 0),
+                              translationEnabled: Offset(0, 0),
+                              child: OpacityAnimatedWidget.tween(
+                                enabled: animation,
+                                opacityDisabled: 0,
+                                duration: Duration(milliseconds: 1000),
+                                opacityEnabled: 1,
+                                child: SvgPicture.asset('svg/d4.svg'),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 30,
@@ -154,69 +162,274 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                       ],
                     ),
                   ],
-                )
+                )),
               ),
-            ),
+            if (pageNo == 1)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  child: Column(
+                    children: [
+                      TranslationAnimatedWidget.tween(
+                        enabled: animation,
+                        duration: Duration(milliseconds: 500),
+                        translationDisabled: Offset(0, -200),
+                        translationEnabled: Offset(0, 0),
+                        child: OpacityAnimatedWidget.tween(
+                          enabled: animation,
+                          opacityDisabled: 0,
+                          duration: Duration(milliseconds: 200),
+                          opacityEnabled: 1,
+                          child: Image.asset('images/trophy.png'),
+                        ),
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TranslationAnimatedWidget.tween(
+                            enabled: animation,
+                            duration: Duration(milliseconds: 500),
+                            translationDisabled: Offset(-500, 0),
+                            translationEnabled: Offset(0, 0),
+                            child: OpacityAnimatedWidget.tween(
+                              enabled: animation,
+                              opacityDisabled: 0,
+                              duration: Duration(milliseconds: 200),
+                              opacityEnabled: 1,
+                              child: Text(
+                                'CHOSE A LOTTERY',
+                                style:
+                                    TextStyle(fontSize: 22, color: Colors.red),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          TranslationAnimatedWidget.tween(
+                            enabled: animation,
+                            duration: Duration(milliseconds: 500),
+                            translationDisabled: Offset(200, 0),
+                            translationEnabled: Offset(0, 0),
+                            child: OpacityAnimatedWidget.tween(
+                              enabled: animation,
+                              opacityDisabled: 0,
+                              duration: Duration(milliseconds: 200),
+                              opacityEnabled: 1,
+                              child: Text(
+                                'BUY A TICKET & WIN BIG PRIZES',
+                                style:
+                                    TextStyle(fontSize: 22, color: Colors.blue),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            if (pageNo == 2)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TranslationAnimatedWidget.tween(
+                      enabled: animation,
+                      duration: Duration(milliseconds: 500),
+                      translationDisabled: Offset(-200, 0),
+                      translationEnabled: Offset(0, 0),
+                      child: OpacityAnimatedWidget.tween(
+                        enabled: animation,
+                        opacityDisabled: 0,
+                        duration: Duration(milliseconds: 500),
+                        opacityEnabled: 1,
+                        child: Image.asset('images/tickets.png'),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    TranslationAnimatedWidget.tween(
+                      enabled: animation,
+                      duration: Duration(milliseconds: 500),
+                      translationDisabled: Offset(0, 200),
+                      translationEnabled: Offset(0, 0),
+                      child: OpacityAnimatedWidget.tween(
+                        enabled: animation,
+                        opacityDisabled: 0,
+                        duration: Duration(milliseconds: 500),
+                        opacityEnabled: 1,
+                        child: Text(
+                          'GET YOUR TICKETS',
+                          style: TextStyle(fontSize: 22, color: Colors.red),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TranslationAnimatedWidget.tween(
+                      enabled: animation,
+                      duration: Duration(milliseconds: 500),
+                      translationDisabled: Offset(0, 200),
+                      translationEnabled: Offset(0, 0),
+                      child: OpacityAnimatedWidget.tween(
+                        enabled: animation,
+                        opacityDisabled: 0,
+                        duration: Duration(milliseconds: 500),
+                        opacityEnabled: 1,
+                        child: Text(
+                          'UP TO 30% DISCOUNT',
+                          style: TextStyle(fontSize: 22, color: Colors.blue),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+            if (pageNo == 3)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TranslationAnimatedWidget.tween(
+                        enabled: animation,
+                        duration: Duration(milliseconds: 500),
+                        translationDisabled: Offset(200, -200),
+                        translationEnabled: Offset(0, 0),
+                        child: OpacityAnimatedWidget.tween(
+                          enabled: animation,
+                          opacityDisabled: 0,
+                          duration: Duration(milliseconds: 200),
+                          opacityEnabled: 1,
+                          child: Image.asset('images/account.png'),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          TranslationAnimatedWidget.tween(
+                            enabled: animation,
+                            duration: Duration(milliseconds: 500),
+                            translationDisabled: Offset(-500, 0),
+                            translationEnabled: Offset(0, 0),
+                            child: OpacityAnimatedWidget.tween(
+                              enabled: animation,
+                              opacityDisabled: 0,
+                              duration: Duration(milliseconds: 200),
+                              opacityEnabled: 1,
+                              child: Text(
+                                'ACCOUNT TO ACCOUNT',
+                                style:
+                                TextStyle(fontSize: 22, color: Colors.red),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          TranslationAnimatedWidget.tween(
+                            enabled: animation,
+                            duration: Duration(milliseconds: 500),
+                            translationDisabled: Offset(200, 0),
+                            translationEnabled: Offset(0, 0),
+                            child: OpacityAnimatedWidget.tween(
+                              enabled: animation,
+                              opacityDisabled: 0,
+                              duration: Duration(milliseconds: 200),
+                              opacityEnabled: 1,
+                              child: Text(
+                                'MONEY TRANSFER',
+                                style:
+                                TextStyle(fontSize: 22, color: Colors.blue),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 AnimatedSmoothIndicator(
-                  activeIndex: 0,
-                  count:  6,
-                  effect:  WormEffect(
-                      spacing:  4.0,
-                      radius:  50.0,
-                      dotWidth:  6.0,
-                      dotHeight:  6.0,
-                      paintStyle:  PaintingStyle.fill,
-                      strokeWidth:  1,
-                      dotColor:  Colors.grey,
-                      activeDotColor:  Colors.indigo,
-
+                  activeIndex: pageNo,
+                  count: 6,
+                  effect: WormEffect(
+                    spacing: 4.0,
+                    radius: 50.0,
+                    dotWidth: 6.0,
+                    dotHeight: 6.0,
+                    paintStyle: PaintingStyle.fill,
+                    strokeWidth: 1,
+                    dotColor: Colors.grey,
+                    activeDotColor: Colors.indigo,
                   ),
                 ),
-                SizedBox(height: 16,),
+                SizedBox(
+                  height: 16,
+                ),
                 Container(
                   height: 38,
                   width: 135,
                   child: ElevatedButton(
                       style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          )
-                        )
-                           ),
-
+                          shape:
+                              MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ))),
                       onPressed: () {
-                         Navigator.pushNamed(context, WinPrizePage.routeName);
+                        pageNo++;
+                        animation=true;
+                        setState(() {
+
+                        });
+                        // Navigator.pushNamed(context, HomePage.routeName);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(width: 5,),
-                          Text('Next',style: TextStyle(fontSize: 20),),
-                          SizedBox(width: 4,),
-                          Icon(Icons.arrow_forward_ios,size: 17,),
-                          SizedBox(width: 5,),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            'Next',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 17,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
                         ],
                       )),
                 ),
               ],
             ),
-            SizedBox(height: 1,)
-
+            SizedBox(
+              height: 1,
+            )
           ],
         ),
       ),
     );
   }
-
-
-
-
-
-
-
-
 }
