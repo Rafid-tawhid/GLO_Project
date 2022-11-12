@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'constants.dart';
 
@@ -51,14 +52,15 @@ AppBar myAppbar() {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
+
               padding: EdgeInsets.only(left: 2),
-              margin: EdgeInsets.only(bottom: 8, right: 10),
+              margin: EdgeInsets.only(bottom: 5, right: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: lightBgSecondaryColor,
               ),
-              width: 70,
-              height: 12,
+              width: 75,
+              height: 16,
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -70,7 +72,7 @@ AppBar myAppbar() {
                         child: Text(
                           '\$ 10000',
                           style: myStyle(
-                              7, lightBgPrimaryColor, FontWeight.w700),
+                              8, lightBgPrimaryColor, FontWeight.w700),
                         ),
                       ),
                     ],
@@ -78,8 +80,8 @@ AppBar myAppbar() {
                   Positioned(
                     right: -5,
                     top: -2,
-                    child: Image.asset('images/i.png',
-                        height: 15),
+                    child: SvgPicture.asset('svg/c.svg',
+                        height: 18),
                   ),
                 ],
               )),
@@ -91,13 +93,13 @@ AppBar myAppbar() {
           Container(
               alignment: Alignment.center,
               padding: EdgeInsets.only(left: 2),
-              margin: EdgeInsets.only(bottom: 8, left: 7),
+              margin: EdgeInsets.only(bottom: 5, left: 7,),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: lightBgSecondaryColor,
               ),
-              width: 70,
-              height: 12,
+              width: 75,
+              height: 16,
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -109,7 +111,7 @@ AppBar myAppbar() {
                         child: Text(
                           '\$ 10000',
                           style: myStyle(
-                              7, lightBgPrimaryColor, FontWeight.w700),
+                              8, lightBgPrimaryColor, FontWeight.w700),
                         ),
                       ),
                     ],
@@ -117,8 +119,8 @@ AppBar myAppbar() {
                   Positioned(
                     left: -5,
                     top: -2,
-                    child: Image.asset('images/c.png',
-                        height: 15),
+                    child: SvgPicture.asset('svg/i.svg',
+                        height: 18),
                   ),
                 ],
               )),

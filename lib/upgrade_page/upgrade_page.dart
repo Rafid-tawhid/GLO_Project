@@ -392,19 +392,23 @@ class _UpgradePageState extends State<UpgradePage> {
                           Expanded(child: Text('Dealers Country:',style: TextStyle(fontSize: 16),)),
                           Expanded(
                             child: SizedBox(
-                              height: 28,
-                              width: double.infinity,
+                              height: 32,
                               child: DropdownButtonFormField(
-                                isDense: false,
 
+                                hint: Text('Select Country',style: TextStyle(fontSize: 8),),
                                 decoration: InputDecoration(
+                                  isDense: true,
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  contentPadding: EdgeInsets.fromLTRB(5, 5, 2, 5),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide(color: Color(0xff000054)),
                                       borderRadius:
                                       BorderRadius.all(Radius.circular(5))),
                                 ),
                                 items: [
-                                  DropdownMenuItem(child: Text('Select Country      '))
+                                  DropdownMenuItem(
+                                      child: Text('Select Country'))
                                 ], onChanged: (value) {  },
                               ),
                             ),

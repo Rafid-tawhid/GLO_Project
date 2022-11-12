@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xff2E3192),
       ),
     // home: CarouselDemo(),
-      initialRoute: WelcomeDashboard.routeName,
+      initialRoute: UpgradePage.routeName,
       routes: {
         WelcomePage.routeName:(context)=>WelcomePage(),
         WelcomeAnim.routeName:(context)=>WelcomeAnim(),

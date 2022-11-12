@@ -472,7 +472,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                 opacityDisabled: 0,
                                 duration: Duration(milliseconds: 200),
                                 opacityEnabled: 1,
-                                child: SvgPicture.asset('svg/money.svg'),
+                                child: Image.asset('images/money.png'),
                               ),
                             ),
                             Positioned(
@@ -490,7 +490,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                   opacityDisabled: 0,
                                   duration: Duration(milliseconds: 200),
                                   opacityEnabled: 1,
-                                  child: SvgPicture.asset('svg/people.svg'),
+                                  child: Image.asset('images/peoples.png'),
                                 ),
                               ),
                             ),
@@ -548,9 +548,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                 viewportFraction: 1,
                 reverse: false,
                 onPageChanged: (value, CarouselPageChangedReason) {
-                  if(value == 6) {
-                  Navigator.pushNamed(context, HomePage.routeName);
-                  }
+
                   pageNo = value;
                   changePage(pageNo);
                   setState(() {});
@@ -602,10 +600,16 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                           borderRadius: BorderRadius.circular(12),
                         ))),
                     onPressed: () {
-                      _controller.nextPage();
                       pageNo++;
+                      if(pageNo == 6) {
+                        Navigator.pushNamed(context, HomePage.routeName);
+                      }
+                      _controller.nextPage();
+
                       changePage(pageNo);
                       setState(() {});
+
+
                       // Navigator.pushNamed(context, HomePage.routeName);
                     },
                     child: Row(
