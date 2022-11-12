@@ -4,7 +4,7 @@ import 'package:glo_project/utils/constants.dart';
 
 class NationalTicketPage extends StatefulWidget {
   const NationalTicketPage({Key? key}) : super(key: key);
-  static const String routeName='/national';
+  static const String routeName = '/national';
 
   @override
   State<NationalTicketPage> createState() => _NationalTicketPageState();
@@ -21,9 +21,10 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
             Container(
               height: 80,
               decoration: BoxDecoration(
-                color: Color(0xffFFD504),
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12),bottomRight: Radius.circular(12))
-              ),
+                  color: Color(0xffFFD504),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12))),
               child: Row(
                 children: [
                   Column(
@@ -31,18 +32,21 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.arrow_back,color: Color(0xff061596),size: 30,),
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Color(0xff061596),
+                          size: 30,
+                        ),
                       ),
                     ],
                   ),
-
                   Expanded(
                     child: Container(
                       height: 80,
                       child: Stack(
                         children: [
                           Positioned(
-                            left:0,
+                            left: 0,
                             right: 0,
                             top: 0,
                             child: SvgPicture.asset(
@@ -53,12 +57,19 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                             ),
                           ),
                           Positioned(
-                            left:0,
+                            left: 0,
                             right: 0,
                             bottom: 0,
-                            child:Padding(
+                            child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: Text('NATIONAL',style: TextStyle(color: Color(0xff061596),fontSize: 20,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                              child: Text(
+                                'NATIONAL',
+                                style: TextStyle(
+                                    color: Color(0xff061596),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                           Positioned(
@@ -70,18 +81,26 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    child: Text('\$ 9097.75',style: TextStyle(color: Color(0xffFFD504),fontSize: 12),),
+                                    child: Text(
+                                      '\$ 9097.75',
+                                      style: TextStyle(
+                                          color: Color(0xffFFD504),
+                                          fontSize: 12),
+                                    ),
                                     height: 18,
                                     width: 93,
                                     decoration: BoxDecoration(
                                         color: Color(0xff061596),
-                                        borderRadius: BorderRadius.circular(40)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(40)),
                                   ),
                                   Positioned(
-                                    left: -10,
+                                      left: -10,
                                       top: -3,
-                                      child: Image.asset('images/dollar_coin.png',height: 22,)),
+                                      child: Image.asset(
+                                        'images/dollar_coin.png',
+                                        height: 22,
+                                      )),
                                 ],
                               ),
                             ),
@@ -95,18 +114,26 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                                 children: [
                                   Container(
                                     alignment: Alignment.center,
-                                    child: Text('\$ 9097.75',style: TextStyle(color: Color(0xffFFD504),fontSize: 12),),
+                                    child: Text(
+                                      '\$ 9097.75',
+                                      style: TextStyle(
+                                          color: Color(0xffFFD504),
+                                          fontSize: 12),
+                                    ),
                                     height: 18,
                                     width: 93,
                                     decoration: BoxDecoration(
                                         color: Color(0xff061596),
-                                        borderRadius: BorderRadius.circular(40)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(40)),
                                   ),
                                   Positioned(
                                       right: -10,
                                       top: -3,
-                                      child: Image.asset('images/dollar_coin.png',height: 22,)),
+                                      child: Image.asset(
+                                        'images/dollar_coin.png',
+                                        height: 22,
+                                      )),
                                 ],
                               ),
                             ),
@@ -116,7 +143,7 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 8.0,bottom: 8),
+                    padding: const EdgeInsets.only(right: 8.0, bottom: 8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -126,9 +153,17 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                           width: 30,
                           height: 30,
                         ),
-                        SizedBox(height: 3,),
-                        Text('1682832598',style: TextStyle(color: Color(0xff061596),fontSize: 10),),
-                        SizedBox(height: 5,)
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Text(
+                          '1682832598',
+                          style:
+                              TextStyle(color: Color(0xff061596), fontSize: 10),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        )
                       ],
                     ),
                   ),
@@ -138,164 +173,222 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Card(
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),),
-                child: Column(
-                  children: [
-                    Card(
-                      elevation: 2,
-                      color: lightBgThirdColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      Card(
+                        elevation: 2,
+                        color: lightBgThirdColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.notifications_active,
+                                    color: Color(0xff061596),
+                                    size: 25,
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(
+                                    'Last Time for Buying Ticket',
+                                    style: TextStyle(
+                                        color: Color(0xff061596), fontSize: 22),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                '0D: 08H: 15M: 03S',
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 22),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0,bottom: 8),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Row(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-
-                                Icon(Icons.notifications_active,color: Color(0xff061596),size: 25,),
-                                SizedBox(width: 4,),
-                                Text('Last Time for Buying Ticket',style: TextStyle(color:Color(0xff061596),fontSize: 22 ),)
-                              ],
+                            SizedBox(
+                              width: 4,
                             ),
-                            SizedBox(height: 5,),
-                            Text('0D: 08H: 15M: 03S',style: TextStyle(color: Colors.red,fontSize: 22),)
+                            Icon(
+                              Icons.lightbulb_outline_rounded,
+                              size: 25,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Select Play Type',
+                              style: TextStyle(
+                                  color: Color(0xff061596), fontSize: 18),
+                            )
                           ],
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Row(
-                        children: [
-                          SizedBox(width: 4,),
-                          Icon(Icons.lightbulb_outline_rounded,size: 25,),
-                          SizedBox(width: 5,),
-                          Text('Select Play Type',style: TextStyle(color: Color(0xff061596),fontSize: 18),)
-                        ],
+                      SizedBox(
+                        height: 5,
                       ),
-                    ),
-                    SizedBox(height: 5,),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: DropdownButtonFormField<String>(
-                        validator: (value) {
-                          if (value == null) {
-                            return 'Select Play Type';
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: lightBgThirdColor,
-                          isDense: true,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                              width: 2
-                            )
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Card(
+                          elevation: 1,
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButtonFormField<String>(
+                              isDense: true,
+                              validator: (value) {
+                                if (value == null) {
+                                  return 'Select Play Type';
+                                } else {
+                                  return null;
+                                }
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(15, 10, 15, 15),
+                                fillColor: lightBgThirdColor,
+                                isDense: true,
+                              ),
+                              hint: Text('Select Play Type'),
+                              value: _type,
+                              onChanged: (value) {
+                                setState(() {
+                                  _type = value;
+                                });
+                              },
+                              items: ['NATIONAL', 'PCSO', 'BINGO', 'TOTO']
+                                  .map((e) => DropdownMenuItem(
+                                        child: SizedBox(child: new Text(e)),
+                                        value: e,
+                                      ))
+                                  .toList(),
+                            ),
                           ),
                         ),
-                        hint: Text('Select Play Type'),
-                        value: _type,
-                        onChanged: (value) {
-                          setState(() {
-                            _type = value;
-                          });
-                        },
-                        items: ['NATIONAL','PCSO','BINGO','TOTO']
-                            .map((e) => DropdownMenuItem(
-                          child: SizedBox(child: new Text(e)),
-                          value: e,
-                        ))
-                            .toList(),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(child: Text('Total Amount',style: TextStyle(fontSize: 18,),textAlign: TextAlign.center,),),
-                          Expanded(child: Text('Discount 20%',style: TextStyle(color: lightBgSecondaryColor,fontSize: 18),textAlign: TextAlign.center)),
-                          Expanded(child: Text('Bying Price',style: TextStyle(fontSize: 18),textAlign: TextAlign.center)),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text('25',textAlign: TextAlign.center,style: TextStyle(fontSize: 18),),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'Total Amount',
+                                style: TextStyle(
+                                  fontSize: 18,
                                 ),
-                                elevation: 2,
-                                color: lightBgThirdColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Expanded(
+                                child: Text('Discount 20%',
+                                    style: TextStyle(
+                                        color: lightBgSecondaryColor,
+                                        fontSize: 18),
+                                    textAlign: TextAlign.center)),
+                            Expanded(
+                                child: Text('Bying Price',
+                                    style: TextStyle(fontSize: 18),
+                                    textAlign: TextAlign.center)),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      '25',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  ),
+                                  elevation: 2,
+                                  color: lightBgThirdColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text('5',textAlign: TextAlign.center,style: TextStyle(color: lightBgSecondaryColor,fontSize: 18),),
-                                ),
-                                elevation: 2,
-                                color: lightBgThirdColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text('20',textAlign: TextAlign.center,style: TextStyle(fontSize: 18),),
-                                ),
-                                elevation: 2,
-                                color: lightBgThirdColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      '5',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: lightBgSecondaryColor,
+                                          fontSize: 18),
+                                    ),
+                                  ),
+                                  elevation: 2,
+                                  color: lightBgThirdColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      '20',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  ),
+                                  elevation: 2,
+                                  color: lightBgThirdColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              ),
+                    ],
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Card(
                 elevation: 2,
-                  shape: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(6),
-                    borderSide: BorderSide.none
-                ),
+                shape: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: BorderSide.none),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -304,9 +397,25 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(child: Text('Number',style: TextStyle(fontSize: 18,),textAlign: TextAlign.center,),),
-                          Expanded(child: Text('Straight',style: TextStyle(color: lightBgSecondaryColor,fontSize: 18),textAlign: TextAlign.center)),
-                          Expanded(child: Text('Rumble',style: TextStyle(fontSize: 18),textAlign: TextAlign.center)),
+                          Expanded(
+                            child: Text(
+                              'Number',
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Expanded(
+                              child: Text('Straight',
+                                  style: TextStyle(
+                                      color: lightBgSecondaryColor,
+                                      fontSize: 18),
+                                  textAlign: TextAlign.center)),
+                          Expanded(
+                              child: Text('Rumble',
+                                  style: TextStyle(fontSize: 18),
+                                  textAlign: TextAlign.center)),
                         ],
                       ),
                     ),
@@ -320,13 +429,16 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                               child: Card(
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
-                                  child: Text('125',textAlign: TextAlign.center,style: TextStyle(fontSize: 18),),
+                                  child: Text(
+                                    '125',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 18),
+                                  ),
                                 ),
                                 elevation: 2,
                                 color: lightBgThirdColor,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)
-                                ),
+                                    borderRadius: BorderRadius.circular(5)),
                               ),
                             ),
                           ),
@@ -336,13 +448,18 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                               child: Card(
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
-                                  child: Text('15',textAlign: TextAlign.center,style: TextStyle(color: lightBgSecondaryColor,fontSize: 18),),
+                                  child: Text(
+                                    '15',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: lightBgSecondaryColor,
+                                        fontSize: 18),
+                                  ),
                                 ),
                                 elevation: 2,
                                 color: lightBgThirdColor,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)
-                                ),
+                                    borderRadius: BorderRadius.circular(5)),
                               ),
                             ),
                           ),
@@ -352,13 +469,16 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                               child: Card(
                                 child: Padding(
                                   padding: const EdgeInsets.all(5.0),
-                                  child: Text('20',textAlign: TextAlign.center,style: TextStyle(fontSize: 18),),
+                                  child: Text(
+                                    '20',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 18),
+                                  ),
                                 ),
                                 elevation: 2,
                                 color: lightBgThirdColor,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5)
-                                ),
+                                    borderRadius: BorderRadius.circular(5)),
                               ),
                             ),
                           ),
@@ -369,39 +489,59 @@ class _NationalTicketPageState extends State<NationalTicketPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                            onPressed: (){},
+                          onPressed: () {},
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.refresh,color: Colors.white,),
-                              SizedBox(width: 3,),
+                              Icon(
+                                Icons.refresh,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
                               Text('Refresh')
                             ],
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: lightBgSecondaryColor
-                          ),
-
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              backgroundColor: Color(0xff061596)),
                         ),
-                        SizedBox(width: 15,),
+                        SizedBox(
+                          width: 15,
+                        ),
                         ElevatedButton(
-                          onPressed: (){},
+                          onPressed: () {},
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.shopping_cart,color: lightBgSecondaryColor,),
-                              SizedBox(width: 3,),
-                              Text('Submit',style: TextStyle(color:lightBgSecondaryColor ),)
+                              Icon(
+                                Icons.shopping_cart,
+                                color: lightBgSecondaryColor,
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              Text(
+                                'Submit',
+                                style: TextStyle(color: lightBgSecondaryColor),
+                              )
                             ],
                           ),
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: lightBgPrimaryColor
-                          ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              backgroundColor: lightBgPrimaryColor),
 
                         )
                       ],
                     ),
-                    SizedBox(height: 15,)
+                    SizedBox(
+                      height: 15,
+                    )
                   ],
                 ),
               ),

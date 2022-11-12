@@ -2,379 +2,578 @@ import 'package:animated_widgets/widgets/opacity_animated.dart';
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:glo_project/pages/welcome/welcome_dashboard.dart';
 import 'package:glo_project/pages/welcome/winprize_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 
 class CarouselDemo extends StatefulWidget {
-  static const String routeName='/';
+  static const String routeName = '/demo';
 
   @override
   State<CarouselDemo> createState() => _CarouselDemoState();
 }
 
 class _CarouselDemoState extends State<CarouselDemo> {
-  int activeIndex = 0;
-  int index=0;
-  final controller = CarouselController();
-  final urlImages = [
-    'https://images.unsplash.com/photo-1612825173281-9a193378527e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=499&q=80',
-    'https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    'https://images.unsplash.com/photo-1627916607164-7b20241db935?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80',
-    'https://images.unsplash.com/photo-1522037576655-7a93ce0f4d10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    'https://images.unsplash.com/photo-1570829053985-56e661df1ca2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-  ];
-
+  final Color kDarkBlueColor = Color(0xFF053149);
+  int pageNo = 0;
   bool animation = false;
   bool animation2 = false;
   bool animation3 = false;
+  bool animation4 = false;
+  bool animation5 = false;
+  final CarouselController _controller = CarouselController();
 
-  @override
-  void initState() {
-    animation = !animation;
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            image: DecorationImage(
-                image: AssetImage('images/bg_dashboard.png'),
-                fit: BoxFit.contain)),
-        child: Column(
-          children: [
-            SizedBox(height: 30,),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: MediaQuery.of(context).size.height / 12,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset('images/logo.png'),
-                    TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: Color(0xffD5E2FC)),
-                        onPressed: () {},
-                        child: Text(
-                          'English',
-                          style: TextStyle(color: Colors.black),
-                        ))
-                  ],
-                ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0, left: 8, right: 8),
+            child: Container(
+              height: MediaQuery.of(context).size.height / 11,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset('images/logo.png'),
+                  TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: Color(0xffD5E2FC)),
+                      onPressed: () {},
+                      child: Text(
+                        'English',
+                        style: TextStyle(color: Colors.black),
+                      ))
+                ],
               ),
             ),
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CarouselSlider(
-                        carouselController: controller,
-                        items: [
-                          welcomeDashboard(),
-                          winPrizes(),
-                          buyTicket(),
-
-                        ],
-                        options: CarouselOptions(
-                            height: 500,
-                            autoPlay: false,
-                            enableInfiniteScroll: false,
-                            autoPlayAnimationDuration: Duration(seconds: 2),
-                            enlargeCenterPage: true,
-                            onPageChanged: (index, reason) =>
-                                setState(() => activeIndex = index))),
-                    SizedBox(height: 12),
-                    buildIndicator(),
-                    SizedBox(height: 25,),
-                    Container(
-                      height: 38,
-                      width: 135,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  )
-                              )
-                          ),
-
-                          onPressed: () {
-                            controller.animateToPage(index);
-                            if(index==1){
-                              setState(() {
-                                animation2 = !animation2;
-                              });
-                            }
-                            if(index==2){
-                              setState(() {
-                                animation3 = !animation3;
-                              });
-                            }
-                           // Navigator.pushNamed(context, WinPrizePage.routeName);
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(width: 5,),
-                              Text('Next',style: TextStyle(fontSize: 20),),
-                              SizedBox(width: 4,),
-                              Icon(Icons.arrow_forward_ios,size: 17,),
-                              SizedBox(width: 5,),
-                            ],
-                          )),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Padding buyTicket() {
-    return Padding(
+          ),
+          Expanded(
+            child: CarouselSlider(
+              carouselController: _controller,
+              items: [
+                Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
-                    child:Column(
+                      child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40.0, right: 40),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TranslationAnimatedWidget.tween(
+                                enabled: animation,
+                                duration: Duration(milliseconds: 1000),
+                                translationDisabled: Offset(-300, -100),
+                                translationEnabled: Offset(0, 0),
+                                child: OpacityAnimatedWidget.tween(
+                                  enabled: animation,
+                                  duration: Duration(milliseconds: 1000),
+                                  opacityDisabled: 0,
+                                  opacityEnabled: 1,
+                                  child: SvgPicture.asset('svg/d2.svg'),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: TranslationAnimatedWidget.tween(
+                                enabled: animation,
+                                duration: Duration(milliseconds: 1000),
+                                translationDisabled: Offset(300, -100),
+                                translationEnabled: Offset(0, 0),
+                                child: OpacityAnimatedWidget.tween(
+                                  enabled: animation,
+                                  duration: Duration(milliseconds: 1000),
+                                  opacityDisabled: 0,
+                                  opacityEnabled: 1,
+                                  child: SvgPicture.asset('svg/d1.svg'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40.0, right: 40),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TranslationAnimatedWidget.tween(
+                                enabled: animation,
+                                duration: Duration(milliseconds: 1000),
+                                translationDisabled: Offset(-300, 0),
+                                translationEnabled: Offset(0, 0),
+                                child: OpacityAnimatedWidget.tween(
+                                  enabled: animation,
+                                  opacityDisabled: 0,
+                                  duration: Duration(milliseconds: 1000),
+                                  opacityEnabled: 1,
+                                  child: SvgPicture.asset('svg/d3.svg'),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: TranslationAnimatedWidget.tween(
+                                enabled: animation,
+                                duration: Duration(milliseconds: 1000),
+                                translationDisabled: Offset(300, 0),
+                                translationEnabled: Offset(0, 0),
+                                child: OpacityAnimatedWidget.tween(
+                                  enabled: animation,
+                                  opacityDisabled: 0,
+                                  duration: Duration(milliseconds: 1000),
+                                  opacityEnabled: 1,
+                                  child: SvgPicture.asset('svg/d4.svg'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'YOU CAN BUY',
+                            style: TextStyle(fontSize: 22, color: Colors.red),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            'FOUR TYPES OF LOTTERY HERE',
+                            style: TextStyle(fontSize: 22, color: Colors.blue),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TranslationAnimatedWidget.tween(
-                          enabled: animation3,
-                          duration: Duration(milliseconds: 1500),
-                          translationDisabled: Offset(-200, 0),
+                          enabled: animation2,
+                          duration: Duration(milliseconds: 500),
+                          translationDisabled: Offset(0, -200),
                           translationEnabled: Offset(0, 0),
                           child: OpacityAnimatedWidget.tween(
-                            enabled: animation3,
+                            enabled: animation2,
                             opacityDisabled: 0,
-                            duration: Duration(milliseconds: 1500),
+                            duration: Duration(milliseconds: 200),
                             opacityEnabled: 1,
-                            child: SvgPicture.asset('svg/tickets.svg'),
+                            child: Image.asset('images/trophy.png'),
                           ),
                         ),
-                        SizedBox(height: 20,),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             TranslationAnimatedWidget.tween(
-                              enabled: animation3,
-                              duration: Duration(milliseconds: 1500),
-                              translationDisabled: Offset(0, 200),
+                              enabled: animation2,
+                              duration: Duration(milliseconds: 500),
+                              translationDisabled: Offset(-500, 0),
                               translationEnabled: Offset(0, 0),
                               child: OpacityAnimatedWidget.tween(
-                                enabled: animation3,
+                                enabled: animation2,
                                 opacityDisabled: 0,
-                                duration: Duration(milliseconds: 1500),
+                                duration: Duration(milliseconds: 200),
                                 opacityEnabled: 1,
                                 child: Text(
-                                  'GET YOUR TICKETS',
-                                  style: TextStyle(fontSize: 22, color: Colors.red),
+                                  'CHOSE A LOTTERY',
+                                  style: TextStyle(
+                                      fontSize: 22, color: Colors.red),
                                 ),
                               ),
                             ),
-
                             SizedBox(
-                              height: 10,
+                              height: 15,
                             ),
                             TranslationAnimatedWidget.tween(
-                              enabled: animation3,
-                              duration: Duration(milliseconds: 1500),
-                              translationDisabled: Offset(0, 200),
+                              enabled: animation2,
+                              duration: Duration(milliseconds: 500),
+                              translationDisabled: Offset(200, 0),
                               translationEnabled: Offset(0, 0),
                               child: OpacityAnimatedWidget.tween(
-                                enabled: animation3,
+                                enabled: animation2,
                                 opacityDisabled: 0,
-                                duration: Duration(milliseconds: 1500),
+                                duration: Duration(milliseconds: 200),
                                 opacityEnabled: 1,
                                 child: Text(
-                                  'UP TO 30% DISCOUNT',
-                                  style: TextStyle(fontSize: 22, color: Colors.blue),
+                                  'BUY A TICKET & WIN BIG PRIZES',
+                                  style: TextStyle(
+                                      fontSize: 22, color: Colors.blue),
                                 ),
                               ),
                             ),
-
                           ],
                         ),
-
                       ],
                     ),
                   ),
-                );
-  }
-
-  Column winPrizes() {
-    return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TranslationAnimatedWidget.tween(
-                      enabled: animation2,
-                      duration: Duration(milliseconds: 1500),
-                      translationDisabled: Offset(0, -200),
-                      translationEnabled: Offset(0, 0),
-                      child: OpacityAnimatedWidget.tween(
-                        enabled: animation2,
-                        opacityDisabled: 0,
-                        duration: Duration(milliseconds: 1500),
-                        opacityEnabled: 1,
-                        child: SvgPicture.asset('svg/trophy.svg'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      TranslationAnimatedWidget.tween(
+                        enabled: animation3,
+                        duration: Duration(milliseconds: 500),
+                        translationDisabled: Offset(-200, 0),
+                        translationEnabled: Offset(0, 0),
+                        child: OpacityAnimatedWidget.tween(
+                          enabled: animation3,
+                          opacityDisabled: 0,
+                          duration: Duration(milliseconds: 500),
+                          opacityEnabled: 1,
+                          child: Image.asset('images/tickets.png'),
+                        ),
                       ),
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TranslationAnimatedWidget.tween(
+                        enabled: animation3,
+                        duration: Duration(milliseconds: 500),
+                        translationDisabled: Offset(0, 200),
+                        translationEnabled: Offset(0, 0),
+                        child: OpacityAnimatedWidget.tween(
+                          enabled: animation3,
+                          opacityDisabled: 0,
+                          duration: Duration(milliseconds: 500),
+                          opacityEnabled: 1,
+                          child: Text(
+                            'GET YOUR TICKETS',
+                            style: TextStyle(fontSize: 22, color: Colors.red),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TranslationAnimatedWidget.tween(
+                        enabled: animation3,
+                        duration: Duration(milliseconds: 500),
+                        translationDisabled: Offset(0, 200),
+                        translationEnabled: Offset(0, 0),
+                        child: OpacityAnimatedWidget.tween(
+                          enabled: animation3,
+                          opacityDisabled: 0,
+                          duration: Duration(milliseconds: 500),
+                          opacityEnabled: 1,
+                          child: Text(
+                            'UP TO 30% DISCOUNT',
+                            style: TextStyle(fontSize: 22, color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+
                       children: [
                         TranslationAnimatedWidget.tween(
-                          enabled: animation2,
-                          duration: Duration(milliseconds: 1500),
-                          translationDisabled: Offset(-500, 0),
+                          enabled: animation4,
+                          duration: Duration(milliseconds: 500),
+                          translationDisabled: Offset(200, -200),
                           translationEnabled: Offset(0, 0),
                           child: OpacityAnimatedWidget.tween(
-                            enabled: animation2,
+                            enabled: animation4,
                             opacityDisabled: 0,
-                            duration: Duration(milliseconds: 1500),
+                            duration: Duration(milliseconds: 200),
                             opacityEnabled: 1,
-                            child: Text(
-                              'CHOSE A LOTTERY',
-                              style: TextStyle(fontSize: 22, color: Colors.red),
-                            ),
+                            child: Image.asset('images/account.png'),
                           ),
                         ),
-
                         SizedBox(
-                          height: 15,
+                          height: 40,
                         ),
-                        TranslationAnimatedWidget.tween(
-                          enabled: animation2,
-                          duration: Duration(milliseconds: 1500),
-                          translationDisabled: Offset(200, 0),
-                          translationEnabled: Offset(0, 0),
-                          child: OpacityAnimatedWidget.tween(
-                            enabled: animation2,
-                            opacityDisabled: 0,
-                            duration: Duration(milliseconds: 1500),
-                            opacityEnabled: 1,
-                            child: Text(
-                              'BUY A TICKET & WIN BIG PRIZES',
-                              style: TextStyle(fontSize: 22, color: Colors.blue),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TranslationAnimatedWidget.tween(
+                              enabled: animation4,
+                              duration: Duration(milliseconds: 500),
+                              translationDisabled: Offset(-500, 0),
+                              translationEnabled: Offset(0, 0),
+                              child: OpacityAnimatedWidget.tween(
+                                enabled: animation4,
+                                opacityDisabled: 0,
+                                duration: Duration(milliseconds: 200),
+                                opacityEnabled: 1,
+                                child: Text(
+                                  'ACCOUNT TO ACCOUNT',
+                                  style: TextStyle(
+                                      fontSize: 22, color: Colors.red),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  ],
-                );
-  }
-
-  Column welcomeDashboard() {
-    return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TranslationAnimatedWidget.tween(
-                            enabled: animation,
-                            duration: Duration(milliseconds: 1000),
-                            translationDisabled: Offset(-300, -100),
-                            translationEnabled: Offset(0, 0),
-                            child: OpacityAnimatedWidget.tween(
-                              enabled: animation,
-                              duration: Duration(milliseconds: 1000),
-                              opacityDisabled: 0,
-                              opacityEnabled: 1,
-                              child: Image.asset('images/a1.png'),
+                            SizedBox(
+                              height: 15,
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          child: TranslationAnimatedWidget.tween(
-                            enabled: animation,
-                            duration: Duration(milliseconds: 1000),
-                            translationDisabled: Offset(300, -100),
-                            translationEnabled: Offset(0, 0),
-                            child: OpacityAnimatedWidget.tween(
-                              enabled: animation,
-                              duration: Duration(milliseconds: 1000),
-                              opacityDisabled: 0,
-                              opacityEnabled: 1,
-                              child: Image.asset('images/a1.png'),
+                            TranslationAnimatedWidget.tween(
+                              enabled: animation4,
+                              duration: Duration(milliseconds: 500),
+                              translationDisabled: Offset(200, 0),
+                              translationEnabled: Offset(0, 0),
+                              child: OpacityAnimatedWidget.tween(
+                                enabled: animation4,
+                                opacityDisabled: 0,
+                                duration: Duration(milliseconds: 200),
+                                opacityEnabled: 1,
+                                child: Text(
+                                  'MONEY TRANSFER',
+                                  style: TextStyle(
+                                      fontSize: 22, color: Colors.blue),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TranslationAnimatedWidget.tween(
-                            enabled: animation,
-                            duration: Duration(milliseconds: 1000),
-                            translationDisabled: Offset(-300, 0),
-                            translationEnabled: Offset(0, 0),
-                            child: OpacityAnimatedWidget.tween(
-                              enabled: animation,
-                              opacityDisabled: 0,
-                              duration: Duration(milliseconds: 1000),
-                              opacityEnabled: 1,
-                              child: Image.asset('images/a1.png'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: TranslationAnimatedWidget.tween(
-                            enabled: animation,
-                            duration: Duration(milliseconds: 1000),
-                            translationDisabled: Offset(300, 0),
-                            translationEnabled: Offset(0, 0),
-                            child: OpacityAnimatedWidget.tween(
-                              enabled: animation,
-                              opacityDisabled: 0,
-                              duration: Duration(milliseconds: 1000),
-                              opacityEnabled: 1,
-                              child: Image.asset('images/a1.png'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          'YOU CAN BUY',
-                          style: TextStyle(fontSize: 22, color: Colors.red),
+                        Stack(
+                          children: [
+                            TranslationAnimatedWidget.tween(
+                              enabled: animation5,
+                              duration: Duration(milliseconds: 500),
+                              translationDisabled: Offset(-200, 0),
+                              translationEnabled: Offset(0, 0),
+                              child: OpacityAnimatedWidget.tween(
+                                enabled: animation5,
+                                opacityDisabled: 0,
+                                duration: Duration(milliseconds: 200),
+                                opacityEnabled: 1,
+                                child: Image.asset('images/money_circle.png'),
+                              ),
+                            ),
+                            Positioned(
+                              left: 0,
+                              right: 0,
+                              top: 0,
+                              bottom: 0,
+                              child: TranslationAnimatedWidget.tween(
+                                enabled: animation5,
+                                duration: Duration(milliseconds: 500),
+                                translationDisabled: Offset(0, -200),
+                                translationEnabled: Offset(0, 0),
+                                child: OpacityAnimatedWidget.tween(
+                                  enabled: animation5,
+                                  opacityDisabled: 0,
+                                  duration: Duration(milliseconds: 200),
+                                  opacityEnabled: 1,
+                                  child: Image.asset('images/bank.png'),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 40,
                         ),
-                        Text(
-                          'FOUR TYPES OF LOTTERY HERE',
-                          style: TextStyle(fontSize: 22, color: Colors.blue),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TranslationAnimatedWidget.tween(
+                              enabled: animation5,
+                              duration: Duration(milliseconds: 500),
+                              translationDisabled: Offset(-500, 0),
+                              translationEnabled: Offset(0, 0),
+                              child: OpacityAnimatedWidget.tween(
+                                enabled: animation5,
+                                opacityDisabled: 0,
+                                duration: Duration(milliseconds: 200),
+                                opacityEnabled: 1,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'WORLD WIDE',
+                                      style: TextStyle(
+                                          fontSize: 22, color: Colors.red),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      'MONEY WITHDRAWAL',
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          color: Color(0xff061596)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                );
+                  ),
+                ),
+              ],
+
+              //Slider Container properties
+              options: CarouselOptions(
+                height: 480.0,
+                viewportFraction: 1,
+                onPageChanged: (value, CarouselPageChangedReason) {
+                  pageNo = value;
+                  changePage(pageNo);
+                  setState(() {});
+                },
+                enlargeCenterPage: true,
+                // autoPlay: true,
+                aspectRatio: 16 / 9,
+                // autoPlayCurve: Curves.fastOutSlowIn,
+                // enableInfiniteScroll: true,
+                // autoPlayAnimationDuration: Duration(milliseconds: 800),
+              ),
+            ),
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedSmoothIndicator(
+                activeIndex: pageNo,
+                count: 6,
+                effect: WormEffect(
+                  spacing: 4.0,
+                  radius: 50.0,
+                  dotWidth: 6.0,
+                  dotHeight: 6.0,
+                  paintStyle: PaintingStyle.fill,
+                  strokeWidth: 1,
+                  dotColor: Colors.grey,
+                  activeDotColor: Colors.indigo,
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Container(
+                height: 38,
+                width: 135,
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.pressed))
+                              return Colors.blueAccent;
+                            return Color(0xff2E3192); // Use the component's default.
+                          },
+                        ),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ))),
+                    onPressed: () {
+                      _controller.nextPage();
+                      pageNo++;
+                      changePage(pageNo);
+                      setState(() {});
+                      // Navigator.pushNamed(context, HomePage.routeName);
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Next',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 17,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                      ],
+                    )),
+              ),
+              SizedBox(
+                height: 40,
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
-  Widget buildIndicator() => AnimatedSmoothIndicator(
-    onDotClicked: animateToSlide,
-    effect: ExpandingDotsEffect(dotWidth: 15, activeDotColor: Colors.blue),
-    activeIndex: activeIndex,
-    count: urlImages.length,
-  );
-  void animateToSlide(int index) => controller.animateToPage(index);
+
+  void changePage(int pageNo) {
+    print(pageNo);
+    if (pageNo == 0) {
+      animation = true;
+      animation2 = false;
+      animation3 = false;
+      animation4 = false;
+      animation5 = false;
+    }
+    if (pageNo == 1) {
+      animation2 = true;
+      animation = false;
+      animation3 = false;
+      animation4 = false;
+      animation5 = false;
+    }
+    if (pageNo == 2) {
+      animation3 = true;
+      animation2 = false;
+      animation = false;
+      animation4 = false;
+      animation5 = false;
+    }
+    if (pageNo == 3) {
+      animation4 = true;
+      animation2 = false;
+      animation3 = false;
+      animation = false;
+      animation5 = false;
+    }
+    if (pageNo == 4) {
+      animation5 = true;
+      animation2 = false;
+      animation3 = false;
+      animation4 = false;
+      animation = false;
+    }
+  }
 }
-
-Widget buildImage(String urlImage, int index,BuildContext context) =>
-    Container(
-        width: MediaQuery.of(context).size.width,
-        child: Image.network(urlImage, fit: BoxFit.cover));
