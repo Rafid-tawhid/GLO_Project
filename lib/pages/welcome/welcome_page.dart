@@ -15,40 +15,59 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/welcome_bg.png',),
-                fit: BoxFit.cover
-            )
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-
-            Container(height: 30,),
-            Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
-              child: Image.asset('images/welcome.png',fit: BoxFit.cover),
+      body: ListView(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/welcome_bg.png',),
+                    fit: BoxFit.cover
+                )
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 50,right: 50,bottom: 15),
-              child: SvgPicture.asset('svg/glo_logo2.svg'),
-            ),
-            Center(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Color(0xffFFC813)),
-                onPressed: (){
-                  Navigator.pushNamed(context, WelcomeAnim.routeName);
-                },
-                child: Text('JOIN US',style: TextStyle(color: Colors.white),),
-              ),
-            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
+                  child: Image.asset('images/welcome.png',fit: BoxFit.cover),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 50,right: 50,bottom: 15),
+                  child: SvgPicture.asset('svg/glo_logo2.svg'),
+                ),
+                Center(
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, WelcomeAnim.routeName);
+                    },
+                    child: Container(
+                      width: 120,
+                      height: 40,
+                      alignment: Alignment.center,
+                      child:  Text('JOIN US',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
+                      decoration: BoxDecoration(
+
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            image:AssetImage("images/join_us.png"),
+                            fit:BoxFit.cover
+                        ),
+                      ),
+                    ),
+                  ),
 
 
-          ],
-        ),
+                ),
+                SizedBox(height: 5,)
+
+
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

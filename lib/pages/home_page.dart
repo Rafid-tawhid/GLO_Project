@@ -2,10 +2,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glo_project/pages/ticket_info/latest_lottery_result.dart';
+import 'package:glo_project/pages/ticket_info/lottery_price.dart';
+import 'package:glo_project/pages/ticket_info/lottery_ticket_history.dart';
+import 'package:glo_project/pages/ticket_info/national_ticket_info.dart';
+import 'package:glo_project/pages/ticket_info/national_ticket_result.dart';
+import 'package:glo_project/pages/ticket_info/ticket_referal_history.dart';
 import 'package:glo_project/utils/drawer.dart';
 import '../../utils/constants.dart';
+import '../upgrade_page/upgrade_page.dart';
 import '../utils/my_appbar.dart';
 import 'dealership_page.dart';
+import 'deposits/deposit_page.dart';
+import 'transfer/transfer.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -70,37 +79,52 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/5,
-                            child: Column(
-                              children: [
-                                Expanded(child: SvgPicture.asset('svg/deposit.svg',)),
-                                Text('Deposit',style: TextStyle(fontSize: 12),)
-                              ],
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.pushNamed(context, DepositPage.routeName);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/5,
+                              child: Column(
+                                children: [
+                                  Expanded(child: SvgPicture.asset('svg/deposit.svg',)),
+                                  Text('Deposit',style: TextStyle(fontSize: 12),)
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/5,
-                            child: Column(
-                              children: [
-                                Expanded(child: SvgPicture.asset('svg/transfer.svg')),
-                                Text('Transfer',style: TextStyle(fontSize: 12),)
-                              ],
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.pushNamed(context, TransferPage.routeName);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/5,
+                              child: Column(
+                                children: [
+                                  Expanded(child: SvgPicture.asset('svg/transfer.svg')),
+                                  Text('Transfer',style: TextStyle(fontSize: 12),)
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/5,
-                            child: Column(
-                              children: [
-                                Expanded(child: SvgPicture.asset('svg/lotteries.svg')),
-                                Text('Lotteries',style: TextStyle(fontSize: 12),)
-                              ],
+                        InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(context, NationalTicketPage.routeName);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/5,
+                              child: Column(
+                                children: [
+                                  Expanded(child: SvgPicture.asset('svg/lotteries.svg')),
+                                  Text('Lotteries',style: TextStyle(fontSize: 12),)
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -154,8 +178,8 @@ class _HomePageState extends State<HomePage> {
                             width: MediaQuery.of(context).size.width/5,
                             child: Column(
                               children: [
-                                Expanded(child: Text('',style: TextStyle(fontSize: 12),)),
-                                Text('',style: TextStyle(fontSize: 12),)
+                                Expanded(child: Text('')),
+                                Text('Withdraw Pack',style: TextStyle(fontSize: 11.7),)
                               ],
                             ),
                           ),
@@ -166,8 +190,8 @@ class _HomePageState extends State<HomePage> {
                             width: MediaQuery.of(context).size.width/5,
                             child: Column(
                               children: [
-                                Expanded(child: Text('',style: TextStyle(fontSize: 12),)),
-                                Text('',style: TextStyle(fontSize: 12),)
+                                Expanded(child: Text('')),
+                                Text('Pack Details',style: TextStyle(fontSize: 12),)
                               ],
                             ),
                           ),
@@ -197,23 +221,29 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(4),
             child: Container(
+              margin: EdgeInsets.only(left: 10,right: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   color: const Color(0XFF000080),
                 ),
 
                 width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: EdgeInsets.all(6),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('images/dollar_coin.png',height: 22,),
-                      Text(' Upgrade Your Account',style: TextStyle(color: Colors.white),)
-                    ],
+                child: InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, DealershipPage.routeName);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(6),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('images/dollar_coin.png',height: 22,),
+                        Text(' Upgrade Your Account',style: TextStyle(color: Colors.white),)
+                      ],
+                    ),
                   ),
                 )
             ),
@@ -255,40 +285,55 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/4.5,
-                            child: Column(
-                              children: [
-                                SvgPicture.asset('svg/transfer_history.svg'),
-                                SizedBox(height: 7,),
-                                Text('Transfer History',style: TextStyle(fontSize: 12),),
-                              ],
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.pushNamed(context, LatestLotteryResult.routeName);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/4.5,
+                              child: Column(
+                                children: [
+                                  SvgPicture.asset('svg/transfer_history.svg'),
+                                  SizedBox(height: 7,),
+                                  Text('Transfer History',style: TextStyle(fontSize: 12),),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/4.5,
-                            child: Column(
-                              children: [
-                                SvgPicture.asset('svg/ticket_history.svg'),
-                                SizedBox(height: 7,),
-                                Text('Ticket History',style: TextStyle(fontSize: 12),)
-                              ],
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.pushNamed(context, LotteryTicketHistory.routeName);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/4.5,
+                              child: Column(
+                                children: [
+                                  SvgPicture.asset('svg/ticket_history.svg'),
+                                  SizedBox(height: 7,),
+                                  Text('Ticket History',style: TextStyle(fontSize: 12),)
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/4,
-                            child: Column(
-                              children: [
-                                SvgPicture.asset('svg/refer_history.svg'),
-                                SizedBox(height: 7,),
-                                Text('Referral History',style: TextStyle(fontSize: 12),)
-                              ],
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.pushNamed(context, ReferralHistory.routeName);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/4,
+                              child: Column(
+                                children: [
+                                  SvgPicture.asset('svg/refer_history.svg'),
+                                  SizedBox(height: 7,),
+                                  Text('Referral History',style: TextStyle(fontSize: 12),)
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -305,15 +350,20 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/4.5,
-                            child: Column(
-                              children: [
-                                Expanded(child: Image.asset('images/lot.png')),
-                                Text('Lotteries',style: TextStyle(fontSize: 12),)
-                              ],
+                        InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(context, NationalTicketPage.routeName);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/4.5,
+                              child: Column(
+                                children: [
+                                  Expanded(child: Image.asset('images/lot.png')),
+                                  Text('Lotteries',style: TextStyle(fontSize: 12),)
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -423,15 +473,20 @@ class _HomePageState extends State<HomePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width/5,
-                                child: Column(
-                                  children: [
-                                    Expanded(child: SvgPicture.asset('svg/glos.svg',)),
-                                    Text('NATIONAL',style: TextStyle(fontSize: 12),)
-                                  ],
+                            InkWell(
+                              onTap: (){
+                                Navigator.pushNamed(context, NationalTicketPageResult.routeName);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width/5,
+                                  child: Column(
+                                    children: [
+                                      Expanded(child: SvgPicture.asset('svg/glos.svg',)),
+                                      Text('NATIONAL',style: TextStyle(fontSize: 12),)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

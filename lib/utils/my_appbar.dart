@@ -25,28 +25,25 @@ AppBar myAppbar() {
         Container(
           padding: EdgeInsets.only(right: 10),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+
             children: [
-              IconButton(
-                icon: CircleAvatar(
-                  backgroundColor: Color(0xff8E8E93),
-                  child: Image.asset(
-                    'images/profile.png',
-                    fit: BoxFit.cover,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SvgPicture.asset(
+                  'svg/user.svg',
+                  fit: BoxFit.cover,
                 ),
-                onPressed: () {},
               ),
               Text(
-                '01682832598',
+                '1682832598',
                 style: TextStyle(color: Colors.black,fontSize: 10),
               ),
+
             ],
           ),
         ),
       ],
-      backgroundColor: Colors.yellowAccent,
+      backgroundColor: Color(0xffFFD504),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -57,7 +54,7 @@ AppBar myAppbar() {
               margin: EdgeInsets.only(bottom: 5, right: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: lightBgSecondaryColor,
+                color: lightBgSecondaryColor2,
               ),
               width: 75,
               height: 16,
@@ -65,6 +62,7 @@ AppBar myAppbar() {
                 clipBehavior: Clip.none,
                 children: [
                   Row(
+
                     children: [
                       SizedBox(width: 20,),
                       Padding(
@@ -96,7 +94,7 @@ AppBar myAppbar() {
               margin: EdgeInsets.only(bottom: 5, left: 7,),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: lightBgSecondaryColor,
+                color: lightBgSecondaryColor2,
               ),
               width: 75,
               height: 16,
@@ -107,7 +105,7 @@ AppBar myAppbar() {
                     children: [
                       SizedBox(width: 20,),
                       Padding(
-                        padding: const EdgeInsets.only(top: 2.0),
+                        padding: const EdgeInsets.only(top: 2.0,bottom: 2),
                         child: Text(
                           '\$ 10000',
                           style: myStyle(

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37.89" height="22.39" viewBox="0 0 37.89 22.39">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_34496" data-name="Rectangle 34496" width="37.89" height="22.39" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Rectangle_34491" data-name="Rectangle 34491" width="37.891" height="22.39" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect id="Rectangle_34492" data-name="Rectangle 34492" width="13.778" height="15.501" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <rect id="Rectangle_34493" data-name="Rectangle 34493" width="3.445" height="3.445" fill="#faa60c"/>
+    </clipPath>
+    <clipPath id="clip-path-6">
+      <rect id="Rectangle_34495" data-name="Rectangle 34495" width="6.889" height="10.334" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_22999" data-name="Group 22999" transform="translate(0 0)">
+    <g id="Group_22998" data-name="Group 22998" transform="translate(0 0)" clip-path="url(#clip-path)">
+      <g id="Group_22985" data-name="Group 22985" style="isolation: isolate">
+        <g id="Group_22984" data-name="Group 22984">
+          <g id="Group_22983" data-name="Group 22983" clip-path="url(#clip-path-2)">
+            <path id="Path_54474" data-name="Path 54474" d="M36.168,22.39H1.722A1.727,1.727,0,0,1,0,20.668V1.722A1.728,1.728,0,0,1,1.722,0H36.168A1.727,1.727,0,0,1,37.89,1.722V20.668a1.726,1.726,0,0,1-1.722,1.722" transform="translate(0 0)" fill="#faa60c"/>
+          </g>
+        </g>
+      </g>
+      <path id="Path_54475" data-name="Path 54475" d="M32.216,20.16H4.659a3.455,3.455,0,0,0-3.445-3.445V4.66A3.455,3.455,0,0,0,4.659,1.215H32.216A3.455,3.455,0,0,0,35.661,4.66V16.715a3.455,3.455,0,0,0-3.445,3.445" transform="translate(0.508 0.508)" fill="#fff"/>
+      <g id="Group_22988" data-name="Group 22988" transform="translate(12.056 3.445)" style="isolation: isolate">
+        <g id="Group_22987" data-name="Group 22987">
+          <g id="Group_22986" data-name="Group 22986" clip-path="url(#clip-path-3)">
+            <path id="Path_54476" data-name="Path 54476" d="M15.39,2.429c3.805,0,6.89,3.47,6.89,7.751s-3.085,7.749-6.89,7.749S8.5,14.46,8.5,10.18s3.085-7.751,6.89-7.751" transform="translate(-8.501 -2.429)" fill="#faa60c"/>
+          </g>
+        </g>
+      </g>
+      <g id="Group_22991" data-name="Group 22991" transform="translate(6.889 9.473)" style="isolation: isolate">
+        <g id="Group_22990" data-name="Group 22990">
+          <g id="Group_22989" data-name="Group 22989" clip-path="url(#clip-path-4)">
+            <path id="Path_54477" data-name="Path 54477" d="M6.58,6.679A1.722,1.722,0,1,1,4.858,8.4,1.722,1.722,0,0,1,6.58,6.679" transform="translate(-4.857 -6.679)" fill="#faa60c"/>
+          </g>
+        </g>
+      </g>
+      <g id="Group_22994" data-name="Group 22994" transform="translate(27.557 9.473)" style="isolation: isolate">
+        <g id="Group_22993" data-name="Group 22993">
+          <g id="Group_22992" data-name="Group 22992" clip-path="url(#clip-path-4)">
+            <path id="Path_54478" data-name="Path 54478" d="M21.152,6.679A1.722,1.722,0,1,1,19.43,8.4a1.722,1.722,0,0,1,1.722-1.722" transform="translate(-19.43 -6.679)" fill="#faa60c"/>
+          </g>
+        </g>
+      </g>
+      <g id="Group_22997" data-name="Group 22997" transform="translate(15.501 6.028)" style="isolation: isolate">
+        <g id="Group_22996" data-name="Group 22996">
+          <g id="Group_22995" data-name="Group 22995" clip-path="url(#clip-path-6)">
+            <path id="Path_54479" data-name="Path 54479" d="M15.235,8.556H13.513a.814.814,0,0,1-.862-.861.814.814,0,0,1,.862-.861H16.1a.814.814,0,0,0,.861-.862.814.814,0,0,0-.861-.861h-.861a.861.861,0,1,0-1.722,0,2.538,2.538,0,0,0-2.584,2.584,2.537,2.537,0,0,0,2.584,2.583h1.722a.862.862,0,0,1,0,1.723H12.651a.861.861,0,0,0,0,1.722h.862a.861.861,0,0,0,1.722,0,2.583,2.583,0,1,0,0-5.167" transform="translate(-10.93 -4.251)" fill="#fff"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

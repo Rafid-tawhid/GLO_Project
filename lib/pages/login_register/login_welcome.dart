@@ -42,7 +42,7 @@ class _LoginWelcomeState extends State<LoginWelcome> {
             Padding(
               padding: const EdgeInsets.only(left: 15.0, right: 15),
               child: Container(
-                height: MediaQuery.of(context).size.height/1.8,
+
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.black,
@@ -52,6 +52,7 @@ class _LoginWelcomeState extends State<LoginWelcome> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 22.0,right: 22),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Column(
                           mainAxisSize: MainAxisSize.min,
@@ -125,8 +126,8 @@ class _LoginWelcomeState extends State<LoginWelcome> {
                                   },
                                     child: Text('VARIFY NOW',style: TextStyle(fontSize: 12,color: Color(0xff02C6C1)),))
                               ],
-                            )
-
+                            ),
+                            SizedBox(height: 15,),
                           ],
                         ),
 
@@ -136,7 +137,7 @@ class _LoginWelcomeState extends State<LoginWelcome> {
                 ),
               ),
             ),
-            SizedBox(height: 20,)
+
           ],
         ),
       ),

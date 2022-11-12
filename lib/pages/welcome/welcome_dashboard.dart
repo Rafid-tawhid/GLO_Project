@@ -5,6 +5,7 @@ import 'package:ezanimation/ezanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glo_project/pages/home_page.dart';
+import 'package:glo_project/pages/login_register/login_page.dart';
 import 'package:glo_project/pages/welcome/winprize_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -163,7 +164,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                               ),
                               Text(
                                 'FOUR TYPES OF LOTTERY HERE',
-                                style: TextStyle(fontSize: 22, color: Colors.blue),
+                                style: TextStyle(fontSize: 22, color: Color(0xff061596)),
                               ),
                             ],
                           ),
@@ -226,7 +227,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                 child: Text(
                                   'BUY A TICKET & WIN BIG PRIZES',
                                   style: TextStyle(
-                                      fontSize: 22, color: Colors.blue),
+                                      fontSize: 22, color: Color(0xff061596)),
                                 ),
                               ),
                             ),
@@ -289,7 +290,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                           opacityEnabled: 1,
                           child: Text(
                             'UP TO 30% DISCOUNT',
-                            style: TextStyle(fontSize: 22, color: Colors.blue),
+                            style: TextStyle(fontSize: 22, color: Color(0xff061596)),
                           ),
                         ),
                       ),
@@ -356,7 +357,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                 child: Text(
                                   'MONEY TRANSFER',
                                   style: TextStyle(
-                                      fontSize: 22, color: Colors.blue),
+                                      fontSize: 22, color: Color(0xff061596)),
                                 ),
                               ),
                             ),
@@ -373,41 +374,18 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Stack(
-                          children: [
-                            TranslationAnimatedWidget.tween(
-                              enabled: animation5,
-                              duration: Duration(milliseconds: 500),
-                              translationDisabled: Offset(-200, 0),
-                              translationEnabled: Offset(0, 0),
-                              child: OpacityAnimatedWidget.tween(
-                                enabled: animation5,
-                                opacityDisabled: 0,
-                                duration: Duration(milliseconds: 200),
-                                opacityEnabled: 1,
-                                child: Image.asset('images/money_circle.png'),
-                              ),
-                            ),
-                            Positioned(
-                              left: 0,
-                              right: 0,
-                              top: 0,
-                              bottom: 0,
-                              child: TranslationAnimatedWidget.tween(
-                                enabled: animation5,
-                                duration: Duration(milliseconds: 500),
-                                translationDisabled: Offset(0, -200),
-                                translationEnabled: Offset(0, 0),
-                                child: OpacityAnimatedWidget.tween(
-                                  enabled: animation5,
-                                  opacityDisabled: 0,
-                                  duration: Duration(milliseconds: 200),
-                                  opacityEnabled: 1,
-                                  child: Image.asset('images/bank.png'),
-                                ),
-                              ),
-                            ),
-                          ],
+                        TranslationAnimatedWidget.tween(
+                          enabled: animation5,
+                          duration: Duration(milliseconds: 1000),
+                          translationDisabled: Offset(0, 0),
+                          translationEnabled: Offset(0, 0),
+                          child: OpacityAnimatedWidget.tween(
+                            enabled: animation5,
+                            opacityDisabled: 0,
+                            duration: Duration(milliseconds: 1000),
+                            opacityEnabled: 1,
+                            child: Image.asset('images/withdrawal.png'),
+                          ),
                         ),
                         SizedBox(
                           height: 40,
@@ -601,8 +579,10 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                         ))),
                     onPressed: () {
                       pageNo++;
+
                       if(pageNo == 6) {
-                        Navigator.pushNamed(context, HomePage.routeName);
+                        _controller.stopAutoPlay();
+                        Navigator.pushNamed(context, LoginPage.routeName);
                       }
                       _controller.nextPage();
 
@@ -625,9 +605,12 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                         SizedBox(
                           width: 4,
                         ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          size: 17,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0,bottom: 4),
+                          child: Icon(
+                            Icons.arrow_forward_ios,
+                            size: 17,
+                          ),
                         ),
                         SizedBox(
                           width: 5,

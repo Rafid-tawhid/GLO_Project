@@ -19,11 +19,14 @@ class ForgetPassword extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                   )),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Forgot Password',
-                style: TextStyle(color: Color(0xff008AE5), fontSize: 24),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Forgot Password',
+                  style: TextStyle(color: Color(0xff008AE5), fontSize: 24),
+                ),
               ),
             ),
             Padding(

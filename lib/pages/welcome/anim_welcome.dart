@@ -1,4 +1,6 @@
 
+import 'package:animated_widgets/widgets/opacity_animated.dart';
+import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:ezanimation/ezanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,12 +16,16 @@ class WelcomeAnim extends StatefulWidget {
 class _WelcomeAnimState extends State<WelcomeAnim> {
   EzAnimation ezAnimation=EzAnimation(200.0, 50.0, Duration(seconds: 2));
 
+  bool animation=false;
   @override
   void initState() {
     Future.delayed(
       Duration(milliseconds: 50),
         (){
         ezAnimation.start();
+        setState(() {
+          animation=true;
+        });
         }
     );
     Future.delayed(
@@ -50,7 +56,19 @@ class _WelcomeAnimState extends State<WelcomeAnim> {
             SizedBox(
               height: MediaQuery.of(context).size.height/5,
             ),
-            SvgPicture.asset('svg/glo2.svg'),
+            TranslationAnimatedWidget.tween(
+              enabled: animation,
+              duration: Duration(milliseconds: 1000),
+              translationDisabled: Offset(300, -300),
+              translationEnabled: Offset(0, 0),
+              child: OpacityAnimatedWidget.tween(
+                enabled: animation,
+                duration: Duration(milliseconds: 1000),
+                opacityDisabled: 0,
+                opacityEnabled: 1,
+                child: SvgPicture.asset('svg/glo2.svg'),
+              ),
+            ),
             SizedBox(
               height: 70,
             ),
