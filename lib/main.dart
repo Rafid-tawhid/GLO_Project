@@ -9,6 +9,7 @@ import 'package:glo_project/pages/ticket_info/latest_lottery_result.dart';
 import 'package:glo_project/pages/ticket_info/lottery_ticket_history.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_info.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_result.dart';
+import 'package:glo_project/pages/ticket_info/pcso_lottery_page.dart';
 import 'package:glo_project/pages/ticket_info/ticket_referal_history.dart';
 import 'package:glo_project/pages/transfer/transfer.dart';
 import 'package:glo_project/pages/transfer/transfer_form.dart';
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
         WithdrawPage.routeName:(context)=>WithdrawPage(),
         BankWithdrawDetails.routeName:(context)=>BankWithdrawDetails(),
         EWalletWithdrawForm.routeName:(context)=>EWalletWithdrawForm(),
+        PCSOLotteryTickets.routeName:(context)=>PCSOLotteryTickets(),
       },
     );
   }

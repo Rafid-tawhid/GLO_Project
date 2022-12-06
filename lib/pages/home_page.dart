@@ -7,6 +7,7 @@ import 'package:glo_project/pages/ticket_info/lottery_price.dart';
 import 'package:glo_project/pages/ticket_info/lottery_ticket_history.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_info.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_result.dart';
+import 'package:glo_project/pages/ticket_info/pcso_lottery_page.dart';
 import 'package:glo_project/pages/ticket_info/ticket_referal_history.dart';
 import 'package:glo_project/pages/withdraw/withdrawal_page.dart';
 import 'package:glo_project/utils/drawer.dart';
@@ -15,6 +16,7 @@ import '../upgrade_page/upgrade_page.dart';
 import '../utils/my_appbar.dart';
 import 'dealership_page.dart';
 import 'deposits/deposit_page.dart';
+import 'login_register/varify_page.dart';
 import 'transfer/transfer.dart';
 
 
@@ -301,7 +303,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   SvgPicture.asset('svg/transfer_history.svg'),
                                   SizedBox(height: 7,),
-                                  Text('Transfer History',style: TextStyle(fontSize: 12),),
+                                  FittedBox(child: Text('Transfer History',style: TextStyle(fontSize: 12),)),
                                 ],
                               ),
                             ),
@@ -319,7 +321,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   SvgPicture.asset('svg/ticket_history.svg'),
                                   SizedBox(height: 7,),
-                                  Text('Ticket History',style: TextStyle(fontSize: 12),)
+                                  FittedBox(child: Text('Ticket History',style: TextStyle(fontSize: 12),))
                                 ],
                               ),
                             ),
@@ -337,22 +339,27 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   SvgPicture.asset('svg/refer_history.svg'),
                                   SizedBox(height: 7,),
-                                  Text('Referral History',style: TextStyle(fontSize: 12),)
+                                  FittedBox(child: Text('Referral History',style: TextStyle(fontSize: 12),))
                                 ],
                               ),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/4,
-                            child: Column(
-                              children: [
-                                SvgPicture.asset('svg/withdraw_history.svg'),
-                                SizedBox(height: 7,),
-                                Text('Withdraw History',style: TextStyle(fontSize: 12),)
-                              ],
+                        InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(context, WithdrawPage.routeName);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/4,
+                              child: Column(
+                                children: [
+                                  SvgPicture.asset('svg/withdraw_history.svg'),
+                                  SizedBox(height: 7,),
+                                  FittedBox(child: Text('Withdraw History',style: TextStyle(fontSize: 12),))
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -496,15 +503,20 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width/5,
-                                child: Column(
-                                  children: [
-                                    Expanded(child: SvgPicture.asset('svg/pcso.svg')),
-                                    Text('PCSO',style: TextStyle(fontSize: 12),)
-                                  ],
+                            InkWell(
+                              onTap: (){
+                                Navigator.pushNamed(context, PCSOLotteryTickets.routeName);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width/5,
+                                  child: Column(
+                                    children: [
+                                      Expanded(child: SvgPicture.asset('svg/pcso.svg')),
+                                      Text('PCSO',style: TextStyle(fontSize: 12),)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -657,7 +669,11 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('Verify Now ->',style: TextStyle(fontSize: 16,color: Colors.red),),
+                            InkWell(
+                                onTap:(){
+                                  Navigator.pushNamed(context, VerificationPage.routeName);
+                                },
+                                child: Text('Verify Now ->',style: TextStyle(fontSize: 16,color: Colors.red),)),
                             SizedBox(height: 5,),
                             Row(
                               mainAxisSize: MainAxisSize.min,
@@ -774,7 +790,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 15,),
                   Text('CHOSE A LOTTERY',style: TextStyle(fontSize: 24,color: Color(0xffED1C24)),),
                   SizedBox(height: 15,),
-                  Text('BUY A TICKET & WIN BIG PRIZES',style: TextStyle(fontSize: 24,color: Color(0xff061596)),),
+                  Text('BUY A TICKET & WIN BIG PRIZES',style: TextStyle(fontSize: 24,color: Color(0xff061596)),textAlign: TextAlign.center,),
                   SizedBox(height: 25,),
 
                 ],
