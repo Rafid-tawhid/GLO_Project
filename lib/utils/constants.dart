@@ -7,6 +7,9 @@ var lightBgPrimaryColor = Color(0xffFFD504);
 var lightBgSecondaryColor = Color(0xff2B3990);
 var lightBgSecondaryColor2 = Color(0xff061596);
 var lightBgThirdColor = Color(0xffF3F3F3);
+var darkBlue = Color(0xff043655);
+var orange = Color(0xffFFD504);
+
 
 var darkBgColor = Color(0xffffffff);
 var darkBgPrimaryColor = Color(0xFF303030);

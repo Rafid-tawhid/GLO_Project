@@ -12,6 +12,9 @@ import 'package:glo_project/pages/ticket_info/national_ticket_result.dart';
 import 'package:glo_project/pages/ticket_info/ticket_referal_history.dart';
 import 'package:glo_project/pages/transfer/transfer.dart';
 import 'package:glo_project/pages/transfer/transfer_form.dart';
+import 'package:glo_project/pages/withdraw/bank_withdraw_details.dart';
+import 'package:glo_project/pages/withdraw/ewallet_withdraw_form.dart';
+import 'package:glo_project/pages/withdraw/withdrawal_page.dart';
 import 'package:glo_project/upgrade_page/upgrade_page.dart';
 import 'package:glo_project/pages/welcome/anim_welcome.dart';
 import 'package:glo_project/pages/welcome/buy_tickets.dart';
@@ -69,6 +72,9 @@ class MyApp extends StatelessWidget {
         TransferForm.routeName:(context)=>TransferForm(),
         LotteryTicketHistory.routeName:(context)=>LotteryTicketHistory(),
         ReferralHistory.routeName:(context)=>ReferralHistory(),
+        WithdrawPage.routeName:(context)=>WithdrawPage(),
+        BankWithdrawDetails.routeName:(context)=>BankWithdrawDetails(),
+        EWalletWithdrawForm.routeName:(context)=>EWalletWithdrawForm(),
       },
     );
   }

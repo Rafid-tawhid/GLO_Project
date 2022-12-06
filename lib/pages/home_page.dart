@@ -8,6 +8,7 @@ import 'package:glo_project/pages/ticket_info/lottery_ticket_history.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_info.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_result.dart';
 import 'package:glo_project/pages/ticket_info/ticket_referal_history.dart';
+import 'package:glo_project/pages/withdraw/withdrawal_page.dart';
 import 'package:glo_project/utils/drawer.dart';
 import '../../utils/constants.dart';
 import '../upgrade_page/upgrade_page.dart';
@@ -128,15 +129,20 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width/5,
-                            child: Column(
-                              children: [
-                                Expanded(child: SvgPicture.asset('svg/withdraw.svg')),
-                                Text('Withdraw',style: TextStyle(fontSize: 12),)
-                              ],
+                        InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(context, WithdrawPage.routeName);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/5,
+                              child: Column(
+                                children: [
+                                  Expanded(child: SvgPicture.asset('svg/withdraw.svg')),
+                                  Text('Withdraw',style: TextStyle(fontSize: 12),)
+                                ],
+                              ),
                             ),
                           ),
                         ),
