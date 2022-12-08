@@ -269,7 +269,8 @@ class _DepositFormState extends State<DepositForm> {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Color((0xffFFD504))),
                                         onPressed: () {
-                                          TransactionSucess(context);
+                                           TransactionSucess(context);
+
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
@@ -319,36 +320,37 @@ class _DepositFormState extends State<DepositForm> {
     );
   }
 
-  void TransactionSucess(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset('images/successful.png'),
-              SizedBox(height: 20,),
-              Text('Transaction Sucessful!',style: TextStyle(color: Colors.blue,fontSize: 16),),
-              SizedBox(height: 20,),
-              Text('Your transfer request of \$5 '),
-              FittedBox(child: const Text('to account 012132323 was sucessful')),
-              SizedBox(height: 10,),
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color((0xff00A9FF))),
-                      onPressed: () {
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
+}
 
-                          Text('Make another transaction',style: TextStyle(color: Colors.white),),
-                        ],
-                      )))
-            ],
-          ),
-        ),);
-  }
+void TransactionSucess(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset('images/successful.png'),
+          SizedBox(height: 20,),
+          Text('Transaction Sucessful!',style: TextStyle(color: Colors.blue,fontSize: 16),),
+          SizedBox(height: 20,),
+          Text('Your transfer request of \$5 '),
+          FittedBox(child: const Text('to account 012132323 was sucessful.')),
+          SizedBox(height: 10,),
+          Container(
+              width: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color((0xff00A9FF))),
+                  onPressed: () {
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+
+                      Text('Make another transaction',style: TextStyle(color: Colors.white),),
+                    ],
+                  )))
+        ],
+      ),
+    ),);
 }

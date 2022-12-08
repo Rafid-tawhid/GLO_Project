@@ -28,6 +28,7 @@ import 'package:glo_project/pages/welcome/winprize_page.dart';
 import 'pages/deposits/deposit_page.dart';
 import 'pages/login_register/login_welcome.dart';
 import 'pages/ticket_info/lottery_price.dart';
+import 'pages/ticket_info/national_ticket_prize.dart';
 
 
 void main() {
@@ -77,6 +78,7 @@ class MyApp extends StatelessWidget {
         BankWithdrawDetails.routeName:(context)=>BankWithdrawDetails(),
         EWalletWithdrawForm.routeName:(context)=>EWalletWithdrawForm(),
         PCSOLotteryTickets.routeName:(context)=>PCSOLotteryTickets(),
+        NationalTicketPrize.routeName:(context)=>NationalTicketPrize(),
       },
     );
   }

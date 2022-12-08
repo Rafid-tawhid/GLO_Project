@@ -5,7 +5,7 @@ import 'constants.dart';
 
 AppBar myAppbar() {
   return AppBar(
-      iconTheme: IconThemeData(color: Colors.grey, size: 24.0),
+      iconTheme: IconThemeData(color: Color(0xff043655), size: 24.0),
       elevation: 0,
       toolbarHeight: 60.0,
       shape: RoundedRectangleBorder(

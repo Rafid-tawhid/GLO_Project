@@ -116,7 +116,9 @@ class _TransferPageState extends State<TransferPage> {
                                                 Expanded(
                                                   child: InkWell(
                                                     onTap: (){
-                                                      Navigator.pushNamed(context, TransferForm.routeName);
+                                                      Navigator.pushNamed(context, TransferForm.routeName).then((value) {
+                                                        Navigator.pop(context);
+                                                      });
                                                     },
                                                     child: Padding(
                                                       padding: const EdgeInsets.all(5.0),

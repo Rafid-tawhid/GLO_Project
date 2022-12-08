@@ -6,6 +6,7 @@ import 'package:glo_project/pages/ticket_info/latest_lottery_result.dart';
 import 'package:glo_project/pages/ticket_info/lottery_price.dart';
 import 'package:glo_project/pages/ticket_info/lottery_ticket_history.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_info.dart';
+import 'package:glo_project/pages/ticket_info/national_ticket_prize.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_result.dart';
 import 'package:glo_project/pages/ticket_info/pcso_lottery_page.dart';
 import 'package:glo_project/pages/ticket_info/ticket_referal_history.dart';
@@ -45,7 +46,10 @@ class _HomePageState extends State<HomePage> {
           onTap: (value){
             if(value==0){
               Navigator.pushNamed(context, DealershipPage.routeName);
-            }
+            };
+            if(value==1){
+              Navigator.pushNamed(context, NationalTicketPrize.routeName);
+            };
           },
           items: [
             BottomNavigationBarItem(
@@ -116,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         InkWell(
                           onTap: (){
-                            Navigator.pushNamed(context, NationalTicketPage.routeName);
+                            Navigator.pushNamed(context, LatestLotteryResult.routeName);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -295,7 +299,8 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(5.0),
                           child: InkWell(
                             onTap: (){
-                              Navigator.pushNamed(context, LatestLotteryResult.routeName);
+
+                              Navigator.pushNamed(context, NationalTicketPage.routeName);
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width/4.5,
@@ -488,7 +493,9 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             InkWell(
                               onTap: (){
-                                Navigator.pushNamed(context, NationalTicketPageResult.routeName);
+
+                                Navigator.pushNamed(context, NationalTicketPrize.routeName);
+
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
@@ -522,13 +529,18 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width/5,
-                                child: Column(
-                                  children: [
-                                    Expanded(child: SvgPicture.asset('svg/bingo.svg')),
-                                    Text('BINGO',style: TextStyle(fontSize: 12),)
-                                  ],
+                              child: InkWell(
+                                onTap: (){
+                                  Navigator.pushNamed(context, NationalTicketPrize.routeName);
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width/5,
+                                  child: Column(
+                                    children: [
+                                      Expanded(child: SvgPicture.asset('svg/bingo.svg')),
+                                      Text('BINGO',style: TextStyle(fontSize: 12),)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -807,7 +819,6 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-
         },
         child: Icon(Icons.add),
         tooltip: 'Add new Contact',

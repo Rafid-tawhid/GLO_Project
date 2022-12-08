@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../utils/drawer.dart';
 import '../../utils/my_appbar.dart';
+import '../deposits/deposit_form.dart';
 
 class TransferForm extends StatefulWidget {
   const TransferForm({Key? key}) : super(key: key);
@@ -216,6 +217,7 @@ class _TransferFormState extends State<TransferForm> {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Color((0xffFFD504))),
                                         onPressed: () {
+                                          TransactionSucess(context);
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,

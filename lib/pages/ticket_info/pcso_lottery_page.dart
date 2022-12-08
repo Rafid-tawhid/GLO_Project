@@ -168,12 +168,32 @@ class PCSOLotteryTickets extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          Image.asset('images/ticket.png',),
-          Image.asset('images/ticket.png',),
-          Image.asset('images/ticket.png',),
-          Image.asset('images/ticket.png',),
-          Image.asset('images/ticket.png',),
-          Image.asset('images/ticket.png',),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('images/ticket.png',fit: BoxFit.fitWidth,height: 170,),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('images/ticket.png',fit: BoxFit.fitWidth,height: 170,),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('images/ticket.png',fit: BoxFit.fitWidth,height: 170,),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('images/ticket.png',fit: BoxFit.fitWidth,height: 170,),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('images/ticket.png',fit: BoxFit.fitWidth,height: 170,),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('images/ticket.png',fit: BoxFit.fitWidth,height: 170,),
+          ),
+
+
 
         ],
       ),
