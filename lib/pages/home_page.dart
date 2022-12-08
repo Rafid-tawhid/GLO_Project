@@ -531,7 +531,7 @@ class _HomePageState extends State<HomePage> {
                               padding: const EdgeInsets.all(5.0),
                               child: InkWell(
                                 onTap: (){
-                                  Navigator.pushNamed(context, NationalTicketPrize.routeName);
+                                  Navigator.pushNamed(context, NationalTicketPageResult.routeName);
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width/5,
@@ -668,7 +668,7 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.person_3),
+                                Icon(Icons.person_add_alt_1),
                                 SizedBox(width: 2,),
                                 Text('Referrals')
                               ],

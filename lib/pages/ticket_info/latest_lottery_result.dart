@@ -189,9 +189,9 @@ class _LatestLotteryResultState extends State<LatestLotteryResult> {
                       ),
                     ),
                     Positioned(
-                      left: 18,
+                        left: 18,
                         top: 18,
-                        child: Text('NATIONAL',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)),
+                        child: Text('PCSO 2:00 PM',style: TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold),)),
                     Positioned(
                       right: 50,
                       child: Container(
@@ -205,21 +205,25 @@ class _LatestLotteryResultState extends State<LatestLotteryResult> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Expanded(
-                                    child: Text('16/09/2021',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.blueAccent,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13),)),
+                                    child: FittedBox(
+                                      child: Text('16/09/2021',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13),),
+                                    )),
                                 SizedBox(width: 2,),
                                 Expanded(
                                     child:
-                                    Text('04:00 PM',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.blueAccent,
+                                    FittedBox(
+                                      child: Text('04:00 PM',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.red,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 13,),))
+                                          fontSize: 11,),),
+                                    ))
                               ],
                             ),
                             Padding(
@@ -228,7 +232,7 @@ class _LatestLotteryResultState extends State<LatestLotteryResult> {
                                 height: 35,
                                 decoration: BoxDecoration(
                                     color: Colors.yellowAccent,
-                                  borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(4)
                                 ),
 
                                 child: Padding(
@@ -267,12 +271,12 @@ class _LatestLotteryResultState extends State<LatestLotteryResult> {
                                       Container(
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(4),
-                                          border: Border.all(
-                                            color: Colors.blue,
-                                            width: 1.5
-                                          )
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(4),
+                                            border: Border.all(
+                                                color: Colors.blue,
+                                                width: 1.5
+                                            )
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(2.0),
@@ -387,21 +391,25 @@ class _LatestLotteryResultState extends State<LatestLotteryResult> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Expanded(
-                                    child: Text('16/09/2021',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.blueAccent,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13),)),
+                                    child: FittedBox(
+                                      child: Text('16/09/2021',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13),),
+                                    )),
                                 SizedBox(width: 2,),
                                 Expanded(
                                     child:
-                                    Text('04:00 PM',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 13,),))
+                                    FittedBox(
+                                      child: Text('04:00 PM',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 11,),),
+                                    ))
                               ],
                             ),
                             Padding(
@@ -569,21 +577,25 @@ class _LatestLotteryResultState extends State<LatestLotteryResult> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Expanded(
-                                    child: Text('16/09/2021',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.blueAccent,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13),)),
+                                    child: FittedBox(
+                                      child: Text('16/09/2021',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13),),
+                                    )),
                                 SizedBox(width: 2,),
                                 Expanded(
                                     child:
-                                    Text('04:00 PM',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.blueAccent,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 13,),))
+                                    FittedBox(
+                                      child: Text('04:00 PM',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 11,),),
+                                    ))
                               ],
                             ),
                             Padding(
@@ -751,21 +763,25 @@ class _LatestLotteryResultState extends State<LatestLotteryResult> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Expanded(
-                                    child: Text('16/09/2021',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13),)),
+                                    child: FittedBox(
+                                      child: Text('16/09/2021',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 13),),
+                                    )),
                                 SizedBox(width: 2,),
                                 Expanded(
                                     child:
-                                    Text('04:00 PM',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 13,),))
+                                    FittedBox(
+                                      child: Text('04:00 PM',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 11,),),
+                                    ))
                               ],
                             ),
                             Padding(
@@ -872,6 +888,7 @@ class _LatestLotteryResultState extends State<LatestLotteryResult> {
                                 children: [
                                   Text('Down',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
                                   Container(
+                                   
                                     width: (MediaQuery.of(context).size.width/2.7)/2,
                                     decoration: BoxDecoration(
                                         color: Colors.white,
