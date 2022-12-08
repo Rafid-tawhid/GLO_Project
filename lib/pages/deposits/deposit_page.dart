@@ -441,7 +441,7 @@ class DepositDialog extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     color: Colors.grey,),
                   SizedBox(height: 10,),
-                  Text('Contact Official Support Team for'),
+                  FittedBox(child: Text('Contact Official Support Team for')),
                   Text('Deposit'),
                   SizedBox(height: 20,),
                   Image.asset('images/telegram.png',height: 50,),

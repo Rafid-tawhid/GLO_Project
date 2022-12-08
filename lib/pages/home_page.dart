@@ -2,10 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glo_project/models/login_user_model.dart';
+import 'package:glo_project/pages/ticket_info/buy_lottery_tickets_single.dart';
 import 'package:glo_project/pages/ticket_info/latest_lottery_result.dart';
 import 'package:glo_project/pages/ticket_info/lottery_price.dart';
 import 'package:glo_project/pages/ticket_info/lottery_ticket_history.dart';
-import 'package:glo_project/pages/ticket_info/national_ticket_info.dart';
+import 'package:glo_project/pages/ticket_info/buy_lottery_tickets.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_prize.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_result.dart';
 import 'package:glo_project/pages/ticket_info/pcso_lottery_page.dart';
@@ -29,6 +31,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  late User? userInfo;
+  @override
+  void didChangeDependencies() {
+    userInfo=ModalRoute.of(context)!.settings.arguments as User;
+    if(userInfo!=null){
+
+    }
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         InkWell(
                           onTap: (){
-                            Navigator.pushNamed(context, LatestLotteryResult.routeName);
+                            Navigator.pushNamed(context, BuyTicketPage.routeName);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -300,7 +313,7 @@ class _HomePageState extends State<HomePage> {
                           child: InkWell(
                             onTap: (){
 
-                              Navigator.pushNamed(context, NationalTicketPage.routeName);
+                              Navigator.pushNamed(context, LatestLotteryResult.routeName);
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width/4.5,
@@ -370,7 +383,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         InkWell(
                           onTap: (){
-                            Navigator.pushNamed(context, NationalTicketPage.routeName);
+                            Navigator.pushNamed(context, BuyTicketPage.routeName);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -531,7 +544,7 @@ class _HomePageState extends State<HomePage> {
                               padding: const EdgeInsets.all(5.0),
                               child: InkWell(
                                 onTap: (){
-                                  Navigator.pushNamed(context, NationalTicketPrize.routeName);
+                                  Navigator.pushNamed(context, NationalTicketPageResult.routeName);
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width/5,
@@ -546,13 +559,18 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width/5,
-                                child: Column(
-                                  children: [
-                                    Expanded(child: SvgPicture.asset('svg/toto.svg')),
-                                    Text('TOTO',style: TextStyle(fontSize: 12),)
-                                  ],
+                              child: InkWell(
+                                onTap: (){
+                                  Navigator.pushNamed(context, BuyLotteryTicketsSingle.routeName);
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width/5,
+                                  child: Column(
+                                    children: [
+                                      Expanded(child: SvgPicture.asset('svg/toto.svg')),
+                                      Text('TOTO',style: TextStyle(fontSize: 12),)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -668,7 +686,7 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.person_3),
+                                Icon(Icons.person_add_alt_1),
                                 SizedBox(width: 2,),
                                 Text('Referrals')
                               ],

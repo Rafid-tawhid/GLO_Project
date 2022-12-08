@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glo_project/api_calls/user_api_calls.dart';
+import 'package:glo_project/models/login_user_model.dart';
 import 'package:glo_project/pages/home_page.dart';
 
 import 'forget_password.dart';
@@ -22,6 +24,16 @@ class _LoginPageState extends State<LoginPage> {
   String btnTxt='Login';
   final _formKey=GlobalKey<FormState>();
   final _formKey2=GlobalKey<FormState>();
+  final  loginmailCon=TextEditingController();
+  final  loginpassCon=TextEditingController();
+
+
+  @override
+  void dispose() {
+    loginmailCon.dispose();
+    loginpassCon.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +168,12 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   if(showFields==true){
                                     if(_formKey.currentState!.validate()){
-                                      Navigator.pushNamed(context, HomePage.routeName);
+                                      UserApiCalls.loginUserWithEmailAndPass(loginmailCon.text,loginpassCon.text).then((value) {
+                                        var user=value['user'];
+                                        final userInfo=User.fromJson(user);
+                                        Navigator.pushNamed(context, HomePage.routeName,arguments: userInfo);
+                                      });
+
                                     }
                                   } else if(showFields==false) {
                                     if(_formKey2.currentState!.validate()){
@@ -368,6 +385,7 @@ class _LoginPageState extends State<LoginPage> {
             child:Column(
           children: [
             TextFormField(
+              controller: loginmailCon,
               decoration: InputDecoration(
                   labelText: '  Enter Phone or Email',
                   isDense: true,
@@ -384,11 +402,13 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 }
               },
+
             ),
             SizedBox(
               height: 10,
             ),
             TextFormField(
+              controller: loginpassCon,
               obscureText: showPassword,
               validator: (value){
                 if(value==null||value.isEmpty){
