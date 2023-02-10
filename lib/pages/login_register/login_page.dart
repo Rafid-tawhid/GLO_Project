@@ -1,9 +1,14 @@
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glo_project/api_calls/user_api_calls.dart';
 import 'package:glo_project/models/login_user_model.dart';
 import 'package:glo_project/pages/home_page.dart';
 
+import '../../helper_functions/user_info.dart';
+import '../../models/registration_user_model.dart';
+import '../../utils/error_dialog.dart';
 import 'forget_password.dart';
 
 class LoginPage extends StatefulWidget {
@@ -168,16 +173,44 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   if(showFields==true){
                                     if(_formKey.currentState!.validate()){
+                                      EasyLoading.show();
                                       UserApiCalls.loginUserWithEmailAndPass(loginmailCon.text,loginpassCon.text).then((value) {
-                                        var user=value['user'];
-                                        final userInfo=User.fromJson(user);
-                                        Navigator.pushNamed(context, HomePage.routeName,arguments: userInfo);
+                                        if(value!=null){
+                                          var user=value['user'];
+                                          final userInfo=User.fromJson(user);
+                                          final userAllInfo=LoginUserModel.fromJson(value);
+                                         // print(userInfo.email);
+                                          UserInfo.setUserInfo(userAllInfo);
+                                          EasyLoading.dismiss();
+                                          Navigator.pushNamed(context, HomePage.routeName,arguments: userInfo);
+                                        }
+                                        else {
+                                          EasyLoading.dismiss();
+                                          ErrorDialog(ArtSweetAlertType.info,'Server Problem','Please try after some time');
+                                        }
                                       });
 
                                     }
                                   } else if(showFields==false) {
                                     if(_formKey2.currentState!.validate()){
-                                      Navigator.pushNamed(context, HomePage.routeName);
+                                      EasyLoading.show();
+                                      UserApiCalls.registrationUser(null).then((value) {
+                                        if(value!=null){
+                                          print(value.toString());
+                                          final userInfo=RegistrationUserModel.fromJson(value);
+                                          // final userAllInfo=LoginUserModel.fromJson(value);
+                                           print(userInfo.name);
+                                         // UserInfo.setUserInfo(userAllInfo);
+                                          EasyLoading.dismiss();
+                                          //Navigator.pushNamed(context, HomePage.routeName,arguments: userInfo);
+                                        }
+                                        else {
+                                          EasyLoading.dismiss();
+                                          ErrorDialog(ArtSweetAlertType.info,'Server Problem','Please try after some time');
+                                        }
+                                      });
+
+                                     // Navigator.pushNamed(context, HomePage.routeName);
                                     }
                                   }
 
