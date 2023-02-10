@@ -3,6 +3,8 @@ import 'package:glo_project/pages/dealership_page.dart';
 import 'package:glo_project/pages/login_register/login_page.dart';
 import 'package:glo_project/upgrade_page/upgrade_page.dart';
 
+import '../helper_functions/user_info.dart';
+
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
     super.key,
@@ -28,10 +30,10 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             accountName: Text(
-                "Tawhidur Rahman Rafid"
+                UserInfo.loginUserModel!.user!.name??'Test User'
             ),
             accountEmail: Text(
-              "rafidtawhid@gmail.com",
+                UserInfo.loginUserModel!.user!.email??'testuser@gmail.com'
             ),
           ),
           ListTile(
