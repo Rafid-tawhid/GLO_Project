@@ -32,13 +32,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  late User? userInfo;
+  // late User? userInfo;
   @override
   void didChangeDependencies() {
-    userInfo=ModalRoute.of(context)!.settings.arguments as User;
-    if(userInfo!=null){
-
-    }
+    // userInfo=ModalRoute.of(context)!.settings.arguments as User;
+    // if(userInfo!=null){
+    //
+    // }
     super.didChangeDependencies();
   }
 

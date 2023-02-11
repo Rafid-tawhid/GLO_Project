@@ -19,8 +19,8 @@ class UserApiCalls{
          //   'Accept': 'application/json',
          // },
          body: jsonEncode({
-           "email": "marzuk22@gloticket.com",
-           "password": "123456",
+           "email": email,
+           "password": pass,
          }));
      
      if (response.statusCode == 201) {
@@ -37,7 +37,7 @@ class UserApiCalls{
   }
 
 
-  static Future<dynamic> registrationUser(RegistrationUserModel? userModel) async {
+  static Future<dynamic> registrationUser(RegistrationUserModel userModel) async {
     var data;
     try {
       Response response = await post(
@@ -46,15 +46,7 @@ class UserApiCalls{
           // headers: {
           //   'Accept': 'application/json',
           // },
-          body: jsonEncode({
-            "name": "Marzuk Islam 5",
-            "email": "marzuk55@gloticket.com",
-            "password": "123456",
-            "password_confirmation": "123456",
-            "wpin": 1987,
-            "reference": 1234,
-            "userid": 1237653314
-          }));
+          body: jsonEncode(userModel.toJson()));
 
       if (response.statusCode == 200) {
         data =await jsonDecode(response.body.toString());

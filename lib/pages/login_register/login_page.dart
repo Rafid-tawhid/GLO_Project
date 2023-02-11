@@ -31,12 +31,26 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey2=GlobalKey<FormState>();
   final  loginmailCon=TextEditingController();
   final  loginpassCon=TextEditingController();
+  final  nameCon=TextEditingController();
+  final  emlCon=TextEditingController();
+  final  passCon=TextEditingController();
+  final  passConfCon=TextEditingController();
+  final  wpinCon=TextEditingController();
+  final  refCon=TextEditingController();
+  final  userIdCon=TextEditingController();
 
 
   @override
   void dispose() {
     loginmailCon.dispose();
     loginpassCon.dispose();
+    nameCon.dispose();
+    emlCon.dispose();
+    passCon.dispose();
+    passConfCon.dispose();
+    wpinCon.dispose();
+    refCon.dispose();
+    userIdCon.dispose();
     super.dispose();
   }
 
@@ -173,45 +187,21 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   if(showFields==true){
                                     if(_formKey.currentState!.validate()){
-                                      EasyLoading.show();
-                                      UserApiCalls.loginUserWithEmailAndPass(loginmailCon.text,loginpassCon.text).then((value) {
-                                        if(value!=null){
-                                          var user=value['user'];
-                                          final userInfo=User.fromJson(user);
-                                          final userAllInfo=LoginUserModel.fromJson(value);
-                                         // print(userInfo.email);
-                                          UserInfo.setUserInfo(userAllInfo);
-                                          EasyLoading.dismiss();
-                                          Navigator.pushNamed(context, HomePage.routeName);
-                                        }
-                                        else {
-                                          EasyLoading.dismiss();
-                                          ErrorDialog(ArtSweetAlertType.info,'Server Problem','Please try after some time');
-                                        }
-                                      });
-
+                                      loginwithmailpass();
                                     }
                                   } else if(showFields==false) {
                                     if(_formKey2.currentState!.validate()){
-                                      EasyLoading.show();
-                                      UserApiCalls.registrationUser(null).then((value) {
-                                        if(value!=null){
-                                          print(value.toString());
-                                          final userInfo=RegistrationUserModel.fromJson(value);
-                                           print('userInfo.name ${userInfo.name}');
-                                           final loginModel=LoginUserModel();
-                                           loginModel.user!.email=userInfo.email;
-                                           loginModel.user!.name=userInfo.name;
-                                           loginModel.user!.id=userInfo.userid;
-                                           UserInfo.setUserInfo(loginModel);
-                                          EasyLoading.dismiss();
-                                          //Navigator.pushNamed(context, HomePage.routeName,arguments: userInfo);
-                                        }
-                                        else {
-                                          EasyLoading.dismiss();
-                                          ErrorDialog(ArtSweetAlertType.info,'Server Problem','Please try after some time');
-                                        }
-                                      });
+                                      final usermodel=RegistrationUserModel(
+                                        name:nameCon.text,
+                                        email:emlCon.text,
+                                        password:passCon.text,
+                                        passwordConfirmation:passCon.text,
+                                        wpin:num.parse(wpinCon.text),
+                                        reference:num.parse(refCon.text),
+                                        userid: num.parse(userIdCon.text)
+                                      );
+
+                                      registerUserwithInfo(usermodel);
 
                                      // Navigator.pushNamed(context, HomePage.routeName);
                                     }
@@ -281,6 +271,7 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: refCon,
             ),
             SizedBox(
               height: 10,
@@ -303,6 +294,7 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: nameCon,
             ),
             SizedBox(
               height: 10,
@@ -324,6 +316,7 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: emlCon,
             ),
             SizedBox(
               height: 10,
@@ -346,6 +339,7 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: userIdCon,
             ),
             SizedBox(
               height: 10,
@@ -353,7 +347,7 @@ class _LoginPageState extends State<LoginPage> {
             TextFormField(
               validator: (value){
                 if(value==null||value.isEmpty){
-                  return 'Required Phone Number';
+                  return 'Required Pin Number';
                 }
                 else {
                   return null;
@@ -367,6 +361,7 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: wpinCon,
             ),
             SizedBox(
               height: 10,
@@ -381,6 +376,7 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 }
               },
+              controller: passCon,
               decoration: InputDecoration(
                   labelText: '  Confirm Password',
                   isDense: true,
@@ -506,5 +502,51 @@ class _LoginPageState extends State<LoginPage> {
         ))
       ],
     );
+  }
+
+  Future<void> loginwithmailpass() async {
+    EasyLoading.show();
+    await UserApiCalls.loginUserWithEmailAndPass(loginmailCon.text,loginpassCon.text).then((value) {
+      if(value!=null){
+        var user=value['user'];
+        final userInfo=User.fromJson(user);
+        final userAllInfo=LoginUserModel.fromJson(value);
+         print(userInfo.toJson());
+        UserInfo.setUserInfo(userAllInfo);
+        EasyLoading.dismiss();
+        Navigator.pushNamed(context, HomePage.routeName);
+      }
+      else {
+        EasyLoading.dismiss();
+        ErrorDialog(ArtSweetAlertType.info,'Server Problem','Please try after some time');
+      }
+    });
+  }
+
+  Future<void> registerUserwithInfo(RegistrationUserModel userModel) async {
+    print('userModel.toJson() ${userModel.toJson()}');
+  //  EasyLoading.show();
+   await UserApiCalls.registrationUser(userModel).then((value) {
+      if(value!=null){
+        print(value.toString());
+        final userInfo=RegistrationUserModel.fromJson(value);
+        print('userInfo.name ${userInfo.toJson()}');
+        final loginModel=LoginUserModel(
+          user: User(
+            email: userInfo.email,
+            name: userInfo.name,
+            userid: userInfo.userid.toString()
+          )
+        );
+        print('login model ${loginModel.toJson()}');
+        UserInfo.setUserInfo(loginModel);
+         EasyLoading.dismiss();
+        // Navigator.pushNamed(context, HomePage.routeName);
+      }
+      else {
+        EasyLoading.dismiss();
+        ErrorDialog(ArtSweetAlertType.info,'Server Problem','Please try after some time');
+      }
+    });
   }
 }
