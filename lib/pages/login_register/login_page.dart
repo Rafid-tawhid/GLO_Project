@@ -182,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                                          // print(userInfo.email);
                                           UserInfo.setUserInfo(userAllInfo);
                                           EasyLoading.dismiss();
-                                          Navigator.pushNamed(context, HomePage.routeName,arguments: userInfo);
+                                          Navigator.pushNamed(context, HomePage.routeName);
                                         }
                                         else {
                                           EasyLoading.dismiss();
@@ -198,9 +198,12 @@ class _LoginPageState extends State<LoginPage> {
                                         if(value!=null){
                                           print(value.toString());
                                           final userInfo=RegistrationUserModel.fromJson(value);
-                                          // final userAllInfo=LoginUserModel.fromJson(value);
-                                           print(userInfo.name);
-                                         // UserInfo.setUserInfo(userAllInfo);
+                                           print('userInfo.name ${userInfo.name}');
+                                           final loginModel=LoginUserModel();
+                                           loginModel.user!.email=userInfo.email;
+                                           loginModel.user!.name=userInfo.name;
+                                           loginModel.user!.id=userInfo.userid;
+                                           UserInfo.setUserInfo(loginModel);
                                           EasyLoading.dismiss();
                                           //Navigator.pushNamed(context, HomePage.routeName,arguments: userInfo);
                                         }
