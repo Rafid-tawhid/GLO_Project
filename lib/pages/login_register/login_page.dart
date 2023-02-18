@@ -1,4 +1,5 @@
 import 'package:art_sweetalert/art_sweetalert.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -226,6 +227,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             Container(
+              margin: EdgeInsets.only(top: 10),
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
               color: Color(0xff032D46),
@@ -272,6 +274,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(5),
                   )),
               controller: refCon,
+              keyboardType: TextInputType.number,
             ),
             SizedBox(
               height: 10,
@@ -304,6 +307,9 @@ class _LoginPageState extends State<LoginPage> {
                 if(value==null||value.isEmpty){
                   return 'Required Your Email';
                 }
+                if(!EmailValidator.validate(value)){
+                  return 'Required a valid Email';
+                }
                 else {
                   return null;
                 }
@@ -322,6 +328,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 10,
             ),
             TextFormField(
+              keyboardType: TextInputType.number,
               validator: (value){
                 if(value==null||value.isEmpty){
                   return 'Required Phone Number';
@@ -345,6 +352,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 10,
             ),
             TextFormField(
+              keyboardType: TextInputType.number,
               validator: (value){
                 if(value==null||value.isEmpty){
                   return 'Required Pin Number';
@@ -378,6 +386,47 @@ class _LoginPageState extends State<LoginPage> {
               },
               controller: passCon,
               decoration: InputDecoration(
+                  labelText: '  Password',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon:
+                  SizedBox(child: SvgPicture.asset('svg/pass_icon.svg')),
+                  suffixIcon: InkWell(
+                    onTap: (){
+                      setState(() {
+                        showPassword=!showPassword;
+                      });
+                    },
+                    child: showPassword?Icon(
+                      Icons.visibility,
+                      color: Color(0xff032D46),
+                    ):Icon(
+                      Icons.visibility_off,
+                      color: Color(0xff032D46),
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              obscureText: showPassword,
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Password';
+                }
+                if(value!=passCon.text){
+                  return 'Confirm password must be same as Password';
+                }
+                else {
+                  return null;
+                }
+              },
+              controller: passConfCon,
+              decoration: InputDecoration(
                   labelText: '  Confirm Password',
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
@@ -389,8 +438,11 @@ class _LoginPageState extends State<LoginPage> {
                         showPassword=!showPassword;
                       });
                     },
-                    child: Icon(
-                      Icons.remove_red_eye_outlined,
+                    child: showPassword?Icon(
+                      Icons.visibility,
+                      color: Color(0xff032D46),
+                    ):Icon(
+                      Icons.visibility_off,
                       color: Color(0xff032D46),
                     ),
                   ),
@@ -398,9 +450,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(5),
                   )),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10,)
           ],
         ))
       ],
@@ -419,7 +469,7 @@ class _LoginPageState extends State<LoginPage> {
             TextFormField(
               controller: loginmailCon,
               decoration: InputDecoration(
-                  labelText: '  Enter Phone or Email',
+                  labelText: '  Enter your Email',
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
@@ -428,7 +478,10 @@ class _LoginPageState extends State<LoginPage> {
                   )),
               validator: (value){
                 if(value==null||value.isEmpty){
-                  return 'Required Phone or Email';
+                  return 'Required your Email';
+                }
+                if(!EmailValidator.validate(value)){
+                  return 'Required a valid email';
                 }
                 else {
                   return null;
@@ -508,44 +561,78 @@ class _LoginPageState extends State<LoginPage> {
     EasyLoading.show();
     await UserApiCalls.loginUserWithEmailAndPass(loginmailCon.text,loginpassCon.text).then((value) {
       if(value!=null){
-        var user=value['user'];
-        final userInfo=User.fromJson(user);
-        final userAllInfo=LoginUserModel.fromJson(value);
-         print(userInfo.toJson());
-        UserInfo.setUserInfo(userAllInfo);
         EasyLoading.dismiss();
-        Navigator.pushNamed(context, HomePage.routeName);
+        if(value['user']!=null){
+          var user=value['user'];
+          final userInfo=User.fromJson(user);
+          final userAllInfo=LoginUserModel.fromJson(value);
+          print(userInfo.toJson());
+          UserInfo.setUserInfo(userAllInfo);
+          Navigator.pushNamed(context, HomePage.routeName);
+        }
       }
       else {
         EasyLoading.dismiss();
-        ErrorDialog(ArtSweetAlertType.info,'Server Problem','Please try after some time');
+        ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+                type: ArtSweetAlertType.info,
+                title: 'Authentication Problem',
+                text: 'please check your mail and password'
+            )
+        );
       }
     });
   }
 
   Future<void> registerUserwithInfo(RegistrationUserModel userModel) async {
     print('userModel.toJson() ${userModel.toJson()}');
-  //  EasyLoading.show();
+    EasyLoading.show();
    await UserApiCalls.registrationUser(userModel).then((value) {
+     print('valuesss ${value.toString()}');
       if(value!=null){
-        print(value.toString());
-        final userInfo=RegistrationUserModel.fromJson(value);
-        print('userInfo.name ${userInfo.toJson()}');
-        final loginModel=LoginUserModel(
-          user: User(
-            email: userInfo.email,
-            name: userInfo.name,
-            userid: userInfo.userid.toString()
-          )
-        );
-        print('login model ${loginModel.toJson()}');
-        UserInfo.setUserInfo(loginModel);
-         EasyLoading.dismiss();
-        // Navigator.pushNamed(context, HomePage.routeName);
+        EasyLoading.dismiss();
+        if(value['status']=='1'){
+          print('This is called 3');
+          print(value.toString());
+          final userInfo=RegistrationUserModel.fromJson(value);
+          print('userInfo.name ${userInfo.toJson()}');
+          final loginModel=LoginUserModel(
+              user: User(
+                  email: userInfo.email,
+                  name: userInfo.name,
+                  userid: userInfo.userid.toString()
+              )
+          );
+          print('login model ${loginModel.toJson()}');
+          UserInfo.setUserInfo(loginModel);
+          Navigator.pushNamed(context, HomePage.routeName);
+        }
+       else if(value['userid']!=null||value['password']!=null){
+          print('This is called 2');
+          EasyLoading.dismiss();
+          ArtSweetAlert.show(
+              context: context,
+              artDialogArgs: ArtDialogArgs(
+                  type: ArtSweetAlertType.info,
+                  title: 'Server Problem',
+                  text: '${value.toString()}'
+              )
+          );
+        }
       }
       else {
+        print('This is called');
         EasyLoading.dismiss();
-        ErrorDialog(ArtSweetAlertType.info,'Server Problem','Please try after some time');
+        ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+                type: ArtSweetAlertType.info,
+                title: 'Server Problem',
+                text: '${value.toString()}'
+            )
+        );
+
       }
     });
   }

@@ -80,11 +80,11 @@ class MyDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             onTap: (){
-              Navigator.pushNamed(context, LoginPage.routeName);
+              Navigator.pushReplacementNamed(context, LoginPage.routeName);
             },
             leading: Icon(Icons.login),
             hoverColor: Colors.grey,
-            title: Text("Login"),
+            title: Text("Logout"),
           ),
         ],
       ),
