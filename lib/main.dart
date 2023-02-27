@@ -21,7 +21,6 @@ import 'package:glo_project/pages/withdraw/withdrawal_page.dart';
 import 'package:glo_project/providers/user_provider.dart';
 import 'package:glo_project/upgrade_page/upgrade_page.dart';
 import 'package:glo_project/pages/welcome/anim_welcome.dart';
-import 'package:glo_project/pages/welcome/buy_tickets.dart';
 import 'package:glo_project/pages/welcome/test.dart';
 
 import 'package:glo_project/pages/welcome/welcome_dashboard.dart';

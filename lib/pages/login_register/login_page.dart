@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glo_project/api_calls/user_api_calls.dart';
+import 'package:glo_project/models/error_model.dart';
 import 'package:glo_project/models/login_user_model.dart';
 import 'package:glo_project/pages/home_page.dart';
 
@@ -39,7 +40,9 @@ class _LoginPageState extends State<LoginPage> {
   final  wpinCon=TextEditingController();
   final  refCon=TextEditingController();
   final  userIdCon=TextEditingController();
-
+  bool referIconColor=false;
+  bool showMailError=false;
+  bool showNumberError=false;
 
   @override
   void dispose() {
@@ -196,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                                         name:nameCon.text,
                                         email:emlCon.text,
                                         password:passCon.text,
-                                        passwordConfirmation:passCon.text,
+                                        passwordConfirmation:passConfCon.text,
                                         wpin:num.parse(wpinCon.text),
                                         reference:num.parse(refCon.text),
                                         userid: num.parse(userIdCon.text)
@@ -276,6 +279,44 @@ class _LoginPageState extends State<LoginPage> {
               controller: refCon,
               keyboardType: TextInputType.number,
             ),
+            SizedBox(height: 6,),
+            InkWell(
+              onTap: (){
+                setState(() {
+                 referIconColor=!referIconColor;
+                 referIconColor?refCon.text='123456789':refCon.text='';
+                });
+              },
+              child: Row(
+                children: [
+                  Container(
+                    height: 16,
+                    width: 16,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(
+                        color: Color(0xff007AFF),
+                        width: 2
+                      )
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: referIconColor?Color(0xff007AFF):Colors.white,
+                        ),
+                        height: 14,
+                        width: 14,
+
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 5,),
+                  Text('Official Referral Code',style: TextStyle(color:Color(0xff007AFF) ),)
+                ],
+              ),
+            ),
             SizedBox(
               height: 10,
             ),
@@ -291,6 +332,7 @@ class _LoginPageState extends State<LoginPage> {
               decoration: InputDecoration(
                   labelText: '  Enter Name',
                   isDense: true,
+                  errorStyle:TextStyle() ,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   prefixIcon:
                   SizedBox(child: SvgPicture.asset('svg/pass_icon.svg')),
@@ -324,8 +366,12 @@ class _LoginPageState extends State<LoginPage> {
                   )),
               controller: emlCon,
             ),
+            SizedBox(height: 3,),
+           if(showMailError) Align(
+              alignment: Alignment.centerLeft,
+                child: Text('Email Must be unique',style: TextStyle(color: Colors.red),)),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             TextFormField(
               keyboardType: TextInputType.number,
@@ -348,14 +394,21 @@ class _LoginPageState extends State<LoginPage> {
                   )),
               controller: userIdCon,
             ),
+            SizedBox(height: 3,),
+           if(showNumberError) Align(
+                alignment: Alignment.centerLeft,
+                child: Text('This phone number is taken',style: TextStyle(color: Colors.red),)),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             TextFormField(
               keyboardType: TextInputType.number,
               validator: (value){
                 if(value==null||value.isEmpty){
                   return 'Required Pin Number';
+                }
+                if(value.length>6||value.length<4){
+                  return 'please enter a valid pin';
                 }
                 else {
                   return null;
@@ -371,6 +424,10 @@ class _LoginPageState extends State<LoginPage> {
                   )),
               controller: wpinCon,
             ),
+            SizedBox(height: 4,),
+            Align(
+              alignment: Alignment.centerLeft,
+                child: Text('Min : 4 & Max : 6 (Integer Number Only) (ex : 1234)',style: TextStyle(fontSize: 13,color: Color(0xff007AFF)),)),
             SizedBox(
               height: 10,
             ),
@@ -586,14 +643,17 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> registerUserwithInfo(RegistrationUserModel userModel) async {
-    print('userModel.toJson() ${userModel.toJson()}');
     EasyLoading.show();
+    setState(() {
+      showNumberError=false;
+      showMailError=false;
+    });
+
    await UserApiCalls.registrationUser(userModel).then((value) {
      print('valuesss ${value.toString()}');
+     EasyLoading.dismiss();
       if(value!=null){
-        EasyLoading.dismiss();
         if(value['status']=='1'){
-          print('This is called 3');
           print(value.toString());
           final userInfo=RegistrationUserModel.fromJson(value);
           print('userInfo.name ${userInfo.toJson()}');
@@ -605,22 +665,35 @@ class _LoginPageState extends State<LoginPage> {
               )
           );
           print('login model ${loginModel.toJson()}');
+          //set user info
           UserInfo.setUserInfo(loginModel);
+
           Navigator.pushNamed(context, HomePage.routeName);
         }
-       else if(value['userid']!=null||value['password']!=null){
-          print('This is called 2');
-          EasyLoading.dismiss();
-          ArtSweetAlert.show(
-              context: context,
-              artDialogArgs: ArtDialogArgs(
-                  type: ArtSweetAlertType.info,
-                  title: 'Server Problem',
-                  text: '${value.toString()}'
-              )
-          );
+
+       else if(value['email']!=null){
+         print(value['email']);
+         setState(() {
+           showMailError=true;
+         });
         }
+        else if(value['userid']!=null){
+          print(value['userid']);
+          setState(() {
+            showNumberError=true;
+          });
+          // ArtSweetAlert.show(
+          //     context: context,
+          //     artDialogArgs: ArtDialogArgs(
+          //         type: ArtSweetAlertType.info,
+          //         title: 'Server Problem',
+          //         text: '${value.toString()}'
+          //     )
+          // );
+        }
+
       }
+
       else {
         print('This is called');
         EasyLoading.dismiss();
