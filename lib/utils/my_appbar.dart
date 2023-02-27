@@ -7,7 +7,7 @@ AppBar myAppbar() {
   return AppBar(
       iconTheme: IconThemeData(color: Color(0xff043655), size: 24.0),
       elevation: 0,
-      toolbarHeight: 60.0,
+      toolbarHeight: 70.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(10),
@@ -28,7 +28,7 @@ AppBar myAppbar() {
 
             children: [
               Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.only(right: 4.0,top: 8,bottom: 6),
                 child: SvgPicture.asset(
                   'svg/user.svg',
                   fit: BoxFit.cover,

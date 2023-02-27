@@ -1,16 +1,17 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glo_project/pages/home_page.dart';
 import 'package:glo_project/pages/login_register/varify_page.dart';
 
-class LoginWelcome extends StatefulWidget {
+class RegistrationWelcome extends StatefulWidget {
   static const String routeName='/login_welcome';
 
   @override
-  State<LoginWelcome> createState() => _LoginWelcomeState();
+  State<RegistrationWelcome> createState() => _RegistrationWelcomeState();
 }
 
-class _LoginWelcomeState extends State<LoginWelcome> {
+class _RegistrationWelcomeState extends State<RegistrationWelcome> {
   bool animation=false;
   bool freeBox=true;
   @override
@@ -119,10 +120,14 @@ class _LoginWelcomeState extends State<LoginWelcome> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('SKIP',style: TextStyle(fontSize: 12,color: Color(0xff02C6C1)),),
                                 InkWell(
                                   onTap: (){
-                                    Navigator.pushNamed(context, VerificationPage.routeName);
+                                    Navigator.pushNamed(context, HomePage.routeName);
+                                  },
+                                    child: Text('SKIP',style: TextStyle(fontSize: 12,color: Color(0xff02C6C1)),)),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.pushNamed(context,VerificationPage.routeName);
                                   },
                                     child: Text('VARIFY NOW',style: TextStyle(fontSize: 12,color: Color(0xff02C6C1)),))
                               ],

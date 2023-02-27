@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glo_project/pages/dealership_page.dart';
 import 'package:glo_project/pages/login_register/login_page.dart';
 import 'package:glo_project/upgrade_page/upgrade_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helper_functions/user_info.dart';
 
@@ -79,7 +80,10 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            onTap: (){
+            onTap: () async{
+              final pref=await SharedPreferences.getInstance();
+              pref.remove('email');
+              pref.remove('pass');
               Navigator.pushReplacementNamed(context, LoginPage.routeName);
             },
             leading: Icon(Icons.login),

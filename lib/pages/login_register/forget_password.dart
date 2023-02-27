@@ -63,7 +63,7 @@ class ForgetPassword extends StatelessWidget {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Color(0xFF032D46)),
                                   onPressed: () {
-                                    Navigator.pushNamed(context, LoginWelcome.routeName);
+                                    Navigator.pushNamed(context, RegistrationWelcome.routeName);
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(10.0),

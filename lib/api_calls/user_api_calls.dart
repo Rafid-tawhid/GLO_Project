@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:glo_project/api_calls/api_end_url.dart';
+import 'package:glo_project/models/error_model.dart';
 import 'package:http/http.dart';
 
 import '../models/login_user_model.dart';
@@ -23,7 +24,7 @@ class UserApiCalls{
            "password": pass,
          }));
      
-     if (response.statusCode == 201) {
+     if (response.statusCode == 200) {
        data =await jsonDecode(response.body.toString());
        return data;
      }
@@ -50,6 +51,11 @@ class UserApiCalls{
 
       if (response.statusCode == 200) {
         data =await jsonDecode(response.body.toString());
+        return data;
+      }
+      if (response.statusCode == 400) {
+        data =await jsonDecode(response.body.toString());
+
         return data;
       }
       else {

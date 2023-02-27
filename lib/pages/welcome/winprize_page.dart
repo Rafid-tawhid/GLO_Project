@@ -2,7 +2,6 @@ import 'package:animated_widgets/widgets/opacity_animated.dart';
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:glo_project/pages/welcome/buy_tickets.dart';
 
 import '../ticket_info/buy_lottery_tickets.dart';
 

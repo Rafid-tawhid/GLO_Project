@@ -1,6 +1,13 @@
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../api_calls/user_api_calls.dart';
+import '../../helper_functions/user_info.dart';
+import '../../models/login_user_model.dart';
+import '../home_page.dart';
 import 'anim_welcome.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -12,6 +19,52 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+
+
+  @override
+  void initState() {
+
+    Future.delayed(Duration.zero,() async {
+        final pref=await SharedPreferences.getInstance();
+
+        //if login previously get data and login to home page
+
+        if(pref.getString("email")!=null&&pref.getString("pass")!=null){
+          EasyLoading.show();
+          final email=pref.getString("email");
+          final pass=pref.getString("pass");
+          UserApiCalls.loginUserWithEmailAndPass(email!,pass!).then((value) {
+            if(value!=null){
+
+              if(value['user']!=null){
+                var user=value['user'];
+                final userInfo=User.fromJson(user);
+
+                final userAllInfo=LoginUserModel.fromJson(value);
+                print(userInfo.toJson());
+                UserInfo.setUserInfo(userAllInfo);
+                EasyLoading.dismiss();
+                Navigator.pushNamed(context, HomePage.routeName);
+              }
+            }
+            else {
+              EasyLoading.dismiss();
+              ArtSweetAlert.show(
+                  context: context,
+                  artDialogArgs: ArtDialogArgs(
+                      type: ArtSweetAlertType.info,
+                      title: 'Authentication Problem',
+                      text: 'please check your mail and password'
+                  )
+              );
+            }
+          });
+        }
+
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
