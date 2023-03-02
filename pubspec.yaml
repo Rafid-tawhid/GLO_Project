@@ -50,6 +50,7 @@ dependencies:
   art_sweetalert: ^0.0.5
   shared_preferences:
   email_validator: '^2.1.16'
+  image_picker:
 
 
 

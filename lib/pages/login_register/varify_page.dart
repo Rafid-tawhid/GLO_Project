@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:glo_project/pages/home_page.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../utils/constants.dart';
 
@@ -15,6 +18,20 @@ class _VerificationPageState extends State<VerificationPage> {
   var cities;
   var types;
   bool showForm = true;
+  String? _imagePath1;
+  File? _file1;
+  String? _imagePath2;
+  File? _file2;
+  String? _imagePath3;
+  File? _file3;
+
+  final profileCon=TextEditingController();
+  final frontImgCon=TextEditingController();
+  final backImgCon=TextEditingController();
+
+
+  ImageSource _imageSource = ImageSource.gallery;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +41,7 @@ class _VerificationPageState extends State<VerificationPage> {
           child: Card(
             elevation: 4,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: ListView(
               shrinkWrap: true,
               children: [
@@ -44,7 +61,10 @@ class _VerificationPageState extends State<VerificationPage> {
         Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
           child: Container(
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               child: Image.asset(
                 'images/login_banner.png',
                 fit: BoxFit.fitWidth,
@@ -59,14 +79,14 @@ class _VerificationPageState extends State<VerificationPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: EdgeInsets.only(top: 5,bottom: 5),
-          decoration:BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(
-              color: Colors.blue,
-              width: 1
-            )
-          ),
+                padding: EdgeInsets.only(top: 5, bottom: 5),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                        color: Colors.blue,
+                        width: 1
+                    )
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -79,7 +99,8 @@ class _VerificationPageState extends State<VerificationPage> {
 
                             Text(
                               'ACCOUNT TYPE',
-                              style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
 
                           ],
@@ -87,7 +108,8 @@ class _VerificationPageState extends State<VerificationPage> {
                         SizedBox(height: 5,),
                         Text(
                           '(Pending Verification)',
-                          style: TextStyle(color: Colors.lightBlueAccent,fontWeight: FontWeight.bold),
+                          style: TextStyle(color: Colors.lightBlueAccent,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -117,7 +139,8 @@ class _VerificationPageState extends State<VerificationPage> {
             },
             label: Text(
               'Home',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
             ),
           ),
         )
@@ -191,12 +214,13 @@ class _VerificationPageState extends State<VerificationPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
+                    controller: profileCon,
+
                     decoration: InputDecoration(
                         labelText: '  No file chosen',
                         isDense: true,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: TextButton(
@@ -205,7 +229,8 @@ class _VerificationPageState extends State<VerificationPage> {
                               side: BorderSide(color: Colors.grey, width: 1),
                             ),
                             child: Text('Chose Image'),
-                            onPressed: () {},
+                            onPressed: _getImage1
+
                           ),
                         ),
                         border: OutlineInputBorder(
@@ -219,7 +244,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
                         labelText: '  Enter Name here',
                         border: OutlineInputBorder(
@@ -233,7 +258,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
                         labelText: '  example@gmail.com',
                         border: OutlineInputBorder(
@@ -247,7 +272,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
                         labelText: '  Enter Date',
                         border: OutlineInputBorder(
@@ -261,7 +286,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
                         labelText: '  Enter City',
                         border: OutlineInputBorder(
@@ -284,7 +309,7 @@ class _VerificationPageState extends State<VerificationPage> {
                       }
                     },
                     decoration: const InputDecoration(
-                        contentPadding:EdgeInsets.zero,
+                      contentPadding: EdgeInsets.zero,
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey),
                           borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -297,10 +322,11 @@ class _VerificationPageState extends State<VerificationPage> {
                       });
                     },
                     items: cityName
-                        .map((e) => DropdownMenuItem(
-                              child: SizedBox(child: new Text(e)),
-                              value: e,
-                            ))
+                        .map((e) =>
+                        DropdownMenuItem(
+                          child: SizedBox(child: new Text(e)),
+                          value: e,
+                        ))
                         .toList(),
                   ),
                   SizedBox(
@@ -310,7 +336,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
                         labelText: '  Enter Address',
                         border: OutlineInputBorder(
@@ -345,10 +371,11 @@ class _VerificationPageState extends State<VerificationPage> {
                       });
                     },
                     items: gtypes
-                        .map((e) => DropdownMenuItem(
-                              child: SizedBox(child: new Text(e)),
-                              value: e,
-                            ))
+                        .map((e) =>
+                        DropdownMenuItem(
+                          child: SizedBox(child: new Text(e)),
+                          value: e,
+                        ))
                         .toList(),
                   ),
                   SizedBox(
@@ -358,12 +385,14 @@ class _VerificationPageState extends State<VerificationPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
+                    controller: frontImgCon,
+
                     decoration: InputDecoration(
                         labelText: '  No file chosen',
                         isDense: true,
                         contentPadding:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: TextButton(
@@ -372,7 +401,9 @@ class _VerificationPageState extends State<VerificationPage> {
                               side: BorderSide(color: Colors.grey, width: 1),
                             ),
                             child: Text('Chose Image'),
-                            onPressed: () {},
+                            onPressed: ()async {
+                              _getImage2();
+                            },
                           ),
                         ),
                         border: OutlineInputBorder(
@@ -386,12 +417,14 @@ class _VerificationPageState extends State<VerificationPage> {
                   SizedBox(
                     height: 5,
                   ),
-                  TextField(
+                  TextFormField(
+                    controller: backImgCon,
+
                     decoration: InputDecoration(
                         labelText: '  No file chosen',
                         isDense: true,
                         contentPadding:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: TextButton(
@@ -400,7 +433,9 @@ class _VerificationPageState extends State<VerificationPage> {
                               side: BorderSide(color: Colors.grey, width: 1),
                             ),
                             child: Text('Chose Image'),
-                            onPressed: () {},
+                            onPressed: () async{
+                              _getImage3();
+                            },
                           ),
                         ),
                         border: OutlineInputBorder(
@@ -411,7 +446,10 @@ class _VerificationPageState extends State<VerificationPage> {
                     height: 20,
                   ),
                   Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Color((0xff032D46))),
@@ -428,5 +466,42 @@ class _VerificationPageState extends State<VerificationPage> {
         ],
       ),
     );
+  }
+
+  void _getImage1() async {
+    print('object');
+    final selectedImage = await ImagePicker().pickImage(source: _imageSource);
+    print('selectedImage $selectedImage');
+    if (selectedImage != null) {
+      setState(() {
+        _file1 = File(selectedImage!.path);
+        _imagePath1 = selectedImage.path;
+        profileCon.text=_imagePath1??'';
+      });
+    }
+  }
+
+  void _getImage2() async {
+    final selectedImage = await ImagePicker().pickImage(source: _imageSource);
+    print('selectedImage $selectedImage');
+    if (selectedImage != null) {
+      setState(() {
+        _file2 = File(selectedImage!.path);
+        _imagePath2 = selectedImage.path;
+        frontImgCon.text=_imagePath2??'';
+      });
+    }
+  }
+
+  void _getImage3() async {
+    final selectedImage = await ImagePicker().pickImage(source: _imageSource);
+    print('selectedImage $selectedImage');
+    if (selectedImage != null) {
+      setState(() {
+        _file3 = File(selectedImage!.path);
+        _imagePath3 = selectedImage.path;
+        backImgCon.text=_imagePath3??'';
+      });
+    }
   }
 }

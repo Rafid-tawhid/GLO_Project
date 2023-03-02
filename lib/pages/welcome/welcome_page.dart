@@ -47,17 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 Navigator.pushNamed(context, HomePage.routeName);
               }
             }
-            else {
-              EasyLoading.dismiss();
-              ArtSweetAlert.show(
-                  context: context,
-                  artDialogArgs: ArtDialogArgs(
-                      type: ArtSweetAlertType.info,
-                      title: 'Authentication Problem',
-                      text: 'please check your mail and password'
-                  )
-              );
-            }
+
           });
         }
 
