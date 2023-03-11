@@ -4,6 +4,8 @@ import 'package:glo_project/api_calls/api_end_url.dart';
 import 'package:glo_project/models/error_model.dart';
 import 'package:http/http.dart';
 
+import '../helper_functions/user_info.dart';
+import '../models/city_models.dart';
 import '../models/login_user_model.dart';
 import '../models/registration_user_model.dart';
 
@@ -54,6 +56,35 @@ class UserApiCalls{
         return data;
       }
       if (response.statusCode == 400) {
+        data =await jsonDecode(response.body.toString());
+
+        return data;
+      }
+      else {
+        print('Failed........');
+        return null;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+
+  static Future<dynamic> getAllCities() async {
+    var data;
+    final token= UserInfo.loginUserModel!.token;
+    try {
+      Response response = await get(
+          Uri.parse('$baseUrl${ApiEnd.countries}'),
+          //Uri.parse('https://www.testapi.gloticket.org/api/login'),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+            'authorization': 'Bearer $token',
+          },
+          );
+
+      if (response.statusCode == 200) {
         data =await jsonDecode(response.body.toString());
 
         return data;

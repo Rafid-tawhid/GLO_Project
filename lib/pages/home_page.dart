@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glo_project/helper_functions/user_info.dart';
 import 'package:glo_project/models/login_user_model.dart';
 import 'package:glo_project/pages/ticket_info/buy_lottery_tickets_single.dart';
 import 'package:glo_project/pages/ticket_info/latest_lottery_result.dart';
@@ -699,11 +700,12 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            InkWell(
+                            UserInfo.loginUserModel!.user!.status==1?InkWell(
                                 onTap:(){
                                   Navigator.pushNamed(context, VerificationPage.routeName);
                                 },
-                                child: Text('Verify Now ->',style: TextStyle(fontSize: 16,color: Colors.red),)),
+                                child: Text('Verify Now ->',style: TextStyle(fontSize: 16,color: Colors.red),)):
+                            Text('Verified',style: TextStyle(fontSize: 16,color: Colors.red),),
                             SizedBox(height: 5,),
                             Row(
                               mainAxisSize: MainAxisSize.min,

@@ -28,11 +28,11 @@ class _WelcomePageState extends State<WelcomePage> {
         final pref=await SharedPreferences.getInstance();
 
         //if login previously get data and login to home page
-
         if(pref.getString("email")!=null&&pref.getString("pass")!=null){
           EasyLoading.show();
-          final email=pref.getString("email");
-          final pass=pref.getString("pass");
+          final email=await pref.getString("email");
+          final pass=await pref.getString("pass");
+          print(email!+pass!);
           UserApiCalls.loginUserWithEmailAndPass(email!,pass!).then((value) {
             if(value!=null){
 
