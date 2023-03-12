@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/verify_user_model.dart';
 import '../../providers/user_provider.dart';
 import '../../utils/constants.dart';
 
@@ -60,7 +61,6 @@ class _VerificationPageState extends State<VerificationPage> {
   @override
   void didChangeDependencies() {
     provider=Provider.of(context,listen: true);
-    provider.getAllCities();
     super.didChangeDependencies();
   }
 
@@ -183,369 +183,398 @@ class _VerificationPageState extends State<VerificationPage> {
 
   SafeArea verificationForm(BuildContext context) {
     return SafeArea(
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'ACCOUNT TYPE',
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff032D46)),
-                ),
-                Text(
-                  ' (Unverified)',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Color(0xff008AE5)),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 2,
-            ),
-            Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Please Enter Correct Personal Information',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Color(0xff032D46)),
-                )),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'General Information',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff032D46),
-                      fontSize: 22),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Form(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Upload Profile Image',
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      controller: profileCon,
-
-                      decoration: InputDecoration(
-                          labelText: '  No file chosen',
-                          isDense: true,
-                          contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: Color(0xffE9ECEF),
-                                side: BorderSide(color: Colors.grey, width: 1),
-                              ),
-                              child: Text('Chose Image'),
-                              onPressed: _getImage1
-
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'ACCOUNT TYPE',
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff032D46)),
+              ),
+              Text(
+                ' (Unverified)',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Color(0xff008AE5)),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 2,
+          ),
+          Align(
+              alignment: Alignment.center,
+              child: Text(
+                'Please Enter Correct Personal Information',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Color(0xff032D46)),
+              )),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'General Information',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff032D46),
+                    fontSize: 22),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Upload Profile Image',
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    controller: profileCon,
+                    decoration: InputDecoration(
+                        labelText: '  No file chosen',
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: Color(0xffE9ECEF),
+                              side: BorderSide(color: Colors.grey, width: 1),
                             ),
+                            child: Text('Chose Image'),
+                            onPressed: _getImage1
+
                           ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('Name'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      controller: nameCon,
-                      validator: (val){
-                        if(val==null||val.isEmpty){
-                          return 'Name is required';
-                        }
-                        if(val.length<3){
-                          return 'name must be atleast 3 charecter';
-                        }
-                        else {
-                          return null;
-                        }
-                      },
-                      decoration: InputDecoration(
-                          labelText: '  Enter Name here',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('Email'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      controller: emailCon,
-                      validator: (val){
-                        if(val==null||val.isEmpty){
-                          return 'Email is required';
-                        }
-                        if(EmailValidator.validate(val)){
-                          return 'Please give a valid Email';
-                        }
-                        else {
-                          return null;
-                        }
-                      },
-                      decoration: InputDecoration(
-                          labelText: '  example@gmail.com',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('Date of Birth'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    InkWell(
-                      child: Container(
-                        height: 60,
-                        alignment: Alignment.centerLeft,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black45,width: 1),
-                          borderRadius: BorderRadius.circular(5)
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: Text(_dob=='Enter Date'?'Enter Date':_dob,style: TextStyle(fontSize: 16,color: Colors.black45),),
-                        ),
-                      ),
-                      onTap: _selectDate,
-                    ),
-
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('City'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      controller: cityCon,
-                      decoration: InputDecoration(
-                          labelText: '  Enter City',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          )),
-                      validator: (val){
-                        if(val==null||val.isEmpty){
-                          return 'City is required';
-                        }
-                        else {
-                          return null;
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('Country'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    DropdownButtonFormField(
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Select a City';
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.zero,
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
-                      ),
-                      hint: Text(' Select a City'),
-                      value: cities,
-                      onChanged: (value) {
-                        setState(() {
-                          cities = value;
-                        });
-                      },
-                      items: cityName
-                          .map((e) =>
-                          DropdownMenuItem(
-                            child: SizedBox(child: new Text(e)),
-                            value: e,
-                          ))
-                          .toList(),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('Present Address'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      controller: addressCon,
-                      decoration: InputDecoration(
-                          labelText: '  Enter Address',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('NID/Passport/Driving License'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    DropdownButtonFormField(
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Select an identification';
-                        } else {
-                          return null;
-                        }
-                      },
-                      decoration: const InputDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                        )),
+                    validator: (val){
+                      if(_file1==null){
+                        return 'Profile image is required';
+                      }
+                      else {
+                        return null;
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Name'),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    controller: nameCon,
+                    validator: (val){
+                      if(val==null||val.isEmpty){
+                        return 'Name is required';
+                      }
+                      if(val.length<3){
+                        return 'name must be atleast 3 charecter';
+                      }
+                      else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                        labelText: '  Enter Name here',
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                          borderRadius: BorderRadius.circular(5),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Email'),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    controller: emailCon,
+                    validator: (val){
+                      if(val==null||val.isEmpty){
+                        return 'Email is required';
+                      }
+                      if(!EmailValidator.validate(val)){
+                        return 'Please give a valid Email';
+                      }
+                      else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                        labelText: '  example@gmail.com',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Date of Birth'),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  InkWell(
+                    child: Container(
+                      height: 60,
+                      alignment: Alignment.centerLeft,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black45,width: 1),
+                        borderRadius: BorderRadius.circular(5)
                       ),
-                      hint: Text('Select a type'),
-                      value: types,
-                      onChanged: (value) {
-                        setState(() {
-                          types = value;
-                        });
-                      },
-                      items: gtypes
-                          .map((e) =>
-                          DropdownMenuItem(
-                            child: SizedBox(child: new Text(e)),
-                            value: e,
-                          ))
-                          .toList(),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('Frontside Image'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      controller: frontImgCon,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 12.0),
+                        child: Text(_dob=='Enter Date'?'Enter Date':_dob,style: TextStyle(fontSize: 16,color: Colors.black45),),
+                      ),
 
-                      decoration: InputDecoration(
-                          labelText: '  No file chosen',
-                          isDense: true,
-                          contentPadding:
-                          EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: Color(0xffE9ECEF),
-                                side: BorderSide(color: Colors.grey, width: 1),
-                              ),
-                              child: Text('Chose Image'),
-                              onPressed: ()async {
-                                _getImage2();
-                              },
-                            ),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          )),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('Backside Image'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      controller: backImgCon,
+                    onTap: _selectDate,
+                  ),
 
-                      decoration: InputDecoration(
-                          labelText: '  No file chosen',
-                          isDense: true,
-                          contentPadding:
-                          EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: Color(0xffE9ECEF),
-                                side: BorderSide(color: Colors.grey, width: 1),
-                              ),
-                              child: Text('Chose Image'),
-                              onPressed: () async{
-                                _getImage3();
-                              },
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('City'),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    controller: cityCon,
+                    decoration: InputDecoration(
+                        labelText: '  Enter City',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        )),
+                    validator: (val){
+                      if(val==null||val.isEmpty){
+                        return 'City is required';
+                      }
+                      else {
+                        return null;
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Country'),
+                  SizedBox(
+                    height: 5,
+                  ),
+
+                  DropdownButtonFormField(
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 10,),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                    ),
+                    hint: Text('Select a City'),
+                    value: cities,
+                    onChanged: (value) {
+                      print(value);
+                      setState(() {
+                        cities = value;
+                      });
+                    },
+                    items: provider.cityNameList
+                        .map((e) =>
+                        DropdownMenuItem(
+                          value: e,
+                          child: SizedBox(child: new Text(e)),
+                        ))
+                        .toList(),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Present Address'),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    controller: addressCon,
+                    decoration: InputDecoration(
+                        labelText: '  Enter Address',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('NID/Passport/Driving License'),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  DropdownButtonFormField(
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Select an identification';
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 10),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                    ),
+                    hint: Text('Select a type'),
+                    value: types,
+                    onChanged: (value) {
+                      setState(() {
+                        types = value;
+                      });
+                    },
+                    items: gtypes
+                        .map((e) =>
+                        DropdownMenuItem(
+                          child: SizedBox(child: new Text(e)),
+                          value: e,
+                        ))
+                        .toList(),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Frontside Image'),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    controller: frontImgCon,
+
+                    decoration: InputDecoration(
+                        labelText: '  No file chosen',
+                        isDense: true,
+                        contentPadding:
+                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: Color(0xffE9ECEF),
+                              side: BorderSide(color: Colors.grey, width: 1),
                             ),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Color((0xff032D46))),
-                            onPressed: () {
-                              if(_formKey.currentState!.validate()){
-                                setState(() {
-                                  showForm = false;
-                                });
-                              }
+                            child: Text('Chose Image'),
+                            onPressed: ()async {
+                              _getImage2();
                             },
-                            child: Text('Submit')))
-                  ],
-                ),
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        )),
+                    validator: (val){
+                      if(_file2==null){
+                        return 'image is required';
+                      }
+                      else {
+                        return null;
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Backside Image'),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  TextFormField(
+                    controller: backImgCon,
+                    validator: (val){
+                      if(_file3==null){
+                        return 'image is required';
+                      }
+                      else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                        labelText: '  No file chosen',
+                        isDense: true,
+                        contentPadding:
+                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: Color(0xffE9ECEF),
+                              side: BorderSide(color: Colors.grey, width: 1),
+                            ),
+                            child: Text('Chose Image'),
+                            onPressed: () async{
+                              _getImage3();
+                            },
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color((0xff032D46))),
+                          onPressed: () {
+                            if(_formKey.currentState!.validate()){
+                              // setState(() {
+                              //   showForm = false;
+                              // });
+
+                              final verifyModel=VerifyUserModel(
+                                  imageName: _file1!,
+                                  imageFront: _file2!,
+                                  imageBack: _file3!,
+                                  city: cityCon.text,
+                                  country: cities!,
+                                  dob: _dob!,
+                                  cardType: nidCon.text,
+                                  name: nameCon.text,
+                                  email: emailCon.text);
+                              print('verifyModel ${verifyModel.toMap()}');
+                            }
+                          },
+                          child: Text('Submit')))
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

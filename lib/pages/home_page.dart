@@ -15,7 +15,9 @@ import 'package:glo_project/pages/ticket_info/pcso_lottery_page.dart';
 import 'package:glo_project/pages/ticket_info/ticket_referal_history.dart';
 import 'package:glo_project/pages/withdraw/withdrawal_page.dart';
 import 'package:glo_project/utils/drawer.dart';
+import 'package:provider/provider.dart';
 import '../../utils/constants.dart';
+import '../providers/user_provider.dart';
 import '../upgrade_page/upgrade_page.dart';
 import '../utils/my_appbar.dart';
 import 'dealership_page.dart';
@@ -33,13 +35,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  // late User? userInfo;
+  late UserProvider provider;
   @override
   void didChangeDependencies() {
-    // userInfo=ModalRoute.of(context)!.settings.arguments as User;
-    // if(userInfo!=null){
-    //
-    // }
+    provider=Provider.of(context,listen: true);
+    provider.getAllCities();
     super.didChangeDependencies();
   }
 

@@ -121,4 +121,8 @@ Countries copyWith({  num? id,
     return map;
   }
 
+  @override
+  String toString() {
+    return 'Countries{_id: $_id, _phone: $_phone, _code: $_code, _name: $_name, _symbol: $_symbol, _capital: $_capital, _currency: $_currency, _continent: $_continent, _continentCode: $_continentCode, _alpha3: $_alpha3}';
+  }
 }

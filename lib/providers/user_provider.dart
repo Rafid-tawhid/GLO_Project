@@ -5,18 +5,24 @@ import '../models/city_models.dart';
 
 class UserProvider extends ChangeNotifier{
 
-  List<CityModels> cityList=[];
+  List<Countries> cityList=[];
+  List<String> cityNameList=[];
 
-  Future<List<CityModels>> getAllCities()async{
+  Future<dynamic> getAllCities() async{
 
     print('This is called');
     final data = await UserApiCalls.getAllCities();
     cityList.clear();
-    print('This is data ${data.toString()}');
-    for(Map i in data){
-      cityList.add(CityModels.fromJson(i));
+
+    for(Map i in data['countries']){
+      cityList.add(Countries.fromJson(i));
     }
-    print('cityList ${cityList.length}');
+    cityList.forEach((element) {
+      cityNameList.add(element.capital!);
+    });
+
+
+
 
     return cityList;
   }

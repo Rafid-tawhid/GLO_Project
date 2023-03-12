@@ -81,8 +81,7 @@ class UserApiCalls{
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
             'authorization': 'Bearer $token',
-          },
-          );
+          },);
 
       if (response.statusCode == 200) {
         data =await jsonDecode(response.body.toString());
