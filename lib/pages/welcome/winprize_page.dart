@@ -2,7 +2,8 @@ import 'package:animated_widgets/widgets/opacity_animated.dart';
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:glo_project/pages/welcome/buy_tickets.dart';
+
+import '../ticket_info/buy_lottery_tickets.dart';
 
 class WinPrizePage extends StatefulWidget {
   const WinPrizePage({Key? key}) : super(key: key);
@@ -127,7 +128,7 @@ class _WinPrizePageState extends State<WinPrizePage> {
             ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                 onPressed: () {
-                  Navigator.pushNamed(context, BuyTicketPage.routeName);
+                //  Navigator.pushNamed(context, BuyTicketPage.routeName);
                 },
                 child: Text('Next'))
           ],

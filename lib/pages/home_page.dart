@@ -2,17 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glo_project/helper_functions/user_info.dart';
+import 'package:glo_project/models/login_user_model.dart';
+import 'package:glo_project/pages/ticket_info/buy_lottery_tickets_single.dart';
 import 'package:glo_project/pages/ticket_info/latest_lottery_result.dart';
 import 'package:glo_project/pages/ticket_info/lottery_price.dart';
 import 'package:glo_project/pages/ticket_info/lottery_ticket_history.dart';
-import 'package:glo_project/pages/ticket_info/national_ticket_info.dart';
+import 'package:glo_project/pages/ticket_info/buy_lottery_tickets.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_prize.dart';
 import 'package:glo_project/pages/ticket_info/national_ticket_result.dart';
 import 'package:glo_project/pages/ticket_info/pcso_lottery_page.dart';
 import 'package:glo_project/pages/ticket_info/ticket_referal_history.dart';
 import 'package:glo_project/pages/withdraw/withdrawal_page.dart';
 import 'package:glo_project/utils/drawer.dart';
+import 'package:provider/provider.dart';
 import '../../utils/constants.dart';
+import '../providers/user_provider.dart';
 import '../upgrade_page/upgrade_page.dart';
 import '../utils/my_appbar.dart';
 import 'dealership_page.dart';
@@ -29,6 +34,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  late UserProvider provider;
+  @override
+  void didChangeDependencies() {
+    provider=Provider.of(context,listen: true);
+    provider.getAllCities();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         InkWell(
                           onTap: (){
-                            Navigator.pushNamed(context, LatestLotteryResult.routeName);
+                            Navigator.pushNamed(context, BuyTicketPage.routeName);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -300,7 +314,7 @@ class _HomePageState extends State<HomePage> {
                           child: InkWell(
                             onTap: (){
 
-                              Navigator.pushNamed(context, NationalTicketPage.routeName);
+                              Navigator.pushNamed(context, LatestLotteryResult.routeName);
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width/4.5,
@@ -370,7 +384,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         InkWell(
                           onTap: (){
-                            Navigator.pushNamed(context, NationalTicketPage.routeName);
+                            Navigator.pushNamed(context, BuyTicketPage.routeName);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -546,13 +560,18 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width/5,
-                                child: Column(
-                                  children: [
-                                    Expanded(child: SvgPicture.asset('svg/toto.svg')),
-                                    Text('TOTO',style: TextStyle(fontSize: 12),)
-                                  ],
+                              child: InkWell(
+                                onTap: (){
+                                  Navigator.pushNamed(context, BuyLotteryTicketsSingle.routeName);
+                                },
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width/5,
+                                  child: Column(
+                                    children: [
+                                      Expanded(child: SvgPicture.asset('svg/toto.svg')),
+                                      Text('TOTO',style: TextStyle(fontSize: 12),)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -681,11 +700,12 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            InkWell(
+                            UserInfo.loginUserModel!.user!.status==1?InkWell(
                                 onTap:(){
                                   Navigator.pushNamed(context, VerificationPage.routeName);
                                 },
-                                child: Text('Verify Now ->',style: TextStyle(fontSize: 16,color: Colors.red),)),
+                                child: Text('Verify Now ->',style: TextStyle(fontSize: 16,color: Colors.red),)):
+                            Text('Verified',style: TextStyle(fontSize: 16,color: Colors.red),),
                             SizedBox(height: 5,),
                             Row(
                               mainAxisSize: MainAxisSize.min,

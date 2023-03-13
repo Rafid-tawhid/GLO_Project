@@ -1,8 +1,19 @@
+import 'package:art_sweetalert/art_sweetalert.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glo_project/api_calls/user_api_calls.dart';
+import 'package:glo_project/models/error_model.dart';
+import 'package:glo_project/models/login_user_model.dart';
 import 'package:glo_project/pages/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../helper_functions/user_info.dart';
+import '../../models/registration_user_model.dart';
+import '../../utils/error_dialog.dart';
 import 'forget_password.dart';
+import 'login_welcome.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
@@ -22,6 +33,32 @@ class _LoginPageState extends State<LoginPage> {
   String btnTxt='Login';
   final _formKey=GlobalKey<FormState>();
   final _formKey2=GlobalKey<FormState>();
+  final  loginmailCon=TextEditingController();
+  final  loginpassCon=TextEditingController();
+  final  nameCon=TextEditingController();
+  final  emlCon=TextEditingController();
+  final  passCon=TextEditingController();
+  final  passConfCon=TextEditingController();
+  final  wpinCon=TextEditingController();
+  final  refCon=TextEditingController();
+  final  userIdCon=TextEditingController();
+  bool referIconColor=false;
+  bool showMailError=false;
+  bool showNumberError=false;
+
+  @override
+  void dispose() {
+    loginmailCon.dispose();
+    loginpassCon.dispose();
+    nameCon.dispose();
+    emlCon.dispose();
+    passCon.dispose();
+    passConfCon.dispose();
+    wpinCon.dispose();
+    refCon.dispose();
+    userIdCon.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,11 +193,23 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   if(showFields==true){
                                     if(_formKey.currentState!.validate()){
-                                      Navigator.pushNamed(context, HomePage.routeName);
+                                      loginwithmailpass();
                                     }
                                   } else if(showFields==false) {
                                     if(_formKey2.currentState!.validate()){
-                                      Navigator.pushNamed(context, HomePage.routeName);
+                                      final usermodel=RegistrationUserModel(
+                                        name:nameCon.text,
+                                        email:emlCon.text,
+                                        password:passCon.text,
+                                        passwordConfirmation:passConfCon.text,
+                                        wpin:num.parse(wpinCon.text),
+                                        reference:num.parse(refCon.text),
+                                        userid: num.parse(userIdCon.text)
+                                      );
+
+                                      registerUserwithInfo(usermodel);
+
+                                     // Navigator.pushNamed(context, HomePage.routeName);
                                     }
                                   }
 
@@ -183,6 +232,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             Container(
+              margin: EdgeInsets.only(top: 10),
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
               color: Color(0xff032D46),
@@ -228,6 +278,46 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: refCon,
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(height: 6,),
+            InkWell(
+              onTap: (){
+                setState(() {
+                 referIconColor=!referIconColor;
+                 referIconColor?refCon.text='123456789':refCon.text='';
+                });
+              },
+              child: Row(
+                children: [
+                  Container(
+                    height: 16,
+                    width: 16,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(
+                        color: Color(0xff007AFF),
+                        width: 2
+                      )
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: referIconColor?Color(0xff007AFF):Colors.white,
+                        ),
+                        height: 14,
+                        width: 14,
+
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 5,),
+                  Text('Official Referral Code',style: TextStyle(color:Color(0xff007AFF) ),)
+                ],
+              ),
             ),
             SizedBox(
               height: 10,
@@ -244,12 +334,14 @@ class _LoginPageState extends State<LoginPage> {
               decoration: InputDecoration(
                   labelText: '  Enter Name',
                   isDense: true,
+                  errorStyle:TextStyle() ,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   prefixIcon:
                   SizedBox(child: SvgPicture.asset('svg/pass_icon.svg')),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: nameCon,
             ),
             SizedBox(
               height: 10,
@@ -258,6 +350,9 @@ class _LoginPageState extends State<LoginPage> {
               validator: (value){
                 if(value==null||value.isEmpty){
                   return 'Required Your Email';
+                }
+                if(!EmailValidator.validate(value)){
+                  return 'Required a valid Email';
                 }
                 else {
                   return null;
@@ -271,11 +366,17 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: emlCon,
             ),
+            SizedBox(height: 3,),
+           if(showMailError) Align(
+              alignment: Alignment.centerLeft,
+                child: Text('Email Must be unique',style: TextStyle(color: Colors.red),)),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             TextFormField(
+              keyboardType: TextInputType.number,
               validator: (value){
                 if(value==null||value.isEmpty){
                   return 'Required Phone Number';
@@ -293,14 +394,23 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: userIdCon,
             ),
+            SizedBox(height: 3,),
+           if(showNumberError) Align(
+                alignment: Alignment.centerLeft,
+                child: Text('This phone number is taken',style: TextStyle(color: Colors.red),)),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             TextFormField(
+              keyboardType: TextInputType.number,
               validator: (value){
                 if(value==null||value.isEmpty){
-                  return 'Required Phone Number';
+                  return 'Required Pin Number';
+                }
+                if(value.length>6||value.length<4){
+                  return 'please enter a valid pin';
                 }
                 else {
                   return null;
@@ -314,7 +424,12 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
+              controller: wpinCon,
             ),
+            SizedBox(height: 4,),
+            Align(
+              alignment: Alignment.centerLeft,
+                child: Text('Min : 4 & Max : 6 (Integer Number Only) (ex : 1234)',style: TextStyle(fontSize: 13,color: Color(0xff007AFF)),)),
             SizedBox(
               height: 10,
             ),
@@ -328,6 +443,48 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 }
               },
+              controller: passCon,
+              decoration: InputDecoration(
+                  labelText: '  Password',
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                  prefixIcon:
+                  SizedBox(child: SvgPicture.asset('svg/pass_icon.svg')),
+                  suffixIcon: InkWell(
+                    onTap: (){
+                      setState(() {
+                        showPassword=!showPassword;
+                      });
+                    },
+                    child: showPassword?Icon(
+                      Icons.visibility,
+                      color: Color(0xff032D46),
+                    ):Icon(
+                      Icons.visibility_off,
+                      color: Color(0xff032D46),
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              obscureText: showPassword,
+              validator: (value){
+                if(value==null||value.isEmpty){
+                  return 'Required Password';
+                }
+                if(value!=passCon.text){
+                  return 'Confirm password must be same as Password';
+                }
+                else {
+                  return null;
+                }
+              },
+              controller: passConfCon,
               decoration: InputDecoration(
                   labelText: '  Confirm Password',
                   isDense: true,
@@ -340,8 +497,11 @@ class _LoginPageState extends State<LoginPage> {
                         showPassword=!showPassword;
                       });
                     },
-                    child: Icon(
-                      Icons.remove_red_eye_outlined,
+                    child: showPassword?Icon(
+                      Icons.visibility,
+                      color: Color(0xff032D46),
+                    ):Icon(
+                      Icons.visibility_off,
                       color: Color(0xff032D46),
                     ),
                   ),
@@ -349,9 +509,7 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(5),
                   )),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10,)
           ],
         ))
       ],
@@ -368,8 +526,9 @@ class _LoginPageState extends State<LoginPage> {
             child:Column(
           children: [
             TextFormField(
+              controller: loginmailCon,
               decoration: InputDecoration(
-                  labelText: '  Enter Phone or Email',
+                  labelText: '  Enter your Email',
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   prefixIcon: SvgPicture.asset('svg/profile_icon.svg'),
@@ -378,17 +537,22 @@ class _LoginPageState extends State<LoginPage> {
                   )),
               validator: (value){
                 if(value==null||value.isEmpty){
-                  return 'Required Phone or Email';
+                  return 'Required your Email';
+                }
+                if(!EmailValidator.validate(value)){
+                  return 'Required a valid email';
                 }
                 else {
                   return null;
                 }
               },
+
             ),
             SizedBox(
               height: 10,
             ),
             TextFormField(
+              controller: loginpassCon,
               obscureText: showPassword,
               validator: (value){
                 if(value==null||value.isEmpty){
@@ -450,5 +614,114 @@ class _LoginPageState extends State<LoginPage> {
         ))
       ],
     );
+  }
+
+  Future<void> loginwithmailpass() async {
+    final pref=await SharedPreferences.getInstance();
+    EasyLoading.show();
+    await UserApiCalls.loginUserWithEmailAndPass(loginmailCon.text,loginpassCon.text).then((value) {
+      if(value!=null){
+        EasyLoading.dismiss();
+
+        if(value['user']!=null){
+          var user=value['user'];
+          final userInfo=User.fromJson(user);
+
+          final userAllInfo=LoginUserModel.fromJson(value);
+          print(userInfo.toJson());
+          UserInfo.setUserInfo(userAllInfo);
+          //save mail and pass to shared pref
+          pref.setString("email",loginmailCon.text.trim());
+          pref.setString("pass",loginpassCon.text.trim());
+
+          Navigator.pushNamed(context, HomePage.routeName);
+        }
+      }
+      else {
+        EasyLoading.dismiss();
+        ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+                type: ArtSweetAlertType.info,
+                title: 'Authentication Problem',
+                text: 'please check your mail and password'
+            )
+        );
+      }
+    });
+  }
+
+  Future<void> registerUserwithInfo(RegistrationUserModel userModel) async {
+    final pref=await SharedPreferences.getInstance();
+    EasyLoading.show();
+    setState(() {
+      showNumberError=false;
+      showMailError=false;
+    });
+
+   await UserApiCalls.registrationUser(userModel).then((value) {
+
+     print('valuesss ${value.toString()}');
+     EasyLoading.dismiss();
+      if(value!=null){
+        if(value['status']=='1'){
+          print(value.toString());
+          final userInfo=RegistrationUserModel.fromJson(value);
+          print('userInfo.name ${userInfo.toJson()}');
+          final loginModel=LoginUserModel(
+              user: User(
+                  email: userInfo.email,
+                  name: userInfo.name,
+                  userid: userInfo.userid.toString()
+              )
+          );
+          print('login model ${loginModel.toJson()}');
+          //set user info
+          UserInfo.setUserInfo(loginModel);
+
+          //save mail and pass to shared pref
+          pref.setString("email",loginmailCon.text.trim());
+          pref.setString("pass",loginpassCon.text.trim());
+
+          Navigator.pushNamed(context, RegistrationWelcome.routeName);
+        }
+
+       else if(value['email']!=null){
+         print(value['email']);
+         setState(() {
+           showMailError=true;
+         });
+        }
+        else if(value['userid']!=null){
+          print(value['userid']);
+          setState(() {
+            showNumberError=true;
+          });
+          // ArtSweetAlert.show(
+          //     context: context,
+          //     artDialogArgs: ArtDialogArgs(
+          //         type: ArtSweetAlertType.info,
+          //         title: 'Server Problem',
+          //         text: '${value.toString()}'
+          //     )
+          // );
+        }
+
+      }
+
+      else {
+        print('This is called');
+        EasyLoading.dismiss();
+        ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+                type: ArtSweetAlertType.info,
+                title: 'Server Problem',
+                text: '${value.toString()}'
+            )
+        );
+
+      }
+    });
   }
 }

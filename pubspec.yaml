@@ -44,6 +44,15 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   google_fonts:
   flutter_image_slideshow: ^0.1.4
+  provider: ^6.0.5
+  http: ^0.13.5
+  flutter_easyloading: ^3.0.5
+  art_sweetalert: ^0.0.5
+  shared_preferences:
+  email_validator: '^2.1.16'
+  image_picker:
+  intl:
+
 
 
 dev_dependencies:
