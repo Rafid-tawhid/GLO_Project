@@ -52,6 +52,7 @@ dependencies:
   email_validator: '^2.1.16'
   image_picker:
   intl:
+  dropdown_button2: ^2.0.0
 
 
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:glo_project/api_calls/api_end_url.dart';
 import 'package:glo_project/models/error_model.dart';
+import 'package:glo_project/models/verify_user_model.dart';
 import 'package:http/http.dart';
 
 import '../helper_functions/user_info.dart';
@@ -84,6 +85,38 @@ class UserApiCalls{
           },);
 
       if (response.statusCode == 200) {
+        data =await jsonDecode(response.body.toString());
+
+        return data;
+      }
+      else {
+        print('Failed........');
+        return null;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+
+  static Future<dynamic> verificationOfUser(VerifyUserModel verifyUserModel) async {
+    var data;
+    try {
+      Response response = await post(
+          Uri.parse('$baseUrl${ApiEnd.verification}'),
+          //Uri.parse('https://www.testapi.gloticket.org/api/login'),
+          headers: {
+            'Accept': 'application/json',
+          },
+          body: verifyUserModel.toMap());
+
+      if (response.statusCode == 200) {
+        data =await jsonDecode(response.body.toString());
+        print('Data ${data}');
+        return data;
+      }
+      if (response.statusCode == 400) {
+        print(' 2 ${data}');
         data =await jsonDecode(response.body.toString());
 
         return data;
