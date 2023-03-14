@@ -13,12 +13,14 @@ class UserProvider extends ChangeNotifier{
     print('This is called');
     final data = await UserApiCalls.getAllCities();
     cityList.clear();
+    cityNameList.clear();
 
     for(Map i in data['countries']){
       cityList.add(Countries.fromJson(i));
     }
     cityList.forEach((element) {
-      cityNameList.add(element.capital!);
+      cityNameList.add(element.name??'');
+      print(element.name);
     });
 
 

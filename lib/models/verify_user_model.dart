@@ -12,6 +12,7 @@ class VerifyUserModel{
   String cardType;
   String name;
   String email;
+  String address;
 
   VerifyUserModel(
       {
@@ -24,6 +25,7 @@ class VerifyUserModel{
      required this.cardType,
      required this.name,
      required this.email,
+     required this.address,
      });
 
   Map<String, dynamic> toMap() {
@@ -36,6 +38,7 @@ class VerifyUserModel{
     map['cardtype'] = cardType;
     map['name'] = name;
     map['email'] = email;
+    map['address'] = address;
     return map;
   }
 }

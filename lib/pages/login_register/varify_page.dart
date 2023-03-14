@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:glo_project/pages/home_page.dart';
@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../api_calls/user_api_calls.dart';
 import '../../models/verify_user_model.dart';
 import '../../providers/user_provider.dart';
 import '../../utils/constants.dart';
@@ -21,6 +22,7 @@ class VerificationPage extends StatefulWidget {
 
 class _VerificationPageState extends State<VerificationPage> {
   var cities;
+  var countries;
   var types;
   bool showForm = true;
   String? _imagePath1;
@@ -40,6 +42,7 @@ class _VerificationPageState extends State<VerificationPage> {
   final cityCon=TextEditingController();
   final addressCon=TextEditingController();
   final nidCon=TextEditingController();
+  // String dropdownvalue='Kabul';
   ImageSource _imageSource = ImageSource.gallery;
   late UserProvider provider;
 
@@ -386,28 +389,34 @@ class _VerificationPageState extends State<VerificationPage> {
                     height: 5,
                   ),
 
-                  DropdownButtonFormField(
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 10,),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                    ),
-                    hint: Text('Select a City'),
-                    value: cities,
-                    onChanged: (value) {
-                      print(value);
-                      setState(() {
-                        cities = value;
-                      });
-                    },
-                    items: provider.cityNameList
-                        .map((e) =>
-                        DropdownMenuItem(
-                          value: e,
-                          child: SizedBox(child: new Text(e)),
-                        ))
-                        .toList(),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField(
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 10,),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey),
+                                borderRadius: BorderRadius.all(Radius.circular(5))),
+                          ),
+                          hint: Text('Select a City'),
+                          value: countries,
+                          onChanged: (value) {
+                            print(value);
+                            setState(() {
+                              countries = value;
+                            });
+                          },
+                          items: provider.cityNameList
+                              .map((e) =>
+                              DropdownMenuItem(
+                                value: e,
+                                child: SizedBox( width: 200.0, child: new Text(e,style: TextStyle(overflow: TextOverflow.clip),)),
+                              ))
+                              .toList(),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 10,
@@ -552,21 +561,23 @@ class _VerificationPageState extends State<VerificationPage> {
                               backgroundColor: Color((0xff032D46))),
                           onPressed: () {
                             if(_formKey.currentState!.validate()){
-                              // setState(() {
-                              //   showForm = false;
-                              // });
+
+
 
                               final verifyModel=VerifyUserModel(
                                   imageName: _file1!,
                                   imageFront: _file2!,
                                   imageBack: _file3!,
                                   city: cityCon.text,
-                                  country: cities!,
-                                  dob: _dob!,
-                                  cardType: nidCon.text,
+                                  country: countries,
+                                  dob: _dob,
+                                  cardType: types,
                                   name: nameCon.text,
-                                  email: emailCon.text);
-                              print('verifyModel ${verifyModel.toMap()}');
+                                  email: emailCon.text,
+                                  address: addressCon.text
+                              );
+                              UserApiCalls.verificationOfUser(verifyModel);
+                               print('verifyModel ${verifyModel.toMap()}');
                             }
                           },
                           child: Text('Submit')))

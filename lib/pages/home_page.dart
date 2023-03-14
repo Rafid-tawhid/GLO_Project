@@ -36,10 +36,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   late UserProvider provider;
+  bool callOnce=true;
   @override
   void didChangeDependencies() {
     provider=Provider.of(context,listen: true);
-    provider.getAllCities();
+    if(callOnce){
+      provider.getAllCities();
+    }
+    callOnce=false;
     super.didChangeDependencies();
   }
 
