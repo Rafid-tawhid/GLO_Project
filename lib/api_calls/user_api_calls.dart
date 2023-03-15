@@ -9,9 +9,9 @@ import '../helper_functions/user_info.dart';
 import '../models/city_models.dart';
 import '../models/login_user_model.dart';
 import '../models/registration_user_model.dart';
-
+ String baseUrl='https://www.testapi.gloticket.org/';
 class UserApiCalls{
-  static String baseUrl='https://www.testapi.gloticket.org/';
+
 
  static Future<dynamic> loginUserWithEmailAndPass(String email,String pass) async {
    var data;
@@ -100,6 +100,7 @@ class UserApiCalls{
 
 
   static Future<dynamic> verificationOfUser(VerifyUserModel verifyUserModel) async {
+
     var data;
     final token= UserInfo.loginUserModel!.token;
 
@@ -112,6 +113,9 @@ class UserApiCalls{
             'authorization': 'Bearer $token',
           },
           body: verifyUserModel.toMap());
+      print('verifyUserModel ${verifyUserModel.toMap()}');
+       data =await jsonDecode(response.body.toString());
+       print('Data ${data}');
 
       data =await jsonDecode(response.body.toString());
       print('Data 1 ${data}');

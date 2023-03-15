@@ -1,16 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:glo_project/pages/home_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:mime/mime.dart';
 import 'package:provider/provider.dart';
 
+import '../../api_calls/api_end_url.dart';
 import '../../api_calls/user_api_calls.dart';
+import '../../helper_functions/user_info.dart';
 import '../../models/verify_user_model.dart';
 import '../../providers/user_provider.dart';
 import '../../utils/constants.dart';
+import 'package:http/http.dart' as http;
 
 class VerificationPage extends StatefulWidget {
   static const String routeName = '/verify_page';
@@ -45,6 +51,7 @@ class _VerificationPageState extends State<VerificationPage> {
   // String dropdownvalue='Kabul';
   ImageSource _imageSource = ImageSource.gallery;
   late UserProvider provider;
+  List<String> imagesList=[];
 
 
   @override
@@ -559,15 +566,14 @@ class _VerificationPageState extends State<VerificationPage> {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Color((0xff032D46))),
-                          onPressed: () {
+                          onPressed: () async {
+
+
                             if(_formKey.currentState!.validate()){
-
-
-
+                              // String imagepath1 = _file1!.path!;
+                              // String imagepath2 = _file2!.path!;
+                              // String imagepath3 = _file3!.path!;
                               final verifyModel=VerifyUserModel(
-                                  imageName: _file1!,
-                                  imageFront: _file2!,
-                                  imageBack: _file3!,
                                   city: cityCon.text,
                                   country: countries,
                                   dob: _dob,
@@ -576,8 +582,11 @@ class _VerificationPageState extends State<VerificationPage> {
                                   email: emailCon.text,
                                   address: addressCon.text
                               );
-                              UserApiCalls.verificationOfUser(verifyModel);
-                               print('verifyModel ${verifyModel.toMap()}');
+                              uploadImage(verifyModel);
+
+
+                            //  UserApiCalls.verificationOfUser(verifyModel);
+                               // print('verifyModel ${verifyModel.toMap()}');
                             }
                           },
                           child: Text('Submit')))
@@ -592,7 +601,7 @@ class _VerificationPageState extends State<VerificationPage> {
 
   void _getImage1() async {
     print('object');
-    final selectedImage = await ImagePicker().pickImage(source: _imageSource);
+    final selectedImage = await ImagePicker().pickImage(source: _imageSource,imageQuality: 50);
     print('selectedImage $selectedImage');
     if (selectedImage != null) {
       setState(() {
@@ -604,7 +613,7 @@ class _VerificationPageState extends State<VerificationPage> {
   }
 
   void _getImage2() async {
-    final selectedImage = await ImagePicker().pickImage(source: _imageSource);
+    final selectedImage = await ImagePicker().pickImage(source: _imageSource,imageQuality: 50);
     print('selectedImage $selectedImage');
     if (selectedImage != null) {
       setState(() {
@@ -616,7 +625,7 @@ class _VerificationPageState extends State<VerificationPage> {
   }
 
   void _getImage3() async {
-    final selectedImage = await ImagePicker().pickImage(source: _imageSource);
+    final selectedImage = await ImagePicker().pickImage(source: _imageSource,imageQuality: 50);
     print('selectedImage $selectedImage');
     if (selectedImage != null) {
       setState(() {
@@ -637,6 +646,70 @@ class _VerificationPageState extends State<VerificationPage> {
       setState((){
         _dob=DateFormat('dd/MM/yyyy').format(selectedDate);
       });
+    }
+  }
+
+  Future<void> uploadImage(VerifyUserModel verifyModel) async{
+    final token= UserInfo.loginUserModel!.token;
+    EasyLoading.show();
+    var stream1=http.ByteStream(_file1!.openRead());
+    var stream2=http.ByteStream(_file2!.openRead());
+    var stream3=http.ByteStream(_file3!.openRead());
+    stream1.cast();
+    stream2.cast();
+    stream3.cast();
+    var length1=await _file1!.length();
+    var length2=await _file2!.length();
+    var length3=await _file3!.length();
+    try{
+      var uri=Uri.parse('$baseUrl${ApiEnd.verification}${UserInfo.loginUserModel!.user!.id}');
+      var request=http.MultipartRequest('POST',uri);
+
+
+      request.headers[{
+        'Accept': 'application/json',
+        'authorization': 'Bearer $token',
+      }];
+      request.fields['imagename']='Profile Images';
+      request.fields['imagenamefront']='Front Images';
+      request.fields['imagenameback']='Back Images';
+      request.fields[verifyModel.toMap()];
+
+      var multiport1=http.MultipartFile.fromBytes(
+          'imagename',
+          File(_file1!.path).readAsBytesSync(),
+          filename: _file1!.path.split("/").last
+      );
+      var multiport2=http.MultipartFile.fromBytes(
+          'imagenamefront',
+          File(_file2!.path).readAsBytesSync(),
+          filename: _file2!.path.split("/").last
+      );
+      var multiport3=http.MultipartFile.fromBytes(
+          'imagenameback',
+          File(_file3!.path).readAsBytesSync(),
+          filename: _file3!.path.split("/").last
+      );
+      request.files.addAll([multiport1,multiport2,multiport3]);
+
+      var response=await request.send();
+      print('RESPONSE ${response.request}');
+      print('RESPONSE ${response.stream.first.toString()}');
+
+      if(response.statusCode==200){
+        var data =await jsonDecode(response.statusCode.toString());
+        EasyLoading.dismiss();
+        print('all okkk ................${data}');
+      }
+      else {
+
+        EasyLoading.dismiss();
+        var data =await jsonDecode(response.statusCode.toString());
+        print(response.statusCode+data);
+      }
+    }
+    catch(e){
+      print('Error ${e.toString()}');
     }
   }
 }
