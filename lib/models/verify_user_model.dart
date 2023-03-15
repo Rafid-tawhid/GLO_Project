@@ -1,11 +1,12 @@
 
 
-import 'dart:io';
+
+import 'package:glo_project/helper_functions/user_info.dart';
 
 class VerifyUserModel{
-  File imageName;
-  File imageFront;
-  File imageBack;
+  String? imageName;
+  String? imageFront;
+  String? imageBack;
   String city;
   String country;
   String dob;
@@ -16,9 +17,9 @@ class VerifyUserModel{
 
   VerifyUserModel(
       {
-       required this.imageName,
-     required this.imageFront,
-     required this.imageBack,
+       this.imageName,
+     this.imageFront,
+     this.imageBack,
      required this.city,
      required this.country,
      required this.dob,
@@ -28,11 +29,12 @@ class VerifyUserModel{
      required this.address,
      });
 
-  Map<String, dynamic> toMap() {
-    final map = <String, dynamic>{};
-    map['imagename'] = imageName;
-    map['imagenamefront'] = imageFront;
-    map['imagenameback'] = imageBack;
+  Map<String, String> toMap() {
+    final map = <String, String>{};
+    map['id']=UserInfo.loginUserModel!.user!.id!.toString();
+    // map['imagename'] = imageName;
+    // map['imagenamefront'] = imageFront;
+    // map['imagenameback'] = imageBack;
     map['city'] = city;
     map['dateofbirth'] = dob;
     map['cardtype'] = cardType;

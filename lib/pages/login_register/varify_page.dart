@@ -1,16 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:glo_project/pages/home_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:mime/mime.dart';
 import 'package:provider/provider.dart';
 
+import '../../api_calls/api_end_url.dart';
 import '../../api_calls/user_api_calls.dart';
+import '../../helper_functions/user_info.dart';
 import '../../models/verify_user_model.dart';
 import '../../providers/user_provider.dart';
 import '../../utils/constants.dart';
+import 'package:http/http.dart' as http;
 
 class VerificationPage extends StatefulWidget {
   static const String routeName = '/verify_page';
@@ -559,15 +564,32 @@ class _VerificationPageState extends State<VerificationPage> {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Color((0xff032D46))),
-                          onPressed: () {
+                          onPressed: () async {
+
+
                             if(_formKey.currentState!.validate()){
+                              // String imagepath1 = _file1!.path!;
+                              // String imagepath2 = _file2!.path!;
+                              // String imagepath3 = _file3!.path!;
+                              //
+                              // File imagefile1 = File(imagepath1);
+                              // File imagefile2 = File(imagepath2);
+                              // File imagefile3 = File(imagepath3);
+                              // //convert Path to File
+                              // Uint8List imagebytes1 = await imagefile1.readAsBytes();
+                              // Uint8List imagebytes2 = await imagefile2.readAsBytes();
+                              // Uint8List imagebytes3 = await imagefile3.readAsBytes();
+                              //
+                              // String base64string1 = base64.encode(imagebytes1); //convert bytes to base64 string
+                              // String base64string2 = base64.encode(imagebytes2); //convert bytes to base64 string
+                              // String base64string3 = base64.encode(imagebytes3); //convert bytes to base64 string
 
 
 
                               final verifyModel=VerifyUserModel(
-                                  imageName: _file1!,
-                                  imageFront: _file2!,
-                                  imageBack: _file3!,
+                                  // imageName: base64string1,
+                                  // imageFront: base64string2,
+                                  // imageBack: base64string3,
                                   city: cityCon.text,
                                   country: countries,
                                   dob: _dob,
@@ -576,8 +598,31 @@ class _VerificationPageState extends State<VerificationPage> {
                                   email: emailCon.text,
                                   address: addressCon.text
                               );
-                              UserApiCalls.verificationOfUser(verifyModel);
-                               print('verifyModel ${verifyModel.toMap()}');
+
+                              final mimeTypeData=lookupMimeType(_file1!.path,headerBytes: [0xff,0xD8])!.split('/');
+                              final imageUploadRequest=http.MultipartRequest('POST',Uri.parse('$baseUrl${ApiEnd.verification}${UserInfo.loginUserModel!.user!.id}'));
+
+                                final file=await http.MultipartFile.fromPath('imagename',_file1!.path,);
+                              imageUploadRequest.files.add(file);
+                              imageUploadRequest.fields.addAll(verifyModel.toMap());
+
+                              try{
+                                final stream=await imageUploadRequest.send();
+                                final response=await http.Response.fromStream(stream);
+                                if(response.statusCode!=200){
+                                  final data=json.decode(response.body);
+                                  print('Error ${data}');
+                                }
+                                else {
+                                  final data=json.decode(response.body);
+                                  print(data);
+
+                                }
+                              }catch(e){
+                                print(e);
+                              }
+                            //  UserApiCalls.verificationOfUser(verifyModel);
+                               // print('verifyModel ${verifyModel.toMap()}');
                             }
                           },
                           child: Text('Submit')))
