@@ -1,10 +1,12 @@
+
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:glo_project/pages/home_page.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:mime/mime.dart';
@@ -32,26 +34,31 @@ class _VerificationPageState extends State<VerificationPage> {
   var types;
   bool showForm = true;
   String? _imagePath1;
-  File? _file1;
+
+  // File? _file1;
   String? _imagePath2;
-  File? _file2;
+
+  // File? _file2;
   String? _imagePath3;
-  String _dob='Enter Date';
-  File? _file3;
-  final _formKey=GlobalKey<FormState>();
-  final profileCon=TextEditingController();
-  final frontImgCon=TextEditingController();
-  final backImgCon=TextEditingController();
-  final nameCon=TextEditingController();
-  final emailCon=TextEditingController();
-  final dobCon=TextEditingController();
-  final cityCon=TextEditingController();
-  final addressCon=TextEditingController();
-  final nidCon=TextEditingController();
+  String _dob = 'Enter Date';
+
+  // File? _file3;
+  final _formKey = GlobalKey<FormState>();
+  final profileCon = TextEditingController();
+  final frontImgCon = TextEditingController();
+  final backImgCon = TextEditingController();
+  final nameCon = TextEditingController();
+  final emailCon = TextEditingController();
+  final dobCon = TextEditingController();
+  final cityCon = TextEditingController();
+  final addressCon = TextEditingController();
+  final nidCon = TextEditingController();
+
   // String dropdownvalue='Kabul';
   ImageSource _imageSource = ImageSource.gallery;
   late UserProvider provider;
-  List<String> imagesList=[];
+  List<String> imagesList = [];
+  Dio dio = new Dio();
 
 
   @override
@@ -70,7 +77,7 @@ class _VerificationPageState extends State<VerificationPage> {
 
   @override
   void didChangeDependencies() {
-    provider=Provider.of(context,listen: true);
+    provider = Provider.of(context, listen: true);
     super.didChangeDependencies();
   }
 
@@ -263,24 +270,25 @@ class _VerificationPageState extends State<VerificationPage> {
                     decoration: InputDecoration(
                         labelText: '  No file chosen',
                         isDense: true,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 0),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: TextButton(
-                            style: TextButton.styleFrom(
-                              backgroundColor: Color(0xffE9ECEF),
-                              side: BorderSide(color: Colors.grey, width: 1),
-                            ),
-                            child: Text('Chose Image'),
-                            onPressed: _getImage1
+                              style: TextButton.styleFrom(
+                                backgroundColor: Color(0xffE9ECEF),
+                                side: BorderSide(color: Colors.grey, width: 1),
+                              ),
+                              child: Text('Chose Image'),
+                              onPressed: _getImage1
 
                           ),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                         )),
-                    validator: (val){
-                      if(_file1==null){
+                    validator: (val) {
+                      if (_imagePath1 == null) {
                         return 'Profile image is required';
                       }
                       else {
@@ -297,11 +305,11 @@ class _VerificationPageState extends State<VerificationPage> {
                   ),
                   TextFormField(
                     controller: nameCon,
-                    validator: (val){
-                      if(val==null||val.isEmpty){
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
                         return 'Name is required';
                       }
-                      if(val.length<3){
+                      if (val.length < 3) {
                         return 'name must be atleast 3 charecter';
                       }
                       else {
@@ -323,11 +331,11 @@ class _VerificationPageState extends State<VerificationPage> {
                   ),
                   TextFormField(
                     controller: emailCon,
-                    validator: (val){
-                      if(val==null||val.isEmpty){
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
                         return 'Email is required';
                       }
-                      if(!EmailValidator.validate(val)){
+                      if (!EmailValidator.validate(val)) {
                         return 'Please give a valid Email';
                       }
                       else {
@@ -351,14 +359,19 @@ class _VerificationPageState extends State<VerificationPage> {
                     child: Container(
                       height: 60,
                       alignment: Alignment.centerLeft,
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black45,width: 1),
-                        borderRadius: BorderRadius.circular(5)
+                          border: Border.all(color: Colors.black45, width: 1),
+                          borderRadius: BorderRadius.circular(5)
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 12.0),
-                        child: Text(_dob=='Enter Date'?'Enter Date':_dob,style: TextStyle(fontSize: 16,color: Colors.black45),),
+                        child: Text(_dob == 'Enter Date' ? 'Enter Date' : _dob,
+                          style: TextStyle(fontSize: 16,
+                              color: Colors.black45),),
                       ),
 
                     ),
@@ -379,8 +392,8 @@ class _VerificationPageState extends State<VerificationPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                         )),
-                    validator: (val){
-                      if(val==null||val.isEmpty){
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
                         return 'City is required';
                       }
                       else {
@@ -404,7 +417,8 @@ class _VerificationPageState extends State<VerificationPage> {
                             contentPadding: EdgeInsets.only(left: 10,),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.grey),
-                                borderRadius: BorderRadius.all(Radius.circular(5))),
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(5))),
                           ),
                           hint: Text('Select a City'),
                           value: countries,
@@ -418,7 +432,9 @@ class _VerificationPageState extends State<VerificationPage> {
                               .map((e) =>
                               DropdownMenuItem(
                                 value: e,
-                                child: SizedBox( width: 200.0, child: new Text(e,style: TextStyle(overflow: TextOverflow.clip),)),
+                                child: SizedBox(width: 200.0,
+                                    child: new Text(e, style: TextStyle(
+                                        overflow: TextOverflow.clip),)),
                               ))
                               .toList(),
                         ),
@@ -499,7 +515,7 @@ class _VerificationPageState extends State<VerificationPage> {
                               side: BorderSide(color: Colors.grey, width: 1),
                             ),
                             child: Text('Chose Image'),
-                            onPressed: ()async {
+                            onPressed: () async {
                               _getImage2();
                             },
                           ),
@@ -507,8 +523,8 @@ class _VerificationPageState extends State<VerificationPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                         )),
-                    validator: (val){
-                      if(_file2==null){
+                    validator: (val) {
+                      if (_imagePath2 == null) {
                         return 'image is required';
                       }
                       else {
@@ -525,8 +541,8 @@ class _VerificationPageState extends State<VerificationPage> {
                   ),
                   TextFormField(
                     controller: backImgCon,
-                    validator: (val){
-                      if(_file3==null){
+                    validator: (val) {
+                      if (_imagePath3 == null) {
                         return 'image is required';
                       }
                       else {
@@ -546,7 +562,7 @@ class _VerificationPageState extends State<VerificationPage> {
                               side: BorderSide(color: Colors.grey, width: 1),
                             ),
                             child: Text('Chose Image'),
-                            onPressed: () async{
+                            onPressed: () async {
                               _getImage3();
                             },
                           ),
@@ -567,13 +583,11 @@ class _VerificationPageState extends State<VerificationPage> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Color((0xff032D46))),
                           onPressed: () async {
-
-
-                            if(_formKey.currentState!.validate()){
+                            if (_formKey.currentState!.validate()) {
                               // String imagepath1 = _file1!.path!;
                               // String imagepath2 = _file2!.path!;
                               // String imagepath3 = _file3!.path!;
-                              final verifyModel=VerifyUserModel(
+                              final verifyModel = VerifyUserModel(
                                   city: cityCon.text,
                                   country: countries,
                                   dob: _dob,
@@ -582,11 +596,11 @@ class _VerificationPageState extends State<VerificationPage> {
                                   email: emailCon.text,
                                   address: addressCon.text
                               );
-                              uploadImage(verifyModel);
+                              uploadImage2(verifyModel);
 
 
-                            //  UserApiCalls.verificationOfUser(verifyModel);
-                               // print('verifyModel ${verifyModel.toMap()}');
+                              //  UserApiCalls.verificationOfUser(verifyModel);
+                              // print('verifyModel ${verifyModel.toMap()}');
                             }
                           },
                           child: Text('Submit')))
@@ -601,37 +615,40 @@ class _VerificationPageState extends State<VerificationPage> {
 
   void _getImage1() async {
     print('object');
-    final selectedImage = await ImagePicker().pickImage(source: _imageSource,imageQuality: 50);
+    final selectedImage = await ImagePicker().pickImage(
+        source: _imageSource, imageQuality: 50);
     print('selectedImage $selectedImage');
     if (selectedImage != null) {
       setState(() {
-        _file1 = File(selectedImage!.path);
+        //  _file1 = File(selectedImage!.path);
         _imagePath1 = selectedImage.path;
-        profileCon.text=_imagePath1??'';
+        profileCon.text = _imagePath1 ?? '';
       });
     }
   }
 
   void _getImage2() async {
-    final selectedImage = await ImagePicker().pickImage(source: _imageSource,imageQuality: 50);
+    final selectedImage = await ImagePicker().pickImage(
+        source: _imageSource, imageQuality: 50);
     print('selectedImage $selectedImage');
     if (selectedImage != null) {
       setState(() {
-        _file2 = File(selectedImage!.path);
+        //  _file2 = File(selectedImage!.path);
         _imagePath2 = selectedImage.path;
-        frontImgCon.text=_imagePath2??'';
+        frontImgCon.text = _imagePath2 ?? '';
       });
     }
   }
 
   void _getImage3() async {
-    final selectedImage = await ImagePicker().pickImage(source: _imageSource,imageQuality: 50);
+    final selectedImage = await ImagePicker().pickImage(
+        source: _imageSource, imageQuality: 50);
     print('selectedImage $selectedImage');
     if (selectedImage != null) {
       setState(() {
-        _file3 = File(selectedImage!.path);
+        //  _file3 = File(selectedImage!.path);
         _imagePath3 = selectedImage.path;
-        backImgCon.text=_imagePath3??'';
+        backImgCon.text = _imagePath3 ?? '';
       });
     }
   }
@@ -642,74 +659,111 @@ class _VerificationPageState extends State<VerificationPage> {
         initialDate: DateTime.now(),
         firstDate: DateTime(1950),
         lastDate: DateTime.now());
-    if(selectedDate!=null){
-      setState((){
-        _dob=DateFormat('dd/MM/yyyy').format(selectedDate);
+    if (selectedDate != null) {
+      setState(() {
+        _dob = DateFormat('dd/MM/yyyy').format(selectedDate);
       });
     }
   }
 
-  Future<void> uploadImage(VerifyUserModel verifyModel) async{
-    final token= UserInfo.loginUserModel!.token;
+  // Future<void> uploadImage(VerifyUserModel verifyModel) async{
+  //   final token= UserInfo.loginUserModel!.token;
+  //   EasyLoading.show();
+  //   var stream1=http.ByteStream(_file1!.openRead());
+  //   var stream2=http.ByteStream(_file2!.openRead());
+  //   var stream3=http.ByteStream(_file3!.openRead());
+  //   stream1.cast();
+  //   stream2.cast();
+  //   stream3.cast();
+  //   var length1=await _file1!.length();
+  //   var length2=await _file2!.length();
+  //   var length3=await _file3!.length();
+  //   try{
+  //     var uri=Uri.parse('$baseUrl${ApiEnd.verification}${UserInfo.loginUserModel!.user!.id}');
+  //     var request=http.MultipartRequest('POST',uri);
+  //
+  //
+  //     request.headers[{
+  //       'Accept': 'application/json',
+  //       'authorization': 'Bearer $token',
+  //     }];
+  //     request.fields['imagename']='Profile Images';
+  //     request.fields['imagenamefront']='Front Images';
+  //     request.fields['imagenameback']='Back Images';
+  //     request.fields[verifyModel.toMap()];
+  //
+  //     var multiport1=http.MultipartFile.fromBytes(
+  //         'imagename',
+  //         File(_file1!.path).readAsBytesSync(),
+  //         filename: _file1!.path.split("/").last
+  //     );
+  //     var multiport2=http.MultipartFile.fromBytes(
+  //         'imagenamefront',
+  //         File(_file2!.path).readAsBytesSync(),
+  //         filename: _file2!.path.split("/").last
+  //     );
+  //     var multiport3=http.MultipartFile.fromBytes(
+  //         'imagenameback',
+  //         File(_file3!.path).readAsBytesSync(),
+  //         filename: _file3!.path.split("/").last
+  //     );
+  //     request.files.addAll([multiport1,multiport2,multiport3]);
+  //
+  //     var response=await request.send();
+  //     print('RESPONSE ${response.request}');
+  //     print('RESPONSE ${response.stream.first.toString()}');
+  //
+  //     if(response.statusCode==200){
+  //       var data =await jsonDecode(response.statusCode.toString());
+  //       EasyLoading.dismiss();
+  //       print('all okkk ................${data}');
+  //     }
+  //     else {
+  //
+  //       EasyLoading.dismiss();
+  //       var data =await jsonDecode(response.statusCode.toString());
+  //       print(response.statusCode+data);
+  //     }
+  //   }
+  //   catch(e){
+  //     print('Error ${e.toString()}');
+  //   }
+  // }
+
+  Future<void> uploadImage2(VerifyUserModel verifyModel) async {
+    final token = UserInfo.loginUserModel!.token;
     EasyLoading.show();
-    var stream1=http.ByteStream(_file1!.openRead());
-    var stream2=http.ByteStream(_file2!.openRead());
-    var stream3=http.ByteStream(_file3!.openRead());
-    stream1.cast();
-    stream2.cast();
-    stream3.cast();
-    var length1=await _file1!.length();
-    var length2=await _file2!.length();
-    var length3=await _file3!.length();
-    try{
-      var uri=Uri.parse('$baseUrl${ApiEnd.verification}${UserInfo.loginUserModel!.user!.id}');
-      var request=http.MultipartRequest('POST',uri);
 
+      //for multipartrequest
+      var request = http.MultipartRequest('POST', Uri.parse('$baseUrl${ApiEnd.verification}${UserInfo.loginUserModel!.user!.id}'));
 
-      request.headers[{
-        'Accept': 'application/json',
-        'authorization': 'Bearer $token',
-      }];
-      request.fields['imagename']='Profile Images';
-      request.fields['imagenamefront']='Front Images';
-      request.fields['imagenameback']='Back Images';
-      request.fields[verifyModel.toMap()];
+      //for token
+      request.headers.addAll({"Authorization": "Bearer $token"});
 
-      var multiport1=http.MultipartFile.fromBytes(
-          'imagename',
-          File(_file1!.path).readAsBytesSync(),
-          filename: _file1!.path.split("/").last
-      );
-      var multiport2=http.MultipartFile.fromBytes(
-          'imagenamefront',
-          File(_file2!.path).readAsBytesSync(),
-          filename: _file2!.path.split("/").last
-      );
-      var multiport3=http.MultipartFile.fromBytes(
-          'imagenameback',
-          File(_file3!.path).readAsBytesSync(),
-          filename: _file3!.path.split("/").last
-      );
-      request.files.addAll([multiport1,multiport2,multiport3]);
+      //for image and videos and files
+      request.files.add(await http.MultipartFile.fromPath("imagename", _imagePath1!));
+      request.files.add(await http.MultipartFile.fromPath("imagenamefront", _imagePath2!));
+      request.files.add(await http.MultipartFile.fromPath("imagenameback", _imagePath3!));
+      request.fields.addAll(verifyModel.toMap());
 
-      var response=await request.send();
-      print('RESPONSE ${response.request}');
-      print('RESPONSE ${response.stream.first.toString()}');
+      //for completeing the request
+      var response =await request.send();
 
-      if(response.statusCode==200){
-        var data =await jsonDecode(response.statusCode.toString());
+      //for getting and decoding the response into json format
+      var responsed = await http.Response.fromStream(response);
+      final responseData = json.decode(responsed.body);
+
+      if (response.statusCode==200) {
         EasyLoading.dismiss();
-        print('all okkk ................${data}');
+        print("SUCCESS");
+        print(responseData);
       }
       else {
-
+        print("ERROR");
         EasyLoading.dismiss();
-        var data =await jsonDecode(response.statusCode.toString());
-        print(response.statusCode+data);
+        print(response.statusCode);
+        print('ERR ${responseData}');
       }
-    }
-    catch(e){
-      print('Error ${e.toString()}');
-    }
+
   }
 }
