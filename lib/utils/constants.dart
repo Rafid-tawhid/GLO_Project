@@ -10,6 +10,7 @@ var lightBgThirdColor = Color(0xffF3F3F3);
 var darkBlue = Color(0xff043655);
 var dark = Color(0xff03273C);
 var orange = Color(0xffFFD504);
+var mainColor = Color(0xff00A9FF);
 
 
 var darkBgColor = Color(0xffffffff);

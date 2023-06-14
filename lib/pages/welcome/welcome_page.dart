@@ -24,34 +24,33 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
 
-    Future.delayed(Duration.zero,() async {
-        final pref=await SharedPreferences.getInstance();
-
-        //if login previously get data and login to home page
-        if(pref.getString("email")!=null&&pref.getString("pass")!=null){
-          EasyLoading.show();
-          final email=await pref.getString("email");
-          final pass=await pref.getString("pass");
-          print(email!+pass!);
-          UserApiCalls.loginUserWithEmailAndPass(email!,pass!).then((value) {
-            EasyLoading.dismiss();
-            if(value!=null){
-
-              if(value['user']!=null){
-                var user=value['user'];
-                final userInfo=User.fromJson(user);
-
-                final userAllInfo=LoginUserModel.fromJson(value);
-                print(userInfo.toJson());
-                UserInfo.setUserInfo(userAllInfo);
-                Navigator.pushNamed(context, HomePage.routeName);
-              }
-            }
-
-          });
-        }
-
-    });
+    // Future.delayed(Duration.zero,() async {
+    //     final pref=await SharedPreferences.getInstance();
+    //
+    //     //if login previously get data and login to home page
+    //     if(pref.getString("email")!=null&&pref.getString("pass")!=null){
+    //       EasyLoading.show();
+    //       final email=await pref.getString("email");
+    //       final pass=await pref.getString("pass");
+    //       print(email!+pass!);
+    //       UserApiCalls.loginUserWithEmailAndPass(email!,pass!).then((value) {
+    //         EasyLoading.dismiss();
+    //         if(value!=null){
+    //
+    //           if(value['user']!=null){
+    //             var user=value['user'];
+    //             final userInfo=User.fromJson(user);
+    //
+    //             final userAllInfo=LoginUserModel.fromJson(value);
+    //             print(userInfo.toJson());
+    //             UserInfo.setUserInfo(userAllInfo);
+    //             Navigator.pushNamed(context, HomePage.routeName);
+    //           }
+    //         }
+    //
+    //       });
+    //     }
+    // });
     super.initState();
   }
 
@@ -63,7 +62,7 @@ class _WelcomePageState extends State<WelcomePage> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('images/welcome_bg.png',),
                     fit: BoxFit.cover
@@ -90,15 +89,15 @@ class _WelcomePageState extends State<WelcomePage> {
                       width: 120,
                       height: 40,
                       alignment: Alignment.center,
-                      child:  Text('JOIN US',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
                       decoration: BoxDecoration(
 
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             image:AssetImage("images/join_us.png"),
                             fit:BoxFit.cover
                         ),
                       ),
+                      child:  const Text('JOIN US',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,),),
                     ),
                   ),
 

@@ -32,10 +32,9 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             accountName: Text(
-                UserInfo.loginUserModel!.user!.name??'Test User'
+                'Test User'
             ),
-            accountEmail: Text(
-                UserInfo.loginUserModel!.user!.email??'testuser@gmail.com'
+            accountEmail: Text('testuser@gmail.com'
             ),
           ),
           ListTile(

@@ -206,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               children: [
                                 Expanded(child: Text('')),
-                                Text('Withdraw Pack',style: TextStyle(fontSize: 11.7),)
+                                Text('',style: TextStyle(fontSize: 11.7),)
                               ],
                             ),
                           ),
@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               children: [
                                 Expanded(child: Text('')),
-                                Text('Pack Details',style: TextStyle(fontSize: 12),)
+                                Text('',style: TextStyle(fontSize: 12),)
                               ],
                             ),
                           ),
@@ -675,7 +675,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 5,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(

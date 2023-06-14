@@ -31,6 +31,7 @@ import 'package:glo_ticket/pages/withdraw/bank_withdraw_details.dart';
 import 'package:glo_ticket/pages/withdraw/ewallet_withdraw_form.dart';
 import 'package:glo_ticket/pages/withdraw/withdrawal_page.dart';
 import 'package:glo_ticket/providers/user_provider.dart';
+import 'package:glo_ticket/utils/transaction_sucessful.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/deposits/deposit_page.dart';
@@ -62,9 +63,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Color(0xff2E3192),
         ),
-      // home: CarouselDemo(),
-        //initialRoute: WelcomePage.routeName,
-        initialRoute: HomePage.routeName,
+
+        initialRoute: WelcomePage.routeName,
+        //initialRoute: HomePage.routeName,
         routes: {
           WelcomePage.routeName:(context)=>const WelcomePage(),
           WelcomeAnim.routeName:(context)=>WelcomeAnim(),
@@ -101,6 +102,7 @@ class MyApp extends StatelessWidget {
           SaudiaPages.routeName:(context)=>SaudiaPages(),
           PinSettingPage.routeName:(context)=>PinSettingPage(),
           EditBankWithdrawDetails.routeName:(context)=>EditBankWithdrawDetails(),
+          TransactionSucessful.routeName:(context)=>TransactionSucessful(),
         },
       ),
     );
