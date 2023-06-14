@@ -45,7 +45,7 @@ class _WelcomeAnimState extends State<WelcomeAnim> {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(
                   'images/welcome_bg2.PNG',

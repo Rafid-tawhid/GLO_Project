@@ -194,7 +194,8 @@ class _LoginPageState extends State<LoginPage> {
                                     onPressed: () {
                                       if(showFields==true){
                                         if(_formKey.currentState!.validate()){
-                                          loginwithmailpass();
+                                          //loginwithmailpass();
+                                          Navigator.pushNamed(context, HomePage.routeName);
                                         }
                                       } else if(showFields==false) {
                                         if(_formKey2.currentState!.validate()){

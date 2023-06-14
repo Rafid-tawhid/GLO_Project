@@ -291,7 +291,7 @@ class _EditBankWithdrawDetailsState extends State<EditBankWithdrawDetails> {
                     )
                 )),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(

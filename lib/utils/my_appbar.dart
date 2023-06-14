@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glo_ticket/pages/profile_popup_pages/pin_setting.dart';
 import 'package:glo_ticket/pages/profile_popup_pages/profile_page.dart';
+import 'package:glo_ticket/utils/transaction_sucessful.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
@@ -237,13 +238,18 @@ AppBar myAppbar(BuildContext context) {
                                             ),
                                           ),
                                           SizedBox(height: 5,),
-                                          const Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Icon(Icons.keyboard_arrow_right_outlined,color: Colors.blue,),
-                                              Text('Verified',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue,),),
-                                            ],
+                                          InkWell(
+                                            onTap: (){
+                                              Navigator.pushNamed(context, TransactionSucessful.routeName);
+                                            },
+                                            child: const Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Icon(Icons.keyboard_arrow_right_outlined,color: Colors.blue,),
+                                                Text('Verified',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue,),),
+                                              ],
+                                            ),
                                           ),
                                           SizedBox(height: 5,),
                                           InkWell(

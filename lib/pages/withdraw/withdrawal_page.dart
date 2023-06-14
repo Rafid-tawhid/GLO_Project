@@ -29,7 +29,7 @@ class _WithdrawPageState extends State<WithdrawPage> {
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                           color: Color(0xffFFD504),
                           spreadRadius: -1.0,
