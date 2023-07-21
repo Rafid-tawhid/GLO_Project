@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:glo_ticket/pages/design/investment_page.dart';
 import 'package:glo_ticket/utils/constants.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helper_functions/user_info.dart';
 import '../pages/dealership_page.dart';
+import '../pages/design/deposit_bank.dart';
+import '../pages/design/bank_withdrawx.dart';
+import '../pages/design/pack_details.dart';
+import '../pages/design/pack_details_bank.dart';
+import '../pages/design/security_money.dart';
 import '../pages/login_register/login_page.dart';
 import '../pages/upgrade_page.dart';
 
@@ -22,7 +28,7 @@ class MyDrawer extends StatelessWidget {
       child: SafeArea(
         child: ListView(
           children: [
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Row(
              mainAxisAlignment: MainAxisAlignment.center,
              children: [
@@ -33,172 +39,207 @@ class MyDrawer extends StatelessWidget {
              ],
            ),
              Padding(
-              padding: EdgeInsets.only(left: 30,top: 12),
+              padding: const EdgeInsets.only(left: 30,top: 12),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
+                    padding: const EdgeInsets.only(bottom: 18.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                        SvgPicture.asset('svg/transferx.svg'),
-                        SizedBox(width: 10,),
-                        Text('Dashboard',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        const SizedBox(width: 10,),
+                        const Text('Dashboard',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
+                    padding: const EdgeInsets.only(bottom: 18.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SvgPicture.asset('svg/upgradex.svg'),
-                        SizedBox(width: 10,),
-                        Text('Upgrade Account',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        const SizedBox(width: 10,),
+                        const Text('Upgrade Account',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset('svg/depositx.svg'),
-                        SizedBox(width: 10,),
-                        Text('Deposit',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
-                      ],
+                    padding: const EdgeInsets.only(bottom: 18.0),
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, DepositBankx.routeName);
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset('svg/depositx.svg'),
+                          const SizedBox(width: 10,),
+                          const Text('Deposit',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, InvestmentPage.routeName);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 18.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset('svg/investmentx.svg'),
+                          const SizedBox(width: 10,),
+                          const Text('Investment',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, PackDetailsEwallet.routeName);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 18.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset('svg/transferx.svg'),
+                          const SizedBox(width: 10,),
+                          const Text('Transfer',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, PackDetailsEwallet.routeName);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 18.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                         SvgPicture.asset('svg/lotteryx.svg'),
+                          const SizedBox(width: 10,),
+                          const Text('Lotteries',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset('svg/investmentx.svg'),
-                        SizedBox(width: 10,),
-                        Text('Investment',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset('svg/transferx.svg'),
-                        SizedBox(width: 10,),
-                        Text('Transfer',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                       SvgPicture.asset('svg/lotteryx.svg'),
-                        SizedBox(width: 10,),
-                        Text('Lotteries',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
+                    padding: const EdgeInsets.only(bottom: 18.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                        SvgPicture.asset('svg/hourglass.svg'),
-                        SizedBox(width: 10,),
-                        Text('Results',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        const SizedBox(width: 10,),
+                        const Text('Results',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
+                    padding: const EdgeInsets.only(bottom: 18.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                        SvgPicture.asset('svg/history.svg'),
-                        SizedBox(width: 10,),
-                        Text('Lotteries History',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        const SizedBox(width: 10,),
+                        const Text('Lotteries History',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                       SvgPicture.asset('svg/withdrawx.svg'),
-                        SizedBox(width: 10,),
-                        Text('Withdraw',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
-                      ],
+                    padding: const EdgeInsets.only(bottom: 18.0),
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, BankWithdrawx.routeName);
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                         SvgPicture.asset('svg/withdrawx.svg'),
+                          const SizedBox(width: 10,),
+                          const Text('Withdraw',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
+                    padding: const EdgeInsets.only(bottom: 18.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                        SvgPicture.asset('svg/usdx.svg'),
-                        SizedBox(width: 10,),
-                        Text('USD Package',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        const SizedBox(width: 10,),
+                        const Text('USD Package',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                       SvgPicture.asset('svg/coinx.svg'),
-                        SizedBox(width: 10,),
-                        Text('USD Rate',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
-                      ],
+                    padding: const EdgeInsets.only(bottom: 18.0),
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, PackDetailsEwallet.routeName);
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                         SvgPicture.asset('svg/coinx.svg'),
+                          const SizedBox(width: 10,),
+                          const Text('USD Rate',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
+                    padding: const EdgeInsets.only(bottom: 18.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                        SvgPicture.asset('svg/goldx.svg'),
-                        SizedBox(width: 10,),
-                        Text('Gold Coin',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        const SizedBox(width: 10,),
+                        const Text('Gold Coin',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
                       ],
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
+                    padding: const EdgeInsets.only(bottom: 18.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                        SvgPicture.asset('svg/refx.svg'),
-                        SizedBox(width: 10,),
-                        Text('Referral History',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        const SizedBox(width: 10,),
+                        const Text('Referral History',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                       SvgPicture.asset('svg/support.svg'),
-                        SizedBox(width: 10,),
-                        Text('Support/Help',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
-                      ],
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(context, SecurityMoney.routeName);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 18.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                         SvgPicture.asset('svg/support.svg'),
+                          const SizedBox(width: 10,),
+                          const Text('Support/Help',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 18.0),
+                    padding: const EdgeInsets.only(bottom: 18.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SvgPicture.asset('svg/logout.svg'),
-                        SizedBox(width: 10,),
-                        Text('Logout',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        const SizedBox(width: 10,),
+                        const Text('Logout',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
                       ],
                     ),
                   ),

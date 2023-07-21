@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:glo_ticket/pages/dealership_page.dart';
 import 'package:glo_ticket/pages/deposits/deposit_form.dart';
-import 'package:glo_ticket/pages/design/bank_withdraw2.dart';
+import 'package:glo_ticket/pages/design/deposit_bank.dart';
 import 'package:glo_ticket/pages/design/bank_withdrawx.dart';
 import 'package:glo_ticket/pages/design/binance.dart';
+import 'package:glo_ticket/pages/design/investment_page.dart';
 import 'package:glo_ticket/pages/design/pack_details.dart';
+import 'package:glo_ticket/pages/design/pack_details_bank.dart';
 import 'package:glo_ticket/pages/design/phone_pay.dart';
+import 'package:glo_ticket/pages/design/security_money.dart';
 import 'package:glo_ticket/pages/design/stc_pay.dart';
 import 'package:glo_ticket/pages/profile_popup_pages/edit_bank_withdraw_details.dart';
 import 'package:glo_ticket/pages/profile_popup_pages/edit_profile_page.dart';
@@ -70,46 +73,52 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xff2E3192),
         ),
 
-        home: PackDetails(),
-        // initialRoute: WelcomePage.routeName,
-        // routes: {
-        //   WelcomePage.routeName:(context)=>const WelcomePage(),
-        //   WelcomeAnim.routeName:(context)=>WelcomeAnim(),
-        //   CarouselDemo.routeName:(context)=>CarouselDemo(),
-        //   WelcomeDashboard.routeName:(context)=>const WelcomeDashboard(),
-        //   BuyTicketPage.routeName:(context)=>BuyTicketPage(),
-        //   WinPrizePage.routeName:(context)=>const WinPrizePage(),
-        //   LoginPage.routeName:(context)=>LoginPage(),
-        //   ForgetPassword.routeName:(context)=>ForgetPassword(),
-        //   RegistrationWelcome.routeName:(context)=>RegistrationWelcome(),
-        //   VerificationPage.routeName:(context)=>const VerificationPage(),
-        //   UpgradePage.routeName:(context)=>UpgradePage(),
-        //   HomePage.routeName:(context)=>HomePage(),
-        //   DealershipPage.routeName:(context)=>DealershipPage(),
-        //   // BuyTicketPage.routeName:(context)=>BuyTicketPage(),
-        //   NationalTicketPageResult.routeName:(context)=>const NationalTicketPageResult(),
-        //   LatestLotteryResult.routeName:(context)=>const LatestLotteryResult(),
-        //   LotteryTicketPrize.routeName:(context)=>const LotteryTicketPrize(),
-        //   DepositPage.routeName:(context)=>const DepositPage(),
-        //   DepositForm.routeName:(context)=>DepositForm(),
-        //   TransferPage.routeName:(context)=>TransferPage(),
-        //   TransferForm.routeName:(context)=>TransferForm(),
-        //   LotteryTicketHistory.routeName:(context)=>LotteryTicketHistory(),
-        //   ReferralHistory.routeName:(context)=>ReferralHistory(),
-        //   WithdrawPage.routeName:(context)=>WithdrawPage(),
-        //   BankWithdrawDetails.routeName:(context)=>BankWithdrawDetails(),
-        //   EWalletWithdrawForm.routeName:(context)=>EWalletWithdrawForm(),
-        //   PCSOLotteryTickets.routeName:(context)=>PCSOLotteryTickets(),
-        //   NationalTicketPrize.routeName:(context)=>NationalTicketPrize(),
-        //   BuyLotteryTicketsSingle.routeName:(context)=>BuyLotteryTicketsSingle(),
-        //   ExchangeRatePage.routeName:(context)=>ExchangeRatePage(),
-        //   Profile_page.routeName:(context)=>Profile_page(),
-        //   EditProfilePage.routeName:(context)=>EditProfilePage(),
-        //   SaudiaPages.routeName:(context)=>SaudiaPages(),
-        //   PinSettingPage.routeName:(context)=>PinSettingPage(),
-        //   EditBankWithdrawDetails.routeName:(context)=>EditBankWithdrawDetails(),
-        //   TransactionSucessful.routeName:(context)=>TransactionSucessful(),
-        // },
+
+        initialRoute: WelcomePage.routeName,
+        routes: {
+          WelcomePage.routeName:(context)=>const WelcomePage(),
+          WelcomeAnim.routeName:(context)=>WelcomeAnim(),
+          CarouselDemo.routeName:(context)=>CarouselDemo(),
+          WelcomeDashboard.routeName:(context)=>const WelcomeDashboard(),
+          BuyTicketPage.routeName:(context)=>BuyTicketPage(),
+          WinPrizePage.routeName:(context)=>const WinPrizePage(),
+          LoginPage.routeName:(context)=>LoginPage(),
+          ForgetPassword.routeName:(context)=>ForgetPassword(),
+          RegistrationWelcome.routeName:(context)=>RegistrationWelcome(),
+          VerificationPage.routeName:(context)=>const VerificationPage(),
+          UpgradePage.routeName:(context)=>UpgradePage(),
+          HomePage.routeName:(context)=>HomePage(),
+          DealershipPage.routeName:(context)=>DealershipPage(),
+          // BuyTicketPage.routeName:(context)=>BuyTicketPage(),
+          NationalTicketPageResult.routeName:(context)=>const NationalTicketPageResult(),
+          LatestLotteryResult.routeName:(context)=>const LatestLotteryResult(),
+          LotteryTicketPrize.routeName:(context)=>const LotteryTicketPrize(),
+          DepositPage.routeName:(context)=>const DepositPage(),
+          DepositForm.routeName:(context)=>DepositForm(),
+          TransferPage.routeName:(context)=>TransferPage(),
+          TransferForm.routeName:(context)=>TransferForm(),
+          LotteryTicketHistory.routeName:(context)=>LotteryTicketHistory(),
+          ReferralHistory.routeName:(context)=>ReferralHistory(),
+          WithdrawPage.routeName:(context)=>WithdrawPage(),
+          BankWithdrawDetails.routeName:(context)=>BankWithdrawDetails(),
+          EWalletWithdrawForm.routeName:(context)=>EWalletWithdrawForm(),
+          PCSOLotteryTickets.routeName:(context)=>PCSOLotteryTickets(),
+          NationalTicketPrize.routeName:(context)=>NationalTicketPrize(),
+          BuyLotteryTicketsSingle.routeName:(context)=>BuyLotteryTicketsSingle(),
+          ExchangeRatePage.routeName:(context)=>ExchangeRatePage(),
+          Profile_page.routeName:(context)=>Profile_page(),
+          EditProfilePage.routeName:(context)=>EditProfilePage(),
+          SaudiaPages.routeName:(context)=>SaudiaPages(),
+          PinSettingPage.routeName:(context)=>PinSettingPage(),
+          EditBankWithdrawDetails.routeName:(context)=>EditBankWithdrawDetails(),
+          TransactionSucessful.routeName:(context)=>TransactionSucessful(),
+          PackDetailsBank.routeName:(context)=>PackDetailsBank(),
+          PackDetailsEwallet.routeName:(context)=>PackDetailsEwallet(),
+          BankWithdrawx.routeName:(context)=>BankWithdrawx(),
+          DepositBankx.routeName:(context)=>DepositBankx(),
+          InvestmentPage.routeName:(context)=>InvestmentPage(),
+          SecurityMoney.routeName:(context)=>SecurityMoney(),
+        },
       ),
     );
   }

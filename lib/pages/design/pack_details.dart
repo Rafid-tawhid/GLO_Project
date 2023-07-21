@@ -4,9 +4,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../utils/constants.dart';
 import '../../utils/drawer.dart';
 import '../../utils/my_appbar.dart';
+import 'pack_details_bank.dart';
 
-class PackDetails extends StatelessWidget {
-  const PackDetails({super.key});
+class PackDetailsEwallet extends StatefulWidget {
+  const PackDetailsEwallet({super.key});
+  static const String routeName='/ewallet';
+
+  @override
+  State<PackDetailsEwallet> createState() => _PackDetailsEwalletState();
+}
+
+class _PackDetailsEwalletState extends State<PackDetailsEwallet> {
+  String activeWidgets = 'wallet package';
 
   @override
   Widget build(BuildContext context) {
@@ -30,30 +39,37 @@ class PackDetails extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    'images/e_walletx.png',
-                                    height: 36,
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    'Pack Details',
-                                    style: TextStyle(color: Colors.blue),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text(
-                                    '(E-wallet)',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 12),
-                                  ),
-                                ],
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color(0xffE1F4FE),
+                                border: Border.all(color: Colors.blue, width: 1),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      'images/e_walletx.png',
+                                      height: 36,
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    const Text(
+                                      'Pack Details',
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      '(E-wallet)',
+                                      style: TextStyle(
+                                          color: Colors.blue, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -62,31 +78,36 @@ class PackDetails extends StatelessWidget {
                           width: 16,
                         ),
                         Expanded(
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    'images/bank_x.png',
-                                    height: 36,
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    'Pack Details',
-                                    style: TextStyle(color: Colors.blue),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text(
-                                    '(bank)',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 12),
-                                  ),
-                                ],
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.pushNamed(context, PackDetailsBank.routeName);
+                            },
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      'images/bank_x.png',
+                                      height: 36,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      'Pack Details',
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      '(bank)',
+                                      style: TextStyle(
+                                          color: Colors.blue, fontSize: 12),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -124,80 +145,152 @@ class PackDetails extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                'images/package.png',
-                                height: 32,
+                        Expanded(
+                          child: Container(
+                            decoration: activeWidgets == 'wallet package'
+                                ? BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Color(0xffE1F4FE),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 1))
+                                : null,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    activeWidgets = 'wallet package';
+                                  });
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset(
+                                      'images/package.png',
+                                      height: 32,
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      'Package',
+                                      style: TextStyle(color: dark),
+                                    )
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                'Package',
-                                style: TextStyle(color: dark),
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                'images/order.png',
-                                height: 32,
+                        Expanded(
+                          child: Container(
+                            decoration: activeWidgets == 'wallet order'
+                                ? BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Color(0xffE1F4FE),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 1))
+                                : null,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    activeWidgets = 'wallet order';
+                                  });
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset(
+                                      'images/order.png',
+                                      height: 32,
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      'Order',
+                                      style: TextStyle(color: dark),
+                                    )
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                'Order',
-                                style: TextStyle(color: dark),
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                'images/processing.png',
-                                height: 32,
+                        Expanded(
+                          child: Container(
+                            decoration: activeWidgets == 'wallet processing'
+                                ? BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Color(0xffE1F4FE),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 1))
+                                : null,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    activeWidgets = 'wallet processing';
+                                  });
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset(
+                                      'images/processing.png',
+                                      height: 32,
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      'Processing',
+                                      style: TextStyle(color: dark),
+                                    )
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                'Processing',
-                                style: TextStyle(color: dark),
-                              )
-                            ],
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                'images/completed.png',
-                                height: 32,
+                        Expanded(
+                          child: Container(
+                            decoration: activeWidgets == 'wallet complete'
+                                ? BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Color(0xffE1F4FE),
+                                    border: Border.all(
+                                        color: Colors.blue, width: 1))
+                                : null,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    activeWidgets = 'wallet complete';
+                                  });
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Image.asset(
+                                      'images/completed.png',
+                                      height: 32,
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      'Completed',
+                                      style: TextStyle(color: dark),
+                                    )
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                'Completed',
-                                style: TextStyle(color: dark),
-                              )
-                            ],
+                            ),
                           ),
                         ),
                       ],
@@ -211,23 +304,39 @@ class PackDetails extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                'images/cancel.png',
-                                height: 32,
+                        Container(
+                          decoration: activeWidgets == 'wallet cancel'
+                              ? BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(0xffE1F4FE),
+                                  border:
+                                      Border.all(color: Colors.blue, width: 1))
+                              : null,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  activeWidgets = 'wallet cancel';
+                                });
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Image.asset(
+                                    'images/cancel.png',
+                                    height: 32,
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    'Cancelled',
+                                    style: TextStyle(color: dark),
+                                  )
+                                ],
                               ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              Text(
-                                'Cancelled',
-                                style: TextStyle(color: dark),
-                              )
-                            ],
+                            ),
                           ),
                         ),
                         Padding(
@@ -272,13 +381,13 @@ class PackDetails extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-
-                 // CanceledCardWidgets()
-
-                  // CompletedCardWidgets()
-                  // ProcessingCardWidgets()
-                  // PackageWidgets(),
-                  // OrderCardWidgets()
+                  if (activeWidgets == 'wallet cancel') CanceledCardWidgets(),
+                  if (activeWidgets == 'wallet complete')
+                    CompletedCardWidgets(),
+                  if (activeWidgets == 'wallet processing')
+                    ProcessingCardWidgets(),
+                  if (activeWidgets == 'wallet package') PackageWidgets(),
+                  if (activeWidgets == 'wallet order') OrderCardWidgets()
                 ],
               ),
             ),
@@ -361,7 +470,6 @@ class CanceledCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-
                 Container(
                   width: MediaQuery.sizeOf(context).width / 1.5,
                   height: .2,
@@ -379,19 +487,22 @@ class CanceledCardWidgets extends StatelessWidget {
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Text('''Sorry! This package is no longer available at the moment. Another person has bought the package. Please try a new package''',style: TextStyle(fontSize: 10,color: Colors.red),textAlign: TextAlign.center,),
+                  child: Text(
+                    '''Sorry! This package is no longer available at the moment. Another person has bought the package. Please try a new package''',
+                    style: TextStyle(fontSize: 10, color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.red),
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 6.0, horizontal: 8),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 6.0, horizontal: 8),
                       child: Text(
                         'Order Cancelled',
                         style: TextStyle(color: Colors.white, fontSize: 10),
@@ -405,16 +516,16 @@ class CanceledCardWidgets extends StatelessWidget {
                   height: .2,
                   color: Colors.grey,
                 ),
-                SizedBox(height: 6,),
+                SizedBox(
+                  height: 6,
+                ),
                 Image.asset(
                   'images/PhonePe_Logo.svg.png',
                   height: 28,
                 ),
-
                 SizedBox(
                   height: 18,
                 ),
-
                 Image.asset('images/bottom_card.png'),
               ],
             ),
@@ -464,7 +575,6 @@ class CanceledCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-
                 Container(
                   width: MediaQuery.sizeOf(context).width / 1.5,
                   height: .2,
@@ -482,19 +592,22 @@ class CanceledCardWidgets extends StatelessWidget {
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Text('''Sorry! This package is no longer available at the moment. Another person has bought the package. Please try a new package''',style: TextStyle(fontSize: 10,color: Colors.red),textAlign: TextAlign.center,),
+                  child: Text(
+                    '''Sorry! This package is no longer available at the moment. Another person has bought the package. Please try a new package''',
+                    style: TextStyle(fontSize: 10, color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.red),
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 6.0, horizontal: 8),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 6.0, horizontal: 8),
                       child: Text(
                         'Order Cancelled',
                         style: TextStyle(color: Colors.white, fontSize: 10),
@@ -508,12 +621,13 @@ class CanceledCardWidgets extends StatelessWidget {
                   height: .2,
                   color: Colors.grey,
                 ),
-                SizedBox(height: 6,),
+                SizedBox(
+                  height: 6,
+                ),
                 Image.asset(
                   'images/PhonePe_Logo.svg.png',
                   height: 28,
                 ),
-
                 SizedBox(
                   height: 18,
                 ),
@@ -566,7 +680,6 @@ class CanceledCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-
                 Container(
                   width: MediaQuery.sizeOf(context).width / 1.5,
                   height: .2,
@@ -584,19 +697,22 @@ class CanceledCardWidgets extends StatelessWidget {
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Text('''Sorry! This package is no longer available at the moment. Another person has bought the package. Please try a new package''',style: TextStyle(fontSize: 10,color: Colors.red),textAlign: TextAlign.center,),
+                  child: Text(
+                    '''Sorry! This package is no longer available at the moment. Another person has bought the package. Please try a new package''',
+                    style: TextStyle(fontSize: 10, color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-
                 Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.red),
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 6.0, horizontal: 8),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 6.0, horizontal: 8),
                       child: Text(
                         'Order Cancelled',
                         style: TextStyle(color: Colors.white, fontSize: 10),
@@ -610,12 +726,13 @@ class CanceledCardWidgets extends StatelessWidget {
                   height: .2,
                   color: Colors.grey,
                 ),
-                SizedBox(height: 6,),
+                SizedBox(
+                  height: 6,
+                ),
                 Image.asset(
                   'images/PhonePe_Logo.svg.png',
                   height: 28,
                 ),
-
                 SizedBox(
                   height: 18,
                 ),
@@ -701,7 +818,6 @@ class CompletedCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-
                 Container(
                   width: MediaQuery.sizeOf(context).width / 1.5,
                   height: .2,
@@ -722,8 +838,8 @@ class CompletedCardWidgets extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.blue),
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 6.0, horizontal: 8),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 6.0, horizontal: 8),
                       child: Text(
                         'Order Successful',
                         style: TextStyle(color: Colors.white, fontSize: 12),
@@ -740,11 +856,12 @@ class CompletedCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-
                 Text(
                   'Code #02',
                   style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
                 ),
                 SizedBox(
                   height: 5,
@@ -754,7 +871,9 @@ class CompletedCardWidgets extends StatelessWidget {
                   height: .2,
                   color: Colors.grey,
                 ),
-                SizedBox(height: 6,),
+                SizedBox(
+                  height: 6,
+                ),
                 Image.asset(
                   'images/PhonePe_Logo.svg.png',
                   height: 35,
@@ -777,7 +896,6 @@ class CompletedCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 18,
                 ),
-
                 Image.asset('images/bottom_card.png'),
               ],
             ),
@@ -827,7 +945,6 @@ class CompletedCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-
                 Container(
                   width: MediaQuery.sizeOf(context).width / 1.5,
                   height: .2,
@@ -866,11 +983,12 @@ class CompletedCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-
                 Text(
                   'Code #02',
                   style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
                 ),
                 SizedBox(
                   height: 5,
@@ -880,7 +998,9 @@ class CompletedCardWidgets extends StatelessWidget {
                   height: .2,
                   color: Colors.grey,
                 ),
-                SizedBox(height: 6,),
+                SizedBox(
+                  height: 6,
+                ),
                 Image.asset(
                   'images/PhonePe_Logo.svg.png',
                   height: 35,
@@ -893,8 +1013,8 @@ class CompletedCardWidgets extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                         color: deeporange),
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 6.0, horizontal: 8),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 6.0, horizontal: 8),
                       child: Text(
                         'Pay Amount : ₹12366.33',
                         style: TextStyle(color: Colors.white, fontSize: 12),
@@ -952,7 +1072,6 @@ class CompletedCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-
                 Container(
                   width: MediaQuery.sizeOf(context).width / 1.5,
                   height: .2,
@@ -970,8 +1089,7 @@ class CompletedCardWidgets extends StatelessWidget {
                 ),
                 Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: purple),
+                        borderRadius: BorderRadius.circular(4), color: purple),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 6.0, horizontal: 8),
@@ -991,11 +1109,12 @@ class CompletedCardWidgets extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-
                 Text(
                   'Code #02',
                   style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
                 ),
                 SizedBox(
                   height: 5,
@@ -1005,7 +1124,9 @@ class CompletedCardWidgets extends StatelessWidget {
                   height: .2,
                   color: Colors.grey,
                 ),
-                SizedBox(height: 6,),
+                SizedBox(
+                  height: 6,
+                ),
                 Image.asset(
                   'images/PhonePe_Logo.svg.png',
                   height: 35,
@@ -1015,8 +1136,7 @@ class CompletedCardWidgets extends StatelessWidget {
                 ),
                 Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: purple),
+                        borderRadius: BorderRadius.circular(4), color: purple),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 6.0, horizontal: 8),
