@@ -4,14 +4,15 @@ import '../../utils/constants.dart';
 import '../../utils/drawer.dart';
 import '../../utils/my_appbar.dart';
 
-class BankWithdrawx2 extends StatefulWidget {
-  const BankWithdrawx2({super.key});
+class DepositBankx extends StatefulWidget {
+  static const String routeName='/deposit_bank';
+  const DepositBankx({super.key});
 
   @override
-  State<BankWithdrawx2> createState() => _BankWithdrawx2State();
+  State<DepositBankx> createState() => _DepositBankxState();
 }
 
-class _BankWithdrawx2State extends State<BankWithdrawx2> {
+class _DepositBankxState extends State<DepositBankx> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
