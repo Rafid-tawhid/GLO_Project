@@ -172,9 +172,11 @@ class _PackDetailsEwalletState extends State<PackDetailsEwallet> {
                                     SizedBox(
                                       height: 4,
                                     ),
-                                    Text(
-                                      'Package',
-                                      style: TextStyle(color: dark),
+                                    FittedBox(
+                                      child: Text(
+                                        'Package',
+                                        style: TextStyle(color: dark),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -209,9 +211,11 @@ class _PackDetailsEwalletState extends State<PackDetailsEwallet> {
                                     SizedBox(
                                       height: 4,
                                     ),
-                                    Text(
-                                      'Order',
-                                      style: TextStyle(color: dark),
+                                    FittedBox(
+                                      child: Text(
+                                        'Order',
+                                        style: TextStyle(color: dark),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -246,9 +250,11 @@ class _PackDetailsEwalletState extends State<PackDetailsEwallet> {
                                     SizedBox(
                                       height: 4,
                                     ),
-                                    Text(
-                                      'Processing',
-                                      style: TextStyle(color: dark),
+                                    FittedBox(
+                                      child: Text(
+                                        'Processing',
+                                        style: TextStyle(color: dark),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -283,9 +289,11 @@ class _PackDetailsEwalletState extends State<PackDetailsEwallet> {
                                     SizedBox(
                                       height: 4,
                                     ),
-                                    Text(
-                                      'Completed',
-                                      style: TextStyle(color: dark),
+                                    FittedBox(
+                                      child: Text(
+                                        'Completed',
+                                        style: TextStyle(color: dark),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -330,9 +338,11 @@ class _PackDetailsEwalletState extends State<PackDetailsEwallet> {
                                   SizedBox(
                                     height: 4,
                                   ),
-                                  Text(
-                                    'Cancelled',
-                                    style: TextStyle(color: dark),
+                                  FittedBox(
+                                    child: Text(
+                                      'Cancelled',
+                                      style: TextStyle(color: dark),
+                                    ),
                                   )
                                 ],
                               ),

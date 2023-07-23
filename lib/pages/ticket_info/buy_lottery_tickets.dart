@@ -56,11 +56,13 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                             left: 0,
                             right: 0,
                             top: 0,
-                            child: SvgPicture.asset(
-                              'svg/national.svg',
-                              fit: BoxFit.contain,
-                              width: 75,
+                            child: Container(
+                              width: 50,
                               height: 55,
+                              child: SvgPicture.asset(
+                                'svg/national.svg',
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                           Positioned(
@@ -73,7 +75,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                                 'NATIONAL',
                                 style: TextStyle(
                                     color: Color(0xff061596),
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center,
                               ),
@@ -105,7 +107,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                                       left: -10,
                                       top: -3,
                                       child: Image.asset(
-                                        'images/dollar_coin.png',
+                                        'images/ii.png',
                                         height: 22,
                                       )),
                                 ],
@@ -138,7 +140,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                                       right: -10,
                                       top: -3,
                                       child: Image.asset(
-                                        'images/dollar_coin.png',
+                                        'images/c.png',
                                         height: 22,
                                       )),
                                 ],
@@ -154,11 +156,9 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Image.asset(
-                          'images/profile_ticket.png',
+                        SvgPicture.asset(
+                          'svg/user.svg',
                           fit: BoxFit.cover,
-                          width: 30,
-                          height: 30,
                         ),
                         SizedBox(
                           height: 3,
@@ -166,7 +166,7 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                         Text(
                           '1682832598',
                           style:
-                              TextStyle(color: Color(0xff061596), fontSize: 10),
+                              TextStyle(color: Color(0xff061596), fontSize: 8),
                         ),
                         SizedBox(
                           height: 5,

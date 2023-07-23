@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glo_ticket/pages/design/investment_page.dart';
+import 'package:glo_ticket/pages/home_page.dart';
 import 'package:glo_ticket/utils/constants.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,13 +46,18 @@ class MyDrawer extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 18.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                       SvgPicture.asset('svg/transferx.svg'),
-                        const SizedBox(width: 10,),
-                        const Text('Dashboard',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
-                      ],
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, HomePage.routeName);
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                         SvgPicture.asset('svg/transferx.svg'),
+                          const SizedBox(width: 10,),
+                          const Text('Dashboard',style: TextStyle(color: Color(0xff043655),fontSize: 16),)
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
