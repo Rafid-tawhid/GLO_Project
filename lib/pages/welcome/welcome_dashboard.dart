@@ -240,11 +240,13 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                       opacityDisabled: 0,
                                       duration: Duration(milliseconds: 200),
                                       opacityEnabled: 1,
-                                      child: Text(
-                                        'BUY A TICKET & WIN BIG PRIZES',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 20, color: Color(0xff061596),),
+                                      child: FittedBox(
+                                        child: Text(
+                                          'BUY A TICKET & WIN BIG PRIZES',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 20, color: Color(0xff061596),),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -519,12 +521,14 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                           SizedBox(
                                             height: 15,
                                           ),
-                                          Text(
-                                            'AND GET UNLIMITED COMISSION',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Color(0xff061596)),
+                                          FittedBox(
+                                            child: Text(
+                                              'AND GET UNLIMITED COMISSION',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Color(0xff061596)),
+                                            ),
                                           ),
                                         ],
                                       ),
