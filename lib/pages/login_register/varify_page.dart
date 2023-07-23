@@ -207,7 +207,7 @@ class _VerificationPageState extends State<VerificationPage> {
           SizedBox(
             height: 15,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -271,8 +271,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     decoration: InputDecoration(
                         labelText: '  No file chosen',
                         isDense: true,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 0, vertical: 0),
+                        contentPadding: EdgeInsets.only(left: 6),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: TextButton(
@@ -318,8 +317,9 @@ class _VerificationPageState extends State<VerificationPage> {
                       }
                     },
                     decoration: InputDecoration(
+
                         labelText: '  Enter Name here',
-                        contentPadding: EdgeInsets.zero,
+                        contentPadding: EdgeInsets.only(left: 8),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                         )),
@@ -346,7 +346,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     },
                     decoration: InputDecoration(
                         labelText: '  example@gmail.com',
-                        contentPadding: EdgeInsets.zero,
+                        contentPadding: EdgeInsets.only(left: 8),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                         )),
@@ -391,7 +391,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   TextFormField(
                     controller: cityCon,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.zero,
+                        contentPadding: EdgeInsets.only(left: 8),
                         labelText: '  Enter City',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
@@ -456,7 +456,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     controller: addressCon,
                     decoration: InputDecoration(
                         labelText: '  Enter Address',
-                        contentPadding: EdgeInsets.zero,
+                        contentPadding: EdgeInsets.only(left: 8),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                         )),
@@ -510,8 +510,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     decoration: InputDecoration(
                         labelText: '  No file chosen',
                         isDense: true,
-                        contentPadding:
-                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        contentPadding: EdgeInsets.only(left: 6),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: TextButton(
@@ -557,8 +556,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     decoration: InputDecoration(
                         labelText: '  No file chosen',
                         isDense: true,
-                        contentPadding:
-                        EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        contentPadding: EdgeInsets.only(left: 6),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.all(0.0),
                           child: TextButton(

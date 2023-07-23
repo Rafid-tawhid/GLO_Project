@@ -276,7 +276,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Card(
               elevation: 1,
               shape: RoundedRectangleBorder(
@@ -675,10 +675,10 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 5,
                   ),
-                  const Row(
+                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
+                      const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
@@ -701,21 +701,27 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
+
+                            InkWell(
+                                onTap:(){
+                                  Navigator.pushNamed(context, VerificationPage.routeName);
+                                },
+                                child: Text('Verify Now ->',style: TextStyle(fontSize: 16,color: Colors.red),)),
                             // UserInfo.loginUserModel!.user!.status==1?InkWell(
                             //     onTap:(){
                             //       Navigator.pushNamed(context, VerificationPage.routeName);
                             //     },
                             //     child: Text('Verify Now ->',style: TextStyle(fontSize: 16,color: Colors.red),)):
                             // Text('Verified',style: TextStyle(fontSize: 16,color: Colors.red),),
-                            // SizedBox(height: 5,),
-                            // Row(
-                            //   mainAxisSize: MainAxisSize.min,
-                            //   children: [
-                            //     Icon(Icons.key),
-                            //     SizedBox(width: 2,),
-                            //     Text('Referrals')
-                            //   ],
-                            // )
+                            SizedBox(height: 5,),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.key),
+                                SizedBox(width: 2,),
+                                Text('Referrals')
+                              ],
+                            )
                           ],
                         ),
                       )

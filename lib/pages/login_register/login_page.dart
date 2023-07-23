@@ -209,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
                                             userid: num.parse(userIdCon.text)
                                           );
 
-                                          registerUserwithInfo(usermodel);
+                                          //registerUserwithInfo(usermodel);
 
                                          // Navigator.pushNamed(context, HomePage.routeName);
                                         }
@@ -234,6 +234,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
+            if(showFields)SizedBox(height: 80,),
             Container(
               margin: EdgeInsets.only(top: 10),
               alignment: Alignment.center,
@@ -275,22 +276,26 @@ class _LoginPageState extends State<LoginPage> {
               },
               decoration: InputDecoration(
                   hintText: '  Enter Referral Code',
+                  prefixIconConstraints: BoxConstraints(minWidth: 50,),
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                   prefixIcon: Container(
-                       decoration: BoxDecoration(
-                         color: Color(0xffe9ecef),
-                         border: Border.all(
-                           width: 0.6,
-                           color: Color(0xff032d46),
-                         ),
-                         borderRadius: BorderRadius.circular(6),
+                   prefixIcon: Padding(
+                     padding: const EdgeInsets.only(right: 6.0),
+                     child: Container(
+                         decoration: BoxDecoration(
+                           color: Color(0xffe9ecef),
+                           border: Border.all(
+                             width: 0.6,
+                             color: Color(0xff032d46),
+                           ),
+                           borderRadius: BorderRadius.circular(6),
 
-                       ),
-                       child: Padding(
-                         padding: const EdgeInsets.symmetric(horizontal: 13.5,vertical: 12),
-                         child: SvgPicture.asset('svg/customer.svg',),
-                       )),
+                         ),
+                         child: Padding(
+                           padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 16),
+                           child: SvgPicture.asset('svg/customer.svg',),
+                         )),
+                   ),
 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
@@ -309,8 +314,8 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                 children: [
                   Container(
-                    height: 16,
-                    width: 16,
+                    height: 14,
+                    width: 14,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(
@@ -322,17 +327,17 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(1.0),
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(20),
                           color: referIconColor?Color(0xff007AFF):Colors.white,
                         ),
-                        height: 14,
-                        width: 14,
+                        height: 12,
+                        width: 12,
 
                       ),
                     ),
                   ),
-                  SizedBox(width: 5,),
-                  Text('Official Referral Code',style: TextStyle(color:Color(0xff007AFF) ),)
+                  SizedBox(width: 2,),
+                  Text('Official Referral Code',style: TextStyle(color:Color(0xff007AFF) ,fontSize: 12),)
                 ],
               ),
             ),
@@ -350,24 +355,28 @@ class _LoginPageState extends State<LoginPage> {
               },
               decoration: InputDecoration(
                   hintText: '  Enter Name',
+                  prefixIconConstraints: BoxConstraints(minWidth: 50,),
                   isDense: true,
                   errorStyle:TextStyle() ,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   prefixIcon:
-                  Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xffe9ecef),
-                        border: Border.all(
-                          width: 0.6,
-                          color: Color(0xff032d46),
-                        ),
-                        borderRadius: BorderRadius.circular(6),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffe9ecef),
+                          border: Border.all(
+                            width: 0.6,
+                            color: Color(0xff032d46),
+                          ),
+                          borderRadius: BorderRadius.circular(6),
 
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 13.5),
-                        child: SvgPicture.asset('svg/userss.svg',),
-                      )),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 14),
+                          child: SvgPicture.asset('svg/userss.svg',),
+                        )),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
@@ -390,22 +399,26 @@ class _LoginPageState extends State<LoginPage> {
               },
               decoration: InputDecoration(
                   hintText: '  example@gmail.com',
+                  prefixIconConstraints: BoxConstraints(minWidth: 50,),
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                  prefixIcon: Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xffe9ecef),
-                        border: Border.all(
-                          width: 0.6,
-                          color: Color(0xff032d46),
-                        ),
-                        borderRadius: BorderRadius.circular(6),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(right: 6.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffe9ecef),
+                          border: Border.all(
+                            width: 0.6,
+                            color: Color(0xff032d46),
+                          ),
+                          borderRadius: BorderRadius.circular(6),
 
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 10),
-                        child: SvgPicture.asset('svg/envelope.svg'),
-                      )),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 10),
+                          child: SvgPicture.asset('svg/envelope.svg'),
+                        )),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
@@ -430,23 +443,27 @@ class _LoginPageState extends State<LoginPage> {
               },
               decoration: InputDecoration(
                   hintText: '  01xxxxxxxxxx',
+                  prefixIconConstraints: BoxConstraints(minWidth: 50,),
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   prefixIcon:
-                  Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xffe9ecef),
-                        border: Border.all(
-                          width: 0.6,
-                          color: Color(0xff032d46),
-                        ),
-                        borderRadius: BorderRadius.circular(6),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffe9ecef),
+                          border: Border.all(
+                            width: 0.6,
+                            color: Color(0xff032d46),
+                          ),
+                          borderRadius: BorderRadius.circular(6),
 
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(13.5),
-                        child: SvgPicture.asset('svg/telephone.svg'),
-                      )),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 10),
+                          child: SvgPicture.asset('svg/telephone.svg'),
+                        )),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
@@ -474,22 +491,26 @@ class _LoginPageState extends State<LoginPage> {
               },
               decoration: InputDecoration(
                   hintText: '  Enter Pin',
+                  prefixIconConstraints: BoxConstraints(minWidth: 50,),
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                  prefixIcon: Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xffe9ecef),
-                        border: Border.all(
-                          width: 0.6,
-                          color: Color(0xff032d46),
-                        ),
-                        borderRadius: BorderRadius.circular(6),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.only(right: 6.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffe9ecef),
+                          border: Border.all(
+                            width: 0.6,
+                            color: Color(0xff032d46),
+                          ),
+                          borderRadius: BorderRadius.circular(6),
 
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: SvgPicture.asset('svg/s_key.svg'),
-                      )),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12,),
+                          child: SvgPicture.asset('svg/s_key.svg'),
+                        )),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
@@ -498,11 +519,12 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 4,),
             const Align(
               alignment: Alignment.centerLeft,
-                child: Text('Min : 4 & Max : 6 (Integer Number Only) (ex : 1234)',style: TextStyle(fontSize: 13,color: Color(0xff007AFF)),)),
+                child: Text('Min : 4 & Max : 6 (Integer Number Only) (ex : 1234)',style: TextStyle(fontSize: 11,color: Color(0xff007AFF)),)),
             const SizedBox(
               height: 16,
             ),
             TextFormField(
+              controller: loginpassCon,
               obscureText: showPassword,
               validator: (value){
                 if(value==null||value.isEmpty){
@@ -512,13 +534,15 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 }
               },
-              controller: passCon,
               decoration: InputDecoration(
-                  hintText: '  Password',
-                  isDense: true,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                  prefixIcon:
-                  Container(
+                hintText: '  Password',
+                isDense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                prefixIconConstraints: BoxConstraints(minWidth: 50,),
+                prefixIcon:
+                Padding(
+                  padding: const EdgeInsets.only(right: 6.0),
+                  child: Container(
                       decoration: BoxDecoration(
                         color: Color(0xffe9ecef),
                         border: Border.all(
@@ -526,29 +550,27 @@ class _LoginPageState extends State<LoginPage> {
                           color: Color(0xff032d46),
                         ),
                         borderRadius: BorderRadius.circular(6),
-
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 13.0,horizontal: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 14.0,horizontal: 10),
                         child: SvgPicture.asset('svg/s_lock.svg'),
                       )),
-                  suffixIcon: InkWell(
-                    onTap: (){
-                      setState(() {
-                        showPassword=!showPassword;
-                      });
-                    },
-                    child: showPassword?Icon(
-                      Icons.visibility,
-                      color: Color(0xff032D46),
-                    ):Icon(
-                      Icons.visibility_off,
-                      color: Color(0xff032D46),
-                    ),
+                ),
+                suffixIcon: InkWell(
+                  onTap: (){
+                    setState(() {
+                      showPassword=!showPassword;
+                    });
+                  },
+                  child: Icon(
+                    showPassword?Icons.remove_red_eye_outlined:Icons.visibility_off_outlined,
+                    color: Color(0xff032D46),
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  )),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
             ),
             SizedBox(
               height: 18,
@@ -569,30 +591,34 @@ class _LoginPageState extends State<LoginPage> {
               controller: passConfCon,
               decoration: InputDecoration(
                   hintText: '  Confirm Password',
+                  prefixIconConstraints: BoxConstraints(minWidth: 50,),
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                   prefixIcon:
-                  Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xffe9ecef),
-                        border: Border.all(
-                          width: 0.6,
-                          color: Color(0xff032d46),
-                        ),
-                        borderRadius: BorderRadius.circular(6),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffe9ecef),
+                          border: Border.all(
+                            width: 0.6,
+                            color: Color(0xff032d46),
+                          ),
+                          borderRadius: BorderRadius.circular(6),
 
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 13.0,horizontal: 10),
-                        child: SvgPicture.asset('svg/s_lock.svg'),
-                      )),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 14.0,horizontal: 10),
+                          child: SvgPicture.asset('svg/s_lock.svg'),
+                        )),
+                  ),
                   suffixIcon: InkWell(
                     onTap: (){
                       setState(() {
                         showPassword=!showPassword;
                       });
                     },
-                    child: showPassword?Icon(
+                    child: showPassword?const Icon(
                       Icons.visibility,
                       color: Color(0xff032D46),
                     ):Icon(
@@ -626,20 +652,24 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: '  Enter your Email',
                   isDense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                  prefixIcon: Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xffe9ecef),
-                        border: Border.all(
-                          width: 0.6,
-                          color: Color(0xff032d46),
-                        ),
-                        borderRadius: BorderRadius.circular(6),
+                  prefixIconConstraints: BoxConstraints(minWidth: 50,),
+                  prefixIcon: Padding(
+                    padding: EdgeInsets.only(right: 6),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffe9ecef),
+                          border: Border.all(
+                            width: 0.6,
+                            color: Color(0xff032d46),
+                          ),
+                          borderRadius: BorderRadius.circular(6),
 
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 14.0,horizontal: 10),
-                        child: SvgPicture.asset('svg/userss.svg'),
-                      )),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 14.0,horizontal: 10),
+                          child: SvgPicture.asset('svg/userss.svg'),
+                        )),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
                   )),
@@ -672,23 +702,27 @@ class _LoginPageState extends State<LoginPage> {
               },
               decoration: InputDecoration(
                   hintText: '  Enter Password',
-                  isDense: true,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                isDense: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                prefixIconConstraints: BoxConstraints(minWidth: 50,),
                   prefixIcon:
-                  Container(
-                      decoration: BoxDecoration(
-                        color: Color(0xffe9ecef),
-                        border: Border.all(
-                          width: 0.6,
-                          color: Color(0xff032d46),
-                        ),
-                        borderRadius: BorderRadius.circular(6),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xffe9ecef),
+                          border: Border.all(
+                            width: 0.6,
+                            color: Color(0xff032d46),
+                          ),
+                          borderRadius: BorderRadius.circular(6),
 
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 13.0,horizontal: 10),
-                        child: SvgPicture.asset('svg/s_lock.svg'),
-                      )),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 14.0,horizontal: 10),
+                          child: SvgPicture.asset('svg/s_lock.svg'),
+                        )),
+                  ),
                   suffixIcon: InkWell(
                     onTap: (){
                       setState(() {
@@ -729,7 +763,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: (){
                     Navigator.pushNamed(context, ForgetPassword.routeName);
                   },
-                    child: Text('Forgot Password?',style: TextStyle(color: Color(0xff008AE5)),))
+                    child: Text('Forgot Password?',style: TextStyle(color: Color(0xff008AE5),fontWeight: FontWeight.bold),))
               ],
             ),
           ],

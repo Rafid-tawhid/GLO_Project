@@ -173,14 +173,14 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                   children: [
                                     Text(
                                       'YOU CAN BUY',
-                                      style: TextStyle(fontSize: 22, color: Colors.red),
+                                      style: TextStyle(fontSize: 20, color: Colors.red),
                                     ),
                                     SizedBox(
                                       height: 15,
                                     ),
                                     Text(
                                       'FOUR TYPES OF LOTTERY HERE',
-                                      style: TextStyle(fontSize: 22, color: Color(0xff061596)),
+                                      style: TextStyle(fontSize: 20, color: Color(0xff061596),),
                                     ),
                                   ],
                                 ),
@@ -223,7 +223,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                       child: Text(
                                         'CHOSE A LOTTERY',
                                         style: TextStyle(
-                                            fontSize: 22, color: Colors.red),
+                                            fontSize: 20, color: Colors.red),
                                       ),
                                     ),
                                   ),
@@ -242,8 +242,9 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                       opacityEnabled: 1,
                                       child: Text(
                                         'BUY A TICKET & WIN BIG PRIZES',
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            fontSize: 22, color: Color(0xff061596)),
+                                            fontSize: 20, color: Color(0xff061596),),
                                       ),
                                     ),
                                   ),
@@ -287,7 +288,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                 opacityEnabled: 1,
                                 child: Text(
                                   'GET YOUR TICKETS',
-                                  style: TextStyle(fontSize: 22, color: Colors.red),
+                                  style: TextStyle(fontSize: 20, color: Colors.red),
                                 ),
                               ),
                             ),
@@ -306,7 +307,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                 opacityEnabled: 1,
                                 child: Text(
                                   'UP TO 30% DISCOUNT',
-                                  style: TextStyle(fontSize: 22, color: Color(0xff061596)),
+                                  style: TextStyle(fontSize: 20, color: Color(0xff061596)),
                                 ),
                               ),
                             ),
@@ -353,7 +354,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                       child: Text(
                                         'ACCOUNT TO ACCOUNT',
                                         style: TextStyle(
-                                            fontSize: 22, color: Colors.red),
+                                            fontSize: 20, color: Colors.red),
                                       ),
                                     ),
                                   ),
@@ -373,7 +374,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                       child: const Text(
                                         'MONEY TRANSFER',
                                         style: TextStyle(
-                                            fontSize: 22, color: Color(0xff061596)),
+                                            fontSize: 20, color: Color(0xff061596)),
                                       ),
                                     ),
                                   ),
@@ -426,7 +427,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                           Text(
                                             'WORLD WIDE',
                                             style: TextStyle(
-                                                fontSize: 22, color: Colors.red),
+                                                fontSize: 20, color: Colors.red),
                                           ),
                                           SizedBox(
                                             height: 15,
@@ -434,7 +435,7 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                           Text(
                                             'MONEY WITHDRAWAL',
                                             style: TextStyle(
-                                                fontSize: 22,
+                                                fontSize: 20,
                                                 color: Color(0xff061596)),
                                           ),
                                         ],
@@ -513,15 +514,16 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
                                           Text(
                                             'REFER YOUR FRIEND',
                                             style: TextStyle(
-                                                fontSize: 22, color: Colors.red),
+                                                fontSize: 20, color: Colors.red),
                                           ),
                                           SizedBox(
                                             height: 15,
                                           ),
                                           Text(
                                             'AND GET UNLIMITED COMISSION',
+                                            textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                fontSize: 22,
+                                                fontSize: 20,
                                                 color: Color(0xff061596)),
                                           ),
                                         ],
