@@ -28,6 +28,7 @@ AppBar myAppbar(BuildContext context) {
         ),
       ),
       centerTitle: false,
+      titleSpacing: 0,
 
       // leading: IconButton(
       //   icon: Icon(Icons.menu, color: Colors.grey, size: 30),
@@ -292,18 +293,17 @@ AppBar myAppbar(BuildContext context) {
                     );
               },
               child: Container(
-                padding: EdgeInsets.only(right: 6),
+                padding: EdgeInsets.only(top: 10,right: 12),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 4.0, top: 0, bottom: 6),
-                      child: SvgPicture.asset(
-                        'svg/user.svg',
-                        fit: BoxFit.cover,
-                      ),
+                    SvgPicture.asset(
+                      'svg/user.svg',
+                      fit: BoxFit.cover,
                     ),
+                    SizedBox(height: 4,),
                     const Text(
                       '1682832598',
                       style: TextStyle(color: Colors.black, fontSize: 7),
