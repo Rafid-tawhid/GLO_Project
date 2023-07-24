@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../utils/constants.dart';
+import '../../utils/my_appbar.dart';
+import '../../utils/transaction_sucessful.dart';
+import '../profile_popup_pages/pin_setting.dart';
+import '../profile_popup_pages/profile_page.dart';
+import '../profile_popup_pages/saudia_page.dart';
 
 class BuyTicketPage extends StatefulWidget {
   const BuyTicketPage({Key? key}) : super(key: key);
@@ -151,27 +156,161 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0, bottom: 8),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SvgPicture.asset(
-                          'svg/user.svg',
-                          fit: BoxFit.cover,
-                        ),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        Text(
-                          '1682832598',
-                          style:
-                              TextStyle(color: Color(0xff061596), fontSize: 8),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        )
-                      ],
+                  InkWell(
+                    onTap: () async {
+                      showDialog(context: context,
+                          builder: (BuildContext context){
+                            return Center(
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    top:60,
+                                    right: 10,
+                                    left: 10,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(10),
+                                              border: Border.all(
+                                                  color: Colors.blue,
+                                                  width: 2
+                                              )
+                                          ),
+                                          width: MediaQuery.of(context).size.width/1.2,
+                                          child:  Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                color: Colors.blue,
+                                                width: MediaQuery.of(context).size.width/1.2,
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: const Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text('My Account',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+                                                    SizedBox(height: 5,),
+                                                    Text('Email: admin@gmail.com',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+
+                                                padding: EdgeInsets.symmetric(vertical: 10),
+                                                child:  Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    CustomPaint(
+                                                      painter: TrianglePainter(),
+                                                    ),
+                                                    InkWell(
+                                                      onTap:(){
+                                                        Navigator.pushNamed(context, Profile_page.routeName);
+                                                      },
+                                                      child: const Row(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: [
+                                                          Icon(Icons.keyboard_arrow_right_outlined,color: Colors.blue,),
+                                                          Text('Profile',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue,),),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5,),
+                                                    InkWell(
+                                                      onTap:(){
+                                                        Navigator.pushNamed(context, PinSettingPage.routeName);
+                                                      },
+                                                      child: const Row(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: [
+                                                          Icon(Icons.keyboard_arrow_right_outlined,color: Colors.blue,),
+                                                          Text('Change Pin',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue,),),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5,),
+                                                    InkWell(
+                                                      onTap: (){
+                                                        Navigator.pushNamed(context, TransactionSucessful.routeName);
+                                                      },
+                                                      child: const Row(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: [
+                                                          Icon(Icons.keyboard_arrow_right_outlined,color: Colors.blue,),
+                                                          Text('Verified',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue,),),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5,),
+                                                    InkWell(
+                                                      onTap: (){
+                                                        Navigator.pushNamed(context, SaudiaPages.routeName);
+                                                      },
+                                                      child: const Row(
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: [
+                                                          Icon(Icons.keyboard_arrow_right_outlined,color: Colors.blue,),
+                                                          Text('Testimonials',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue,),),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5,),
+                                                    const Row(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Icon(Icons.keyboard_arrow_right_outlined,color: Colors.blue,),
+                                                        Text('Logout',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue,),),
+                                                      ],
+                                                    ),
+                                                    SizedBox(height: 5,),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          }
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8.0, bottom: 8),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SvgPicture.asset(
+                            'svg/user.svg',
+                            fit: BoxFit.cover,
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            '1682832598',
+                            style:
+                                TextStyle(color: Color(0xff061596), fontSize: 8),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],

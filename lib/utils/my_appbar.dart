@@ -209,7 +209,7 @@ AppBar myAppbar(BuildContext context) {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           CustomPaint(
-                                            painter: _TrianglePainter(),
+                                            painter: TrianglePainter(),
                                           ),
                                           InkWell(
                                             onTap:(){
@@ -316,7 +316,7 @@ AppBar myAppbar(BuildContext context) {
         ],
       ));
 }
-class _TrianglePainter extends CustomPainter {
+class TrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()

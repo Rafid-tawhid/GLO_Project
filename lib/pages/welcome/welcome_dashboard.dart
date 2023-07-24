@@ -41,613 +41,623 @@ class _WelcomeDashboardState extends State<WelcomeDashboard> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Stack(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Scaffold(
+          body: Stack(
 
-          children: [
+            children: [
 
-            Positioned(
-                right: 0,
-                top: 0,
-                child: Image.asset('images/right.png')),
-            Positioned(
-                left: 0,
-                top: 350,
-                child: Image.asset('images/mid.png')),
-            Positioned(
-                right: 0,
-                bottom: 0,
-                child: Image.asset('images/bottom.png')),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 40.0, left: 8, right: 8),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 11,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset('images/logo.png'),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                                backgroundColor: Color(0xffD5E2FC)),
-                            onPressed: () {},
-                            child: const Text(
-                              'English',
-                              style: TextStyle(color: Colors.black),
-                            ))
-                      ],
+              Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Image.asset('images/right.png')),
+              Positioned(
+                  left: 0,
+                  top: 350,
+                  child: Image.asset('images/mid.png')),
+              Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Image.asset('images/bottom.png')),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40.0, left: 8, right: 8),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height / 11,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset('images/logo.png'),
+                          TextButton(
+                              style: TextButton.styleFrom(
+                                  backgroundColor: Color(0xffD5E2FC)),
+                              onPressed: () {},
+                              child: const Text(
+                                'English',
+                                style: TextStyle(color: Colors.black),
+                              ))
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: CarouselSlider(
-                    carouselController: _controller,
-                    items: [
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Container(
+                  Expanded(
+                    child: CarouselSlider(
+                      carouselController: _controller,
+                      items: [
+                        Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Container(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 40.0, right: 40),
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Expanded(
+                                          child: TranslationAnimatedWidget.tween(
+                                            enabled: animation,
+                                            duration: Duration(milliseconds: 1000),
+                                            translationDisabled: Offset(-300, -100),
+                                            translationEnabled: Offset(0, 0),
+                                            child: OpacityAnimatedWidget.tween(
+                                              enabled: animation,
+                                              duration: Duration(milliseconds: 1000),
+                                              opacityDisabled: 0,
+                                              opacityEnabled: 1,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(bottom: 2),
+                                                child: Image.asset('images/aaa.png',height: 120,width: 120,),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TranslationAnimatedWidget.tween(
+                                            enabled: animation,
+                                            duration: Duration(milliseconds: 1000),
+                                            translationDisabled: Offset(300, -100),
+                                            translationEnabled: Offset(0, 0),
+                                            child: OpacityAnimatedWidget.tween(
+                                              enabled: animation,
+                                              duration: Duration(milliseconds: 1000),
+                                              opacityDisabled: 0,
+                                              opacityEnabled: 1,
+                                              child: Image.asset('images/ccc.png',height: 140,width: 140,fit: BoxFit.cover,),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 6,),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 40.0, right: 40),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: TranslationAnimatedWidget.tween(
+                                            enabled: animation,
+                                            duration: Duration(milliseconds: 1000),
+                                            translationDisabled: Offset(-300, 0),
+                                            translationEnabled: Offset(0, 0),
+                                            child: OpacityAnimatedWidget.tween(
+                                              enabled: animation,
+                                              opacityDisabled: 0,
+                                              duration: Duration(milliseconds: 1000),
+                                              opacityEnabled: 1,
+                                              child: Image.asset('images/bbb.png',height: 120,width: 120,),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: TranslationAnimatedWidget.tween(
+                                            enabled: animation,
+                                            duration: Duration(milliseconds: 1000),
+                                            translationDisabled: Offset(300, 0),
+                                            translationEnabled: Offset(0, 0),
+                                            child: OpacityAnimatedWidget.tween(
+                                              enabled: animation,
+                                              opacityDisabled: 0,
+                                              duration: Duration(milliseconds: 1000),
+                                              opacityEnabled: 1,
+                                              child: Container(
+                                                  alignment: Alignment.bottomLeft,
+                                                  child: Image.asset('images/ddd.png',height: 120,width: 120,)),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        'YOU CAN BUY',
+                                        style: TextStyle(fontSize: 20, color: Colors.red),
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Text(
+                                        'FOUR TYPES OF LOTTERY HERE',
+                                        style: TextStyle(fontSize: 20, color: Color(0xff061596),),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Container(
                             child: Column(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 40.0, right: 40),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: TranslationAnimatedWidget.tween(
-                                          enabled: animation,
-                                          duration: Duration(milliseconds: 1000),
-                                          translationDisabled: Offset(-300, -100),
-                                          translationEnabled: Offset(0, 0),
-                                          child: OpacityAnimatedWidget.tween(
-                                            enabled: animation,
-                                            duration: Duration(milliseconds: 1000),
-                                            opacityDisabled: 0,
-                                            opacityEnabled: 1,
-                                            child: Image.asset('images/aaa.png',height: 120,width: 120,),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: TranslationAnimatedWidget.tween(
-                                          enabled: animation,
-                                          duration: Duration(milliseconds: 1000),
-                                          translationDisabled: Offset(300, -100),
-                                          translationEnabled: Offset(0, 0),
-                                          child: OpacityAnimatedWidget.tween(
-                                            enabled: animation,
-                                            duration: Duration(milliseconds: 1000),
-                                            opacityDisabled: 0,
-                                            opacityEnabled: 1,
-                                            child: Image.asset('images/ccc.png',height: 140,width: 140,),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                TranslationAnimatedWidget.tween(
+                                  enabled: animation2,
+                                  duration: Duration(milliseconds: 500),
+                                  translationDisabled: Offset(0, -200),
+                                  translationEnabled: Offset(0, 0),
+                                  child: OpacityAnimatedWidget.tween(
+                                    enabled: animation2,
+                                    opacityDisabled: 0,
+                                    duration: Duration(milliseconds: 200),
+                                    opacityEnabled: 1,
+                                    child: Image.asset('images/trophy.png'),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 40.0, right: 40),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: TranslationAnimatedWidget.tween(
-                                          enabled: animation,
-                                          duration: Duration(milliseconds: 1000),
-                                          translationDisabled: Offset(-300, 0),
-                                          translationEnabled: Offset(0, 0),
-                                          child: OpacityAnimatedWidget.tween(
-                                            enabled: animation,
-                                            opacityDisabled: 0,
-                                            duration: Duration(milliseconds: 1000),
-                                            opacityEnabled: 1,
-                                            child: Image.asset('images/bbb.png',height: 120,width: 120,),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: TranslationAnimatedWidget.tween(
-                                          enabled: animation,
-                                          duration: Duration(milliseconds: 1000),
-                                          translationDisabled: Offset(300, 0),
-                                          translationEnabled: Offset(0, 0),
-                                          child: OpacityAnimatedWidget.tween(
-                                            enabled: animation,
-                                            opacityDisabled: 0,
-                                            duration: Duration(milliseconds: 1000),
-                                            opacityEnabled: 1,
-                                            child: Image.asset('images/ddd.png',height: 120,width: 120,),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 30,
                                 ),
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'YOU CAN BUY',
-                                      style: TextStyle(fontSize: 20, color: Colors.red),
+                                    TranslationAnimatedWidget.tween(
+                                      enabled: animation2,
+                                      duration: Duration(milliseconds: 500),
+                                      translationDisabled: Offset(-500, 0),
+                                      translationEnabled: Offset(0, 0),
+                                      child: OpacityAnimatedWidget.tween(
+                                        enabled: animation2,
+                                        opacityDisabled: 0,
+                                        duration: Duration(milliseconds: 200),
+                                        opacityEnabled: 1,
+                                        child: Text(
+                                          'CHOSE A LOTTERY',
+                                          style: TextStyle(
+                                              fontSize: 20, color: Colors.red),
+                                        ),
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 15,
                                     ),
-                                    Text(
-                                      'FOUR TYPES OF LOTTERY HERE',
-                                      style: TextStyle(fontSize: 20, color: Color(0xff061596),),
+                                    TranslationAnimatedWidget.tween(
+                                      enabled: animation2,
+                                      duration: Duration(milliseconds: 500),
+                                      translationDisabled: Offset(200, 0),
+                                      translationEnabled: Offset(0, 0),
+                                      child: OpacityAnimatedWidget.tween(
+                                        enabled: animation2,
+                                        opacityDisabled: 0,
+                                        duration: Duration(milliseconds: 200),
+                                        opacityEnabled: 1,
+                                        child: FittedBox(
+                                          child: Text(
+                                            'BUY A TICKET & WIN BIG PRIZES',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 20, color: Color(0xff061596),),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ],
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Container(
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               TranslationAnimatedWidget.tween(
-                                enabled: animation2,
+                                enabled: animation3,
                                 duration: Duration(milliseconds: 500),
-                                translationDisabled: Offset(0, -200),
+                                translationDisabled: Offset(-200, 0),
                                 translationEnabled: Offset(0, 0),
                                 child: OpacityAnimatedWidget.tween(
-                                  enabled: animation2,
+                                  enabled: animation3,
                                   opacityDisabled: 0,
-                                  duration: Duration(milliseconds: 200),
+                                  duration: Duration(milliseconds: 500),
                                   opacityEnabled: 1,
-                                  child: Image.asset('images/trophy.png'),
+                                  child: Image.asset('images/tickets.png'),
                                 ),
                               ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  TranslationAnimatedWidget.tween(
-                                    enabled: animation2,
-                                    duration: Duration(milliseconds: 500),
-                                    translationDisabled: Offset(-500, 0),
-                                    translationEnabled: Offset(0, 0),
-                                    child: OpacityAnimatedWidget.tween(
-                                      enabled: animation2,
-                                      opacityDisabled: 0,
-                                      duration: Duration(milliseconds: 200),
-                                      opacityEnabled: 1,
-                                      child: Text(
-                                        'CHOSE A LOTTERY',
-                                        style: TextStyle(
-                                            fontSize: 20, color: Colors.red),
-                                      ),
-                                    ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              TranslationAnimatedWidget.tween(
+                                enabled: animation3,
+                                duration: Duration(milliseconds: 500),
+                                translationDisabled: Offset(0, 200),
+                                translationEnabled: Offset(0, 0),
+                                child: OpacityAnimatedWidget.tween(
+                                  enabled: animation3,
+                                  opacityDisabled: 0,
+                                  duration: Duration(milliseconds: 500),
+                                  opacityEnabled: 1,
+                                  child: Text(
+                                    'GET YOUR TICKETS',
+                                    style: TextStyle(fontSize: 20, color: Colors.red),
                                   ),
-                                  SizedBox(
-                                    height: 15,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TranslationAnimatedWidget.tween(
+                                enabled: animation3,
+                                duration: Duration(milliseconds: 500),
+                                translationDisabled: Offset(0, 200),
+                                translationEnabled: Offset(0, 0),
+                                child: OpacityAnimatedWidget.tween(
+                                  enabled: animation3,
+                                  opacityDisabled: 0,
+                                  duration: Duration(milliseconds: 500),
+                                  opacityEnabled: 1,
+                                  child: Text(
+                                    'UP TO 30% DISCOUNT',
+                                    style: TextStyle(fontSize: 20, color: Color(0xff061596)),
                                   ),
-                                  TranslationAnimatedWidget.tween(
-                                    enabled: animation2,
-                                    duration: Duration(milliseconds: 500),
-                                    translationDisabled: Offset(200, 0),
-                                    translationEnabled: Offset(0, 0),
-                                    child: OpacityAnimatedWidget.tween(
-                                      enabled: animation2,
-                                      opacityDisabled: 0,
-                                      duration: Duration(milliseconds: 200),
-                                      opacityEnabled: 1,
-                                      child: FittedBox(
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+
+                              children: [
+                                TranslationAnimatedWidget.tween(
+                                  enabled: animation4,
+                                  duration: Duration(milliseconds: 500),
+                                  translationDisabled: Offset(200, -200),
+                                  translationEnabled: Offset(0, 0),
+                                  child: OpacityAnimatedWidget.tween(
+                                    enabled: animation4,
+                                    opacityDisabled: 0,
+                                    duration: Duration(milliseconds: 200),
+                                    opacityEnabled: 1,
+                                    child: Image.asset('images/account.png'),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    TranslationAnimatedWidget.tween(
+                                      enabled: animation4,
+                                      duration: Duration(milliseconds: 500),
+                                      translationDisabled: Offset(-500, 0),
+                                      translationEnabled: Offset(0, 0),
+                                      child: OpacityAnimatedWidget.tween(
+                                        enabled: animation4,
+                                        opacityDisabled: 0,
+                                        duration: Duration(milliseconds: 200),
+                                        opacityEnabled: 1,
                                         child: Text(
-                                          'BUY A TICKET & WIN BIG PRIZES',
-                                          textAlign: TextAlign.center,
+                                          'ACCOUNT TO ACCOUNT',
                                           style: TextStyle(
-                                              fontSize: 20, color: Color(0xff061596),),
+                                              fontSize: 20, color: Colors.red),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            TranslationAnimatedWidget.tween(
-                              enabled: animation3,
-                              duration: Duration(milliseconds: 500),
-                              translationDisabled: Offset(-200, 0),
-                              translationEnabled: Offset(0, 0),
-                              child: OpacityAnimatedWidget.tween(
-                                enabled: animation3,
-                                opacityDisabled: 0,
-                                duration: Duration(milliseconds: 500),
-                                opacityEnabled: 1,
-                                child: Image.asset('images/tickets.png'),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            TranslationAnimatedWidget.tween(
-                              enabled: animation3,
-                              duration: Duration(milliseconds: 500),
-                              translationDisabled: Offset(0, 200),
-                              translationEnabled: Offset(0, 0),
-                              child: OpacityAnimatedWidget.tween(
-                                enabled: animation3,
-                                opacityDisabled: 0,
-                                duration: Duration(milliseconds: 500),
-                                opacityEnabled: 1,
-                                child: Text(
-                                  'GET YOUR TICKETS',
-                                  style: TextStyle(fontSize: 20, color: Colors.red),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            TranslationAnimatedWidget.tween(
-                              enabled: animation3,
-                              duration: Duration(milliseconds: 500),
-                              translationDisabled: Offset(0, 200),
-                              translationEnabled: Offset(0, 0),
-                              child: OpacityAnimatedWidget.tween(
-                                enabled: animation3,
-                                opacityDisabled: 0,
-                                duration: Duration(milliseconds: 500),
-                                opacityEnabled: 1,
-                                child: Text(
-                                  'UP TO 30% DISCOUNT',
-                                  style: TextStyle(fontSize: 20, color: Color(0xff061596)),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-
-                            children: [
-                              TranslationAnimatedWidget.tween(
-                                enabled: animation4,
-                                duration: Duration(milliseconds: 500),
-                                translationDisabled: Offset(200, -200),
-                                translationEnabled: Offset(0, 0),
-                                child: OpacityAnimatedWidget.tween(
-                                  enabled: animation4,
-                                  opacityDisabled: 0,
-                                  duration: Duration(milliseconds: 200),
-                                  opacityEnabled: 1,
-                                  child: Image.asset('images/account.png'),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 40,
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  TranslationAnimatedWidget.tween(
-                                    enabled: animation4,
-                                    duration: Duration(milliseconds: 500),
-                                    translationDisabled: Offset(-500, 0),
-                                    translationEnabled: Offset(0, 0),
-                                    child: OpacityAnimatedWidget.tween(
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    TranslationAnimatedWidget.tween(
                                       enabled: animation4,
-                                      opacityDisabled: 0,
-                                      duration: Duration(milliseconds: 200),
-                                      opacityEnabled: 1,
-                                      child: Text(
-                                        'ACCOUNT TO ACCOUNT',
-                                        style: TextStyle(
-                                            fontSize: 20, color: Colors.red),
+                                      duration: Duration(milliseconds: 500),
+                                      translationDisabled: Offset(200, 0),
+                                      translationEnabled: Offset(0, 0),
+                                      child: OpacityAnimatedWidget.tween(
+                                        enabled: animation4,
+                                        opacityDisabled: 0,
+                                        duration: Duration(milliseconds: 200),
+                                        opacityEnabled: 1,
+                                        child: const Text(
+                                          'MONEY TRANSFER',
+                                          style: TextStyle(
+                                              fontSize: 20, color: Color(0xff061596)),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  TranslationAnimatedWidget.tween(
-                                    enabled: animation4,
-                                    duration: Duration(milliseconds: 500),
-                                    translationDisabled: Offset(200, 0),
-                                    translationEnabled: Offset(0, 0),
-                                    child: OpacityAnimatedWidget.tween(
-                                      enabled: animation4,
-                                      opacityDisabled: 0,
-                                      duration: Duration(milliseconds: 200),
-                                      opacityEnabled: 1,
-                                      child: const Text(
-                                        'MONEY TRANSFER',
-                                        style: TextStyle(
-                                            fontSize: 20, color: Color(0xff061596)),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TranslationAnimatedWidget.tween(
-                                enabled: animation5,
-                                duration: Duration(milliseconds: 1000),
-                                translationDisabled: Offset(0, 0),
-                                translationEnabled: Offset(0, 0),
-                                child: OpacityAnimatedWidget.tween(
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TranslationAnimatedWidget.tween(
                                   enabled: animation5,
-                                  opacityDisabled: 0,
                                   duration: Duration(milliseconds: 1000),
-                                  opacityEnabled: 1,
-                                  child: Image.asset('images/withdrawal.png'),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 40,
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  TranslationAnimatedWidget.tween(
+                                  translationDisabled: Offset(0, 0),
+                                  translationEnabled: Offset(0, 0),
+                                  child: OpacityAnimatedWidget.tween(
                                     enabled: animation5,
-                                    duration: Duration(milliseconds: 500),
-                                    translationDisabled: Offset(-500, 0),
-                                    translationEnabled: Offset(0, 0),
-                                    child: OpacityAnimatedWidget.tween(
+                                    opacityDisabled: 0,
+                                    duration: Duration(milliseconds: 1000),
+                                    opacityEnabled: 1,
+                                    child: Image.asset('images/withdrawal.png'),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    TranslationAnimatedWidget.tween(
                                       enabled: animation5,
-                                      opacityDisabled: 0,
-                                      duration: Duration(milliseconds: 200),
-                                      opacityEnabled: 1,
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            'WORLD WIDE',
-                                            style: TextStyle(
-                                                fontSize: 20, color: Colors.red),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                            'MONEY WITHDRAWAL',
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Color(0xff061596)),
-                                          ),
-                                        ],
+                                      duration: Duration(milliseconds: 500),
+                                      translationDisabled: Offset(-500, 0),
+                                      translationEnabled: Offset(0, 0),
+                                      child: OpacityAnimatedWidget.tween(
+                                        enabled: animation5,
+                                        opacityDisabled: 0,
+                                        duration: Duration(milliseconds: 200),
+                                        opacityEnabled: 1,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'WORLD WIDE',
+                                              style: TextStyle(
+                                                  fontSize: 20, color: Colors.red),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              'MONEY WITHDRAWAL',
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Color(0xff061596)),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Stack(
-                                children: [
-                                  TranslationAnimatedWidget.tween(
-                                    enabled: animation6,
-                                    duration: Duration(milliseconds: 500),
-                                    translationDisabled: Offset(-200, 0),
-                                    translationEnabled: Offset(0, -40),
-                                    child: OpacityAnimatedWidget.tween(
-                                      enabled: animation6,
-                                      opacityDisabled: 0,
-                                      duration: Duration(milliseconds: 200),
-                                      opacityEnabled: 1,
-                                      child: Image.asset('images/money.png'),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    left: 0,
-                                    right: 0,
-                                    top: 0,
-                                    bottom: 0,
-                                    child: TranslationAnimatedWidget.tween(
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Stack(
+                                  children: [
+                                    TranslationAnimatedWidget.tween(
                                       enabled: animation6,
                                       duration: Duration(milliseconds: 500),
-                                      translationDisabled: Offset(0, -200),
+                                      translationDisabled: Offset(-200, 0),
+                                      translationEnabled: Offset(0, -40),
+                                      child: OpacityAnimatedWidget.tween(
+                                        enabled: animation6,
+                                        opacityDisabled: 0,
+                                        duration: Duration(milliseconds: 200),
+                                        opacityEnabled: 1,
+                                        child: Image.asset('images/money.png'),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      left: 0,
+                                      right: 0,
+                                      top: 0,
+                                      bottom: 0,
+                                      child: TranslationAnimatedWidget.tween(
+                                        enabled: animation6,
+                                        duration: Duration(milliseconds: 500),
+                                        translationDisabled: Offset(0, -200),
+                                        translationEnabled: Offset(0, 0),
+                                        child: OpacityAnimatedWidget.tween(
+                                          enabled: animation6,
+                                          opacityDisabled: 0,
+                                          duration: Duration(milliseconds: 200),
+                                          opacityEnabled: 1,
+                                          child: Image.asset('images/peoples.png'),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    TranslationAnimatedWidget.tween(
+                                      enabled: animation6,
+                                      duration: Duration(milliseconds: 500),
+                                      translationDisabled: Offset(-500, 0),
                                       translationEnabled: Offset(0, 0),
                                       child: OpacityAnimatedWidget.tween(
                                         enabled: animation6,
                                         opacityDisabled: 0,
                                         duration: Duration(milliseconds: 200),
                                         opacityEnabled: 1,
-                                        child: Image.asset('images/peoples.png'),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 40,
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  TranslationAnimatedWidget.tween(
-                                    enabled: animation6,
-                                    duration: Duration(milliseconds: 500),
-                                    translationDisabled: Offset(-500, 0),
-                                    translationEnabled: Offset(0, 0),
-                                    child: OpacityAnimatedWidget.tween(
-                                      enabled: animation6,
-                                      opacityDisabled: 0,
-                                      duration: Duration(milliseconds: 200),
-                                      opacityEnabled: 1,
-                                      child: const Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            'REFER YOUR FRIEND',
-                                            style: TextStyle(
-                                                fontSize: 20, color: Colors.red),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          FittedBox(
-                                            child: Text(
-                                              'AND GET UNLIMITED COMISSION',
-                                              textAlign: TextAlign.center,
+                                        child: const Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'REFER YOUR FRIEND',
                                               style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Color(0xff061596)),
+                                                  fontSize: 20, color: Colors.red),
                                             ),
-                                          ),
-                                        ],
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            FittedBox(
+                                              child: Text(
+                                                'AND GET UNLIMITED COMISSION',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    color: Color(0xff061596)),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
+                      ],
+
+                      //Slider Container properties
+                      options: CarouselOptions(
+                        height: 480.0,
+                        viewportFraction: 1,
+                        reverse: false,
+                        onPageChanged: (value, CarouselPageChangedReason) {
+
+                          pageNo = value;
+                          changePage(pageNo);
+                          setState(() {});
+
+                        },
+                        enlargeCenterPage: true,
+                        // autoPlay: true,
+                        aspectRatio: 16 / 9,
+                        // autoPlayCurve: Curves.fastOutSlowIn,
+                        // enableInfiniteScroll: true,
+                        // autoPlayAnimationDuration: Duration(milliseconds: 800),
                       ),
-                    ],
-
-                    //Slider Container properties
-                    options: CarouselOptions(
-                      height: 480.0,
-                      viewportFraction: 1,
-                      reverse: false,
-                      onPageChanged: (value, CarouselPageChangedReason) {
-
-                        pageNo = value;
-                        changePage(pageNo);
-                        setState(() {});
-
-                      },
-                      enlargeCenterPage: true,
-                      // autoPlay: true,
-                      aspectRatio: 16 / 9,
-                      // autoPlayCurve: Curves.fastOutSlowIn,
-                      // enableInfiniteScroll: true,
-                      // autoPlayAnimationDuration: Duration(milliseconds: 800),
                     ),
                   ),
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AnimatedSmoothIndicator(
-                      activeIndex: pageNo,
-                      count: 6,
-                      effect: WormEffect(
-                        spacing: 4.0,
-                        radius: 50.0,
-                        dotWidth: 6.0,
-                        dotHeight: 6.0,
-                        paintStyle: PaintingStyle.fill,
-                        strokeWidth: 1,
-                        dotColor: Colors.grey,
-                        activeDotColor: Colors.indigo,
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AnimatedSmoothIndicator(
+                        activeIndex: pageNo,
+                        count: 6,
+                        effect: WormEffect(
+                          spacing: 4.0,
+                          radius: 50.0,
+                          dotWidth: 6.0,
+                          dotHeight: 6.0,
+                          paintStyle: PaintingStyle.fill,
+                          strokeWidth: 1,
+                          dotColor: Colors.grey,
+                          activeDotColor: Colors.indigo,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Container(
-                      height: 38,
-                      width: 135,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                              MaterialStateProperty.resolveWith<Color>(
-                                    (Set<MaterialState> states) {
-                                  if (states.contains(MaterialState.pressed))
-                                    return Colors.blueAccent;
-                                  return Color(0xff2E3192); // Use the component's default.
-                                },
-                              ),
-                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ))),
-                          onPressed: () {
-                            pageNo++;
-
-                            if(pageNo == 6) {
-                              _controller.stopAutoPlay();
-                              Navigator.pushNamed(context, LoginPage.routeName);
-                            }
-                            _controller.nextPage();
-
-                            changePage(pageNo);
-                            setState(() {});
-
-
-                            // Navigator.pushNamed(context, HomePage.routeName);
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                'Next',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              SizedBox(
-                                width: 4,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4.0,bottom: 4),
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 17,
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Container(
+                        height: 38,
+                        width: 135,
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                                      (Set<MaterialState> states) {
+                                    if (states.contains(MaterialState.pressed))
+                                      return Colors.blueAccent;
+                                    return Color(0xff2E3192); // Use the component's default.
+                                  },
                                 ),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                            ],
-                          )),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ],
+                                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ))),
+                            onPressed: () {
+                              pageNo++;
+
+                              if(pageNo == 6) {
+                                _controller.stopAutoPlay();
+                                Navigator.pushNamed(context, LoginPage.routeName);
+                              }
+                              _controller.nextPage();
+
+                              changePage(pageNo);
+                              setState(() {});
+
+
+                              // Navigator.pushNamed(context, HomePage.routeName);
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  'Next',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0,bottom: 4),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 17,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                              ],
+                            )),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
