@@ -63,193 +63,206 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: ListView(
+        body: Stack(
           children: [
-            Stack(
+            ListView(
+
               children: [
-                ListView(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Image.asset(
+                        'images/login_banner.png',
+                        fit: BoxFit.fitWidth,
+                      )),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Image.asset(
-                            'images/login_banner.png',
-                            fit: BoxFit.fitWidth,
-                          )),
+                    showFields?Text(
+                      'Official Member Login!',
+                      style: TextStyle(color: Color(0xff008AE5), fontSize: 24,fontWeight: FontWeight.w700),
+                    ):Text(
+                      'Official Member Register!',
+                      style: TextStyle(color: Color(0xff008AE5), fontSize: 24,fontWeight: FontWeight.w700),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        showFields?Text(
-                          'Official Member Login!',
-                          style: TextStyle(color: Color(0xff008AE5), fontSize: 24,fontWeight: FontWeight.w700),
-                        ):Text(
-                          'Official Member Register!',
-                          style: TextStyle(color: Color(0xff008AE5), fontSize: 24,fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0, right: 15),
-                      child: Card(
-                        elevation: 10,
-                        shadowColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(22.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                      top: 10, bottom: 10, left: 16, right: 16),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Color(0xff032D46), width: 1)),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                          child: InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            showFields=true;
-                                            btnTxt='Login';
-                                            loginBgColor = Color(0xff032D46);
-                                            loginTxtColor = Colors.white;
-                                            registerBgColor = Colors.white;
-                                            registerTxtColor = Color(0xff032D46);
-                                          });
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(50),
-                                              color: loginBgColor,
-                                              border: Border.all(
-                                                  color: Colors.white, width: 1)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 8.0, bottom: 8),
-                                            child: Text("Login",
-                                                style: TextStyle(
-                                                  color: loginTxtColor,
-                                                ),
-                                                textAlign: TextAlign.center),
-                                          ),
-                                        ),
-                                      )),
-                                      Expanded(
-                                          child: InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            showFields=false;
-                                            btnTxt='Register';
-                                            loginTxtColor = Color(0xff032D46);
-                                            loginBgColor = Colors.white;
-                                            registerTxtColor = Colors.white;
-                                            registerBgColor = Color(0xff032D46);
-                                          });
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(50),
-                                              color: registerBgColor,
-                                              border: Border.all(
-                                                  color: Colors.white, width: 1)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 8.0, bottom: 8),
-                                            child: Text("Register",
-                                                style: TextStyle(
-                                                  color: registerTxtColor,
-                                                ),
-                                                textAlign: TextAlign.center),
-                                          ),
-                                        ),
-                                      )),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              showFields?showLoginInfo():showRegisterInfo(),
-                              SizedBox(
-                                height: 40,
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xFF032D46)),
-                                    onPressed: () {
-                                      if(showFields==true){
-                                        if(_formKey.currentState!.validate()){
-                                          //loginwithmailpass();
-                                          Navigator.pushNamed(context, HomePage.routeName);
-                                        }
-                                      } else if(showFields==false) {
-                                        if(_formKey2.currentState!.validate()){
-                                          final usermodel=RegistrationUserModel(
-                                            name:nameCon.text,
-                                            email:emlCon.text,
-                                            password:passCon.text,
-                                            passwordConfirmation:passConfCon.text,
-                                            wpin:num.parse(wpinCon.text),
-                                            reference:num.parse(refCon.text),
-                                            userid: num.parse(userIdCon.text)
-                                          );
-
-                                          //registerUserwithInfo(usermodel);
-
-                                         // Navigator.pushNamed(context, HomePage.routeName);
-                                        }
-                                      }
-
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(btnTxt),
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
                   ],
                 ),
+                SizedBox(
+                  height: 5,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 15),
+                  child: Card(
+                    elevation: 10,
+                    shadowColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(22.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  top: 10, bottom: 10, left: 16, right: 16),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: Color(0xff032D46), width: 1)),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                      child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        showFields=true;
+                                        btnTxt='Login';
+                                        loginBgColor = Color(0xff032D46);
+                                        loginTxtColor = Colors.white;
+                                        registerBgColor = Colors.white;
+                                        registerTxtColor = Color(0xff032D46);
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(50),
+                                          color: loginBgColor,
+                                          border: Border.all(
+                                              color: Colors.white, width: 1)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8.0, bottom: 8),
+                                        child: Text("Login",
+                                            style: TextStyle(
+                                              color: loginTxtColor,
+                                            ),
+                                            textAlign: TextAlign.center),
+                                      ),
+                                    ),
+                                  )),
+                                  Expanded(
+                                      child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        showFields=false;
+                                        btnTxt='Register';
+                                        loginTxtColor = Color(0xff032D46);
+                                        loginBgColor = Colors.white;
+                                        registerTxtColor = Colors.white;
+                                        registerBgColor = Color(0xff032D46);
+                                      });
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(50),
+                                          color: registerBgColor,
+                                          border: Border.all(
+                                              color: Colors.white, width: 1)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 8.0, bottom: 8),
+                                        child: Text("Register",
+                                            style: TextStyle(
+                                              color: registerTxtColor,
+                                            ),
+                                            textAlign: TextAlign.center),
+                                      ),
+                                    ),
+                                  )),
+                                ],
+                              ),
+                            ),
+                          ),
+                          showFields?showLoginInfo():showRegisterInfo(),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xFF032D46)),
+                                onPressed: () {
+                                  if(showFields==true){
+                                    if(_formKey.currentState!.validate()){
+                                      //loginwithmailpass();
+                                      Navigator.pushNamed(context, HomePage.routeName);
+                                    }
+                                  } else if(showFields==false) {
+                                    if(_formKey2.currentState!.validate()){
+                                      final usermodel=RegistrationUserModel(
+                                        name:nameCon.text,
+                                        email:emlCon.text,
+                                        password:passCon.text,
+                                        passwordConfirmation:passConfCon.text,
+                                        wpin:num.parse(wpinCon.text),
+                                        reference:num.parse(refCon.text),
+                                        userid: num.parse(userIdCon.text)
+                                      );
+
+                                      //registerUserwithInfo(usermodel);
+
+                                     // Navigator.pushNamed(context, HomePage.routeName);
+                                    }
+                                  }
+
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Text(btnTxt),
+                                )),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                if(!showFields)Container(
+                  margin: EdgeInsets.only(top: 10),
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width,
+                  color: Color(0xff032D46),
+                  child: const FittedBox(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 15.0, right: 15, top: 5, bottom: 5),
+                        child: Text(
+                          'By continuing you agree to our Terms and Conditions and Privacy Policy',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.normal),
+                        ),
+                      )),
+                ),
+
               ],
             ),
-            if(showFields)SizedBox(height: 80,),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              color: Color(0xff032D46),
-              child: const FittedBox(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: 15.0, right: 15, top: 5, bottom: 5),
-                    child: Text(
-                      'By continuing you agree to our Terms and Conditions and Privacy Policy',
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.normal),
-                    ),
-                  )),
+            if(showFields)Positioned(
+              bottom: 0,
+              child: Container(
+                margin: EdgeInsets.only(top: 10),
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                color: Color(0xff032D46),
+                child: const FittedBox(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: 15.0, right: 15, top: 5, bottom: 5),
+                      child: Text(
+                        'By continuing you agree to our Terms and Conditions and Privacy Policy',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.normal),
+                      ),
+                    )),
+              ),
             )
           ],
         ),
@@ -632,7 +645,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 10,)
           ],
-        ))
+        )),
+
       ],
     );
   }
@@ -766,6 +780,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text('Forgot Password?',style: TextStyle(color: Color(0xff008AE5),fontWeight: FontWeight.bold),))
               ],
             ),
+
           ],
         ))
       ],
